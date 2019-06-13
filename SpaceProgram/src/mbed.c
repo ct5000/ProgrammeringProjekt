@@ -381,13 +381,13 @@ int16_t readPotRight(){
 
 }
 
-void measPot(int32_t read, char s[]){
+void measPot(int32_t read, char *s){
     //char num[7];
     //char textStr[7];
 
     int32_t g = read / 1242;
     int32_t deci = (read % 1242) * 8;
-    sprintf(s,"%d,%04ld",g, deci);
+    sprintf(s,"%ld,%04ld",g, deci);
 
 
     //strcpy(textStr ,num);

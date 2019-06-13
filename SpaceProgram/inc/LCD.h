@@ -5,6 +5,7 @@
 #include "30010_io.h"
 #include <string.h>
 #include "charset.h"
+#include "mbed.h"
 
 typedef struct {
     int8_t slice;
@@ -13,8 +14,8 @@ typedef struct {
 
 }rollingtext_t;
 
-void lcd_write_string(char t[], char *buffer, int8_t line, int8_t slice);
-void lcd_update(rollingtext_t *p,char * buffer);
+void lcd_write_string(char t[], uint8_t *buffer, int8_t line, int8_t slice);
+void lcd_update(rollingtext_t *p,uint8_t * buffer);
 void initRolling(rollingtext_t *p, int8_t line, char * text);
 
 #endif

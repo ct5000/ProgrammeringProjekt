@@ -37,10 +37,10 @@ int main(void){
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));
-    rollingtext_t *test;
+    //rollingtext_t *test;
      int i;
     char textStr[10];
-    char buffer[512];
+    uint8_t buffer[512];
     uart_init(9600);
     LED_setup();
     joystick_setup();
@@ -72,7 +72,7 @@ int main(void){
 //        strcpy(textStr ,measPot(readPotLeft()));
 
         //printf("%s\n", textStr);
-        lcd_write_string(textStr, &buffer, 1 ,1);
+        lcd_write_string(textStr, buffer, 1 ,1);
 
 
 

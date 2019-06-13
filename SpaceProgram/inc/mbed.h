@@ -28,7 +28,7 @@ void rstFlag();
 void setup_pot();
 int16_t readPotLeft();
 int16_t readPotRight();
-void measPot(int32_t read, char s[]);
+void measPot(int32_t read, char *s);
 
 
 void LED_setup();
