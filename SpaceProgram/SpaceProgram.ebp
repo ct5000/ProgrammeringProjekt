@@ -89,9 +89,19 @@
 		<Unit filename="cmsis\core_cm4_simd.h" />
 		<Unit filename="cmsis\core_cmFunc.h" />
 		<Unit filename="cmsis\core_cmInstr.h" />
+		<Unit filename="inc\30010_io.h" />
+		<Unit filename="inc\ansi.h" />
+		<Unit filename="inc\ball.h" />
+		<Unit filename="inc\charset.h" />
+		<Unit filename="inc\LCD.h" />
+		<Unit filename="inc\LUTsin.h" />
+		<Unit filename="inc\mbed.h" />
+		<Unit filename="inc\serialRead.h" />
 		<Unit filename="inc\stm32f30x.h" />
 		<Unit filename="inc\stm32f30x_conf.h" />
 		<Unit filename="inc\system_stm32f30x.h" />
+		<Unit filename="inc\trigonometric.h" />
+		<Unit filename="inc\vectors.h" />
 		<Unit filename="readme.txt" />
 		<Unit filename="SPL\inc\stm32f30x_adc.h" />
 		<Unit filename="SPL\inc\stm32f30x_can.h" />
@@ -181,13 +191,43 @@
 		<Unit filename="SPL\src\stm32f30x_wwdg.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src\30010_io.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\ansi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\ball.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\charset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\LCD.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\LUTsin.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src\main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\mbed.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\serialRead.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\startup_stm32f30x.S">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\system_stm32f30x.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\trigonometric.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\vectors.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="stm32f302r8_flash.ld" />
