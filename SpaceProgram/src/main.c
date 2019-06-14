@@ -22,8 +22,12 @@
 #include "serialRead.h"
 #include "LCD.h"
 #include "charset.h"
+<<<<<<< HEAD
 #include "SpaceShip.h"
 #include "Landscape.h"
+=======
+#include "menu.h"
+>>>>>>> e68a629ce18a95fd5c68b7678f866b2569d96a55
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -37,6 +41,7 @@
 int main(void){
     uart_init(9600);
     clrscr();
+<<<<<<< HEAD
     color(0,7);
     setup_pot();
 
@@ -77,6 +82,9 @@ int main(void){
 
 
 
+=======
+    drawMenu();
+>>>>>>> e68a629ce18a95fd5c68b7678f866b2569d96a55
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));

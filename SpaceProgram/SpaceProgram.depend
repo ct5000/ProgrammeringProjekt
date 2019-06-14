@@ -495,10 +495,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560503028 source:d:\dtu\programmering\spaceprogram\src\ansi.c
+1560509841 source:d:\dtu\programmering\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560433310 d:\dtu\programmering\spaceprogram\inc\ansi.h
+1560508905 d:\dtu\programmering\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -546,7 +546,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560502569 source:d:\dtu\programmering\spaceprogram\src\main.c
+1560508979 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -558,6 +558,7 @@
 	"serialRead.h"
 	"LCD.h"
 	"charset.h"
+	"menu.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -595,10 +596,10 @@
 	"trigonometric.h"
 	<stdio.h>
 
-1560500554 source:d:\dtu\programmering\spaceprogram\src\menu.c
+1560509861 source:d:\dtu\programmering\spaceprogram\src\menu.c
 	"menu.h"
 
-1560502196 d:\dtu\programmering\spaceprogram\inc\menu.h
+1560508595 d:\dtu\programmering\spaceprogram\inc\menu.h
 	"ansi.h"
 
 1560503284 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
