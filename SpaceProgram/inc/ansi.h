@@ -42,5 +42,7 @@ void writeH(int8_t sizeColumn);
 void writeL(int8_t sizeColumn);
 void deleteLetter(int8_t sizeColumn);
 
+void drawArrow();
+
 #endif
 

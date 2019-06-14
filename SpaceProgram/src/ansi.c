@@ -461,6 +461,9 @@ void deleteLetter(int8_t sizeColumn) {
     }
 }
 
+void drawArrow() {
+    printf("--->");
+}
 
 void saveCursor() {
     printf("%c[s", ESC);
