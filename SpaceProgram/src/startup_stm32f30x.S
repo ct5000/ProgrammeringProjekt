@@ -178,7 +178,7 @@ Reset_Handler:
     ldr    r0, [r1, r3]
     str    r0, [r2, r3]
     bgt    .flash_to_ram_loop
-.flash_to_ram_loop_end:
+.flash_to_ram_loop_end:w
 #endif
 
 #ifndef __NO_SYSTEM_INIT

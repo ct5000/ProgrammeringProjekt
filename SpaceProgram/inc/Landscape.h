@@ -2,14 +2,24 @@
 #define LANDSCAPE_H
 
 # include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 # include "ansi.h"
 #include "SpaceShip.h"
 
-# define SCREEN_WIDTH 157
-# define SCREEN_HEIGHT 45
-# define GROUND_HEIGHT 20
+# define SCREEN_WIDTH 240
+# define SCREEN_HEIGHT 76
+# define GROUND_HEIGHT 56
+
+typedef struct{
+    int8_t x,y;
+    int8_t fuel;
+} mineral_t;
 
 void drawLandscape();
 int8_t inBounds(SpaceShip_t * p);
+int randomNumber(int8_t mini, int8_t maxi);
+void initMineral(mineral_t *p);
+void drawMinerals(mineral_t minerals[]);
 
 #endif

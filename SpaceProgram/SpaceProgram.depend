@@ -196,10 +196,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560509264 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
+1560514131 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560509264 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
+1560514131 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -266,12 +266,12 @@
 	"serialRead.h"
 	<string.h>
 
-1560429352 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
+1560522432 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
 
 1560429352 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\system_stm32f30x.c
 	"stm32f30x.h"
 
-1560510294 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1560523998 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -288,6 +288,7 @@
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
+	<time.h>
 
 1560431640 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\trigonometric.c
 	"trigonometric.h"
@@ -602,13 +603,13 @@
 1560508595 d:\dtu\programmering\spaceprogram\inc\menu.h
 	"ansi.h"
 
-1560503284 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
+1560514131 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
 	"menu.h"
 
-1560503284 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\menu.h
+1560514131 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\menu.h
 	"ansi.h"
 
-1560508999 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
+1560519478 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -620,15 +621,17 @@
 	<stdint.h>
 	<stdlib.h>
 
-1560510517 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1560520987 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 	<string.h>
 
-1560510080 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
+1560523998 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
 	<stdio.h>
+	<stdlib.h>
+	<time.h>
 	"ansi.h"
 	"SpaceShip.h"
 
-1560510630 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
+1560523561 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 

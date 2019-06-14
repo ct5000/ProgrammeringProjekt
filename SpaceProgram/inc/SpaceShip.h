@@ -15,11 +15,14 @@
 
 typedef struct {
     int32_t x, y;
+    int8_t fuel;
 } SpaceShip_t;
 
-void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y);
+void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y, int8_t fuel);
 void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place);
-void drill(SpaceShip_t * ship, char dirct);
+void drill(SpaceShip_t * ship, char dirct, int8_t place);
+void drawfuelBar(SpaceShip_t * ship);
+void usefuelBar(SpaceShip_t * ship, char dirct);
 
 
 #endif
