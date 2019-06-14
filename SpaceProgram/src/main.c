@@ -24,11 +24,11 @@
 #include "charset.h"
 #include "SpaceShip.h"
 #include "Landscape.h"
+#include "menu.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #define ESC 0x1B
 
 
@@ -37,56 +37,33 @@
 
 int main(void){
     uart_init(9600);
+    runningMenu();
+
     clrscr();
-    bgcolor(6);
+    drawLandscape();
 
+    /*
+    color(0,7);
     setup_pot();
-    int i;
-    int q;
-
-    srand(q); //skal afhænge af en tids værdi
-
-
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
 
-    initSpaceShip(ship, 5, 5, 100);
+    initSpaceShip(ship, 5, 5);
 
-    drawfuelBar(ship);
-
-    drawLandscape();
-
-    mineral_t m1;
-    mineral_t m2;
-    mineral_t m3;
-
-
-
-    initMineral(&m1);
-    initMineral(&m2);
-    initMineral(&m3);
-
-    mineral_t minerals[] = {m1,m2,m3};
-
-    drawMinerals(minerals);
 
 
     while(1){
 
     char dirct = uart_get_char();
     updateSpaceShip(ship, dirct, inBounds(ship));
-    drill(ship, dirct, inBounds(ship));
-
-    usefuelBar(ship, dirct);
-    if (uart_get_count() > 2) {
-            uart_clear();
-    }
+    drill(ship, dirct);
+    */
+    while(1){}
 
 
 
 
-    }
 }
 
 
@@ -101,6 +78,63 @@ int main(void){
 
 
 
+
+
+
+
+
+
+
+
+  //  char *text = calloc(100, sizeof(char));
+   // int i;
+    //char *s = calloc(256, sizeof(char));
+    //rollingtext_t *test;
+     /*
+     int i;
+    char textStr[10];
+    uint8_t buffer[512];
+
+    LED_setup();
+    joystick_setup();
+    setup_pot();
+
+    set_timer();
+    start_stop();
+
+
+    lcd_init();
+
+
+    color(0,7);
+    clrscr();
+
+    memset(buffer, 0x00, 512);
+
+    lcd_push_buffer(buffer);
+
+*/
+
+   // while(1){
+/*
+
+       // printf("%d\n",readPotLeft());
+        //measPot(readPotLeft());
+        //printf("\n\n");
+        measPot(readPotLeft(), &textStr);
+//        strcpy(textStr ,measPot(readPotLeft()));
+
+        //printf("%s\n", textStr);
+        lcd_write_string(textStr, buffer, 1 ,1);
+
+
+
+        lcd_push_buffer(buffer);
+
+        for (i=0; i<4000000; i++){}
+            */
+ //   }
+//}
 
 
 

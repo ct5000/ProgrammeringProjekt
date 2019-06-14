@@ -496,10 +496,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560509841 source:d:\dtu\programmering\spaceprogram\src\ansi.c
+1560517450 source:d:\dtu\programmering\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560508905 d:\dtu\programmering\spaceprogram\inc\ansi.h
+1560517450 d:\dtu\programmering\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -547,7 +547,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560508979 source:d:\dtu\programmering\spaceprogram\src\main.c
+1560520436 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -559,6 +559,8 @@
 	"serialRead.h"
 	"LCD.h"
 	"charset.h"
+	"SpaceShip.h"
+	"Landscape.h"
 	"menu.h"
 	<stdlib.h>
 	<stdio.h>
@@ -597,11 +599,12 @@
 	"trigonometric.h"
 	<stdio.h>
 
-1560509861 source:d:\dtu\programmering\spaceprogram\src\menu.c
+1560520304 source:d:\dtu\programmering\spaceprogram\src\menu.c
 	"menu.h"
 
-1560508595 d:\dtu\programmering\spaceprogram\inc\menu.h
+1560520509 d:\dtu\programmering\spaceprogram\inc\menu.h
 	"ansi.h"
+	"30010_io.h"
 
 1560514131 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
 	"menu.h"
@@ -634,4 +637,28 @@
 
 1560523561 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
+
+1560514620 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
+	"SpaceShip.h"
+	<string.h>
+
+1560514620 d:\dtu\programmering\spaceprogram\inc\spaceship.h
+	"vectors.h"
+	"serialRead.h"
+	"mbed.h"
+	"vectors.h"
+	"ansi.h"
+	"LUTsin.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+
+1560514620 source:d:\dtu\programmering\spaceprogram\src\landscape.c
+	"Landscape.h"
+
+1560514620 d:\dtu\programmering\spaceprogram\inc\landscape.h
+	<stdio.h>
+	"ansi.h"
+	"SpaceShip.h"
 

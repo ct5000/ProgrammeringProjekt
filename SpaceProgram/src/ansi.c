@@ -451,6 +451,19 @@ void writeL(int8_t sizeColumn) {
     returnCursor();
     moveCursorRight(sizeColumn);
 }
+void deleteLetter(int8_t sizeColumn) {
+    int i, j;
+    saveCursor();
+    for(i = 0; i< sizeColumn + 1; i++) {
+            for (j = 0; j < sizeColumn; j++) {
+                    printf(" ");
+            }
+    }
+}
+
+void drawArrow() {
+    printf("--->");
+}
 
 void saveCursor() {
     printf("%c[s", ESC);
