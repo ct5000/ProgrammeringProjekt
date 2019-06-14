@@ -98,6 +98,7 @@
 		<Unit filename="inc\mbed.h" />
 		<Unit filename="inc\menu.h" />
 		<Unit filename="inc\serialRead.h" />
+		<Unit filename="inc\SpaceShip.h" />
 		<Unit filename="inc\stm32f30x.h" />
 		<Unit filename="inc\stm32f30x_conf.h" />
 		<Unit filename="inc\system_stm32f30x.h" />
@@ -220,6 +221,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\serialRead.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\SpaceShip.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\startup_stm32f30x.S">

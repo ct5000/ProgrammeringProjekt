@@ -22,6 +22,7 @@
 #include "serialRead.h"
 #include "LCD.h"
 #include "charset.h"
+#include "SpaceShip.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -37,6 +38,42 @@ int main(void){
     clrscr();
     writeS();
     writeS();
+
+    SpaceShip_t skib;
+    SpaceShip_t *ship = &skib;
+
+    initSpaceShip(ship, 10, 10);
+
+    while(1){
+
+    char dirct = uart_get_char();
+    updateSpaceShip(ship, dirct, 2);
+    drill(ship, dirct);
+
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));
@@ -66,7 +103,7 @@ int main(void){
 
 */
 
-    while(1){
+   // while(1){
 /*
 
        // printf("%d\n",readPotLeft());
@@ -84,8 +121,8 @@ int main(void){
 
         for (i=0; i<4000000; i++){}
             */
-    }
-}
+ //   }
+//}
 
 
 
