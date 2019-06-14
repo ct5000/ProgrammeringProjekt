@@ -40,7 +40,7 @@ void writeU(int8_t sizeColumn);
 void writeT(int8_t sizeColumn);
 void writeH(int8_t sizeColumn);
 void writeL(int8_t sizeColumn);
-
+void deleteLetter(int8_t sizeColumn);
 
 #endif
 

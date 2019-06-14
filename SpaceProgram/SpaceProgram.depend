@@ -492,10 +492,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560509841 source:d:\dtu\programmering\spaceprogram\src\ansi.c
+1560510380 source:d:\dtu\programmering\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560508905 d:\dtu\programmering\spaceprogram\inc\ansi.h
+1560510577 d:\dtu\programmering\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
