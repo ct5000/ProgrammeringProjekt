@@ -20,5 +20,19 @@ void inverse(uint8_t on);
 void box(int x1, int y1, int x2, int y2, int design, char windowName[]);
 void deleteSymbol(int x, int y);
 void drawSymbol(int x, int y, char sym);
+
+void saveCursor();
+void returnCursor();
+void moveCursorRight(int i);
+void moveCursorLeft(int i);
+void moveCursorUp(int i);
+void moveCursorDown(int i);
+
+void writeA(int8_t sizeColumn);
+void writeP(int8_t sizeColumn);
+void writeS(int8_t sizeColumn);
+
+
+
 #endif
 

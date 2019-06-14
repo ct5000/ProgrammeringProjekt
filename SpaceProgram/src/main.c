@@ -35,8 +35,8 @@
 int main(void){
     uart_init(9600);
     clrscr();
-    writeS();
-    writeS();
+    writeS(6);
+    writeS(6);
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));
