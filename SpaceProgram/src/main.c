@@ -33,15 +33,19 @@
 
 
 int main(void){
-
+    uart_init(9600);
+    clrscr();
+    writeS();
+    writeS();
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));
     //rollingtext_t *test;
+     /*
      int i;
     char textStr[10];
     uint8_t buffer[512];
-    uart_init(9600);
+
     LED_setup();
     joystick_setup();
     setup_pot();
@@ -60,10 +64,10 @@ int main(void){
 
     lcd_push_buffer(buffer);
 
-
+*/
 
     while(1){
-
+/*
 
        // printf("%d\n",readPotLeft());
         //measPot(readPotLeft());
@@ -79,6 +83,7 @@ int main(void){
         lcd_push_buffer(buffer);
 
         for (i=0; i<4000000; i++){}
+            */
     }
 }
 

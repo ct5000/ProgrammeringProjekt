@@ -1,8 +1,5 @@
 #include "mbed.h"
-#include "serialRead.h"
 
-#include <string.h>
-#include <stdio.h>
 
 /*  blue - D8 - CN5 - 1
     green - D9 - CN5 - 2

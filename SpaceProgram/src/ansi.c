@@ -99,6 +99,60 @@ void drawSymbol(int x, int y, char sym){
 
 
 }
+void writeS() {
+    int i;
+    saveCursor();
+    printf("%c", 218);
+    for (i = 1; i < 5; i++) {
+            printf("%c", 196);
+    }
+    returnCursor();
+    moveCursorDown(1);
+    for (i = 0; i < 2; i++) {
+            printf("%c", 179);
+            moveCursorDown(1);
+            moveCursorLeft(1);
+    }
+    printf("%c", 192);
+    for (i = 1; i < 4; i++) {
+            printf("%c", 196);
+    }
+    printf("%c", 191);
+    moveCursorLeft(1);
+    moveCursorDown(1);
+    for (i = 0; i < 2; i++) {
+            printf("%c", 179);
+            moveCursorDown(1);
+            moveCursorLeft(1);
+    }
+    printf("%c", 217);
+    moveCursorLeft(2);
+    for (i = 0; i < 4; i++) {
+            printf("%c", 196);
+            moveCursorLeft(2);
+    }
+    returnCursor();
+    moveCursorRight(6);
+}
+void saveCursor() {
+    printf("%c[s", ESC);
+}
+void returnCursor() {
+    printf("%c[u", ESC);
+}
+void moveCursorRight(int i) {
+    printf("%c[%dC", ESC, i);
+}
+void moveCursorLeft(int i) {
+    printf("%c[%dD", ESC, i);
+}
+void moveCursorUp(int i) {
+    printf("%c[%dA", ESC, i);
+}
+void moveCursorDown(int i) {
+    printf("%c[%dB", ESC, i);
+}
+
 
 void fgcolor(uint8_t foreground) {
 /*  Value      foreground     Value     foreground

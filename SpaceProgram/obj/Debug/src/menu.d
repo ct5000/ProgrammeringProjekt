@@ -1,4 +1,4 @@
-obj\debug\src\lcd.o: src\LCD.c inc/LCD.h inc/30010_io.h \
+obj\debug\src\menu.o: src\menu.c inc/menu.h inc/ansi.h \
  inc/stm32f30x_conf.h SPL\inc/stm32f30x_adc.h inc/stm32f30x.h \
  cmsis/core_cm4.h cmsis/core_cmInstr.h cmsis/core_cmFunc.h \
  cmsis/core_cm4_simd.h inc/system_stm32f30x.h SPL\inc/stm32f30x_can.h \
@@ -10,5 +10,4 @@ obj\debug\src\lcd.o: src\LCD.c inc/LCD.h inc/30010_io.h \
  SPL\inc/stm32f30x_opamp.h SPL\inc/stm32f30x_pwr.h \
  SPL\inc/stm32f30x_rcc.h SPL\inc/stm32f30x_rtc.h SPL\inc/stm32f30x_spi.h \
  SPL\inc/stm32f30x_tim.h SPL\inc/stm32f30x_usart.h \
- SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h inc/charset.h \
- inc/mbed.h inc/serialRead.h
+ SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h

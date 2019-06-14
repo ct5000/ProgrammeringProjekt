@@ -492,7 +492,7 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560433311 source:d:\dtu\programmering\spaceprogram\src\ansi.c
+1560503028 source:d:\dtu\programmering\spaceprogram\src\ansi.c
 	"ansi.h"
 
 1560433310 d:\dtu\programmering\spaceprogram\inc\ansi.h
@@ -543,7 +543,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560434887 source:d:\dtu\programmering\spaceprogram\src\main.c
+1560502569 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -559,8 +559,11 @@
 	<stdio.h>
 	<string.h>
 
-1560434809 d:\dtu\programmering\spaceprogram\inc\mbed.h
+1560499105 d:\dtu\programmering\spaceprogram\inc\mbed.h
 	"stm32f30x_rcc.h"
+	"serialRead.h"
+	<string.h>
+	<stdio.h>
 
 1560433310 d:\dtu\programmering\spaceprogram\inc\serialread.h
 	"30010_io.h"
@@ -568,11 +571,8 @@
 	<stdint.h>
 	<stdlib.h>
 
-1560434794 source:d:\dtu\programmering\spaceprogram\src\mbed.c
+1560500552 source:d:\dtu\programmering\spaceprogram\src\mbed.c
 	"mbed.h"
-	"serialRead.h"
-	<string.h>
-	<stdio.h>
 
 1560433311 source:d:\dtu\programmering\spaceprogram\src\serialread.c
 	"serialRead.h"
@@ -591,4 +591,10 @@
 	"vectors.h"
 	"trigonometric.h"
 	<stdio.h>
+
+1560500554 source:d:\dtu\programmering\spaceprogram\src\menu.c
+	"menu.h"
+
+1560502196 d:\dtu\programmering\spaceprogram\inc\menu.h
+	"ansi.h"
 

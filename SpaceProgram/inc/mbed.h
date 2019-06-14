@@ -2,7 +2,10 @@
 #define MBED_H
 
 #include "stm32f30x_rcc.h"
+#include "serialRead.h"
 
+#include <string.h>
+#include <stdio.h>
 
 
 int8_t readJoystick();

@@ -13,4 +13,5 @@ obj\debug\src\main.o: src\main.c inc/stm32f30x_conf.h \
  SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h inc/30010_io.h \
  inc/ansi.h inc/LUTsin.h inc/trigonometric.h inc/LUTsin.h inc/vectors.h \
  inc/trigonometric.h inc/ball.h inc/mbed.h inc/serialRead.h \
- inc/30010_io.h inc/LCD.h inc/charset.h inc/mbed.h inc/charset.h
+ inc/30010_io.h inc/serialRead.h inc/LCD.h inc/charset.h inc/mbed.h \
+ inc/charset.h

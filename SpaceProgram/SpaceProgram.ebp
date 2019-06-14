@@ -96,6 +96,7 @@
 		<Unit filename="inc\LCD.h" />
 		<Unit filename="inc\LUTsin.h" />
 		<Unit filename="inc\mbed.h" />
+		<Unit filename="inc\menu.h" />
 		<Unit filename="inc\serialRead.h" />
 		<Unit filename="inc\stm32f30x.h" />
 		<Unit filename="inc\stm32f30x_conf.h" />
@@ -213,6 +214,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\mbed.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\serialRead.c">
