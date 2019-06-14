@@ -22,6 +22,7 @@
 #include "serialRead.h"
 #include "LCD.h"
 #include "charset.h"
+#include "menu.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -35,8 +36,7 @@
 int main(void){
     uart_init(9600);
     clrscr();
-    writeS(6);
-    writeS(6);
+    drawMenu();
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));
