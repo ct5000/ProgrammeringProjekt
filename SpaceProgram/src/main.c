@@ -22,7 +22,12 @@
 #include "serialRead.h"
 #include "LCD.h"
 #include "charset.h"
+<<<<<<< HEAD
+#include "SpaceShip.h"
+#include "Landscape.h"
+=======
 #include "menu.h"
+>>>>>>> e68a629ce18a95fd5c68b7678f866b2569d96a55
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,7 +41,50 @@
 int main(void){
     uart_init(9600);
     clrscr();
+<<<<<<< HEAD
+    color(0,7);
+    setup_pot();
+
+    SpaceShip_t skib;
+    SpaceShip_t *ship = &skib;
+
+    initSpaceShip(ship, 5, 5);
+
+    drawLandscape();
+
+    while(1){
+
+    char dirct = uart_get_char();
+    updateSpaceShip(ship, dirct, inBounds(ship));
+    drill(ship, dirct);
+
+
+
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
     drawMenu();
+>>>>>>> e68a629ce18a95fd5c68b7678f866b2569d96a55
   //  char *text = calloc(100, sizeof(char));
    // int i;
     //char *s = calloc(256, sizeof(char));
@@ -66,7 +114,7 @@ int main(void){
 
 */
 
-    while(1){
+   // while(1){
 /*
 
        // printf("%d\n",readPotLeft());
@@ -84,8 +132,8 @@ int main(void){
 
         for (i=0; i<4000000; i++){}
             */
-    }
-}
+ //   }
+//}
 
 
 

@@ -93,11 +93,13 @@
 		<Unit filename="inc\ansi.h" />
 		<Unit filename="inc\ball.h" />
 		<Unit filename="inc\charset.h" />
+		<Unit filename="inc\Landscape.h" />
 		<Unit filename="inc\LCD.h" />
 		<Unit filename="inc\LUTsin.h" />
 		<Unit filename="inc\mbed.h" />
 		<Unit filename="inc\menu.h" />
 		<Unit filename="inc\serialRead.h" />
+		<Unit filename="inc\SpaceShip.h" />
 		<Unit filename="inc\stm32f30x.h" />
 		<Unit filename="inc\stm32f30x_conf.h" />
 		<Unit filename="inc\system_stm32f30x.h" />
@@ -204,6 +206,9 @@
 		<Unit filename="src\charset.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src\Landscape.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src\LCD.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -220,6 +225,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\serialRead.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\SpaceShip.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\startup_stm32f30x.S">
