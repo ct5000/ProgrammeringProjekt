@@ -23,13 +23,12 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
             (*ship).x++;
             deleteSymbol(prevX,prevY);
 	}
-	else if (place = 3)  {     //landed on the ground
-            (*ship).x=(*ship).x;
-            (*ship).y=(*ship).y;
-	}
 	else {
-            (*ship).x=(*ship).x;    //falling down due to gravity
-            (*ship).y=(*ship).y++;
+	        if (place!=3){
+            //falling down due to gravity
+            (*ship).y++;
+            deleteSymbol(prevX,prevY);
+	        }
 	}
 
 	drawSymbol((*ship).x,(*ship).y, 'A');
@@ -39,10 +38,16 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
 void drill(SpaceShip_t * ship, char dirct){
     int shipx = (*ship).x;
 	int shipy = (*ship).y;
+	int i;
 
 	if (dirct == 'e'){
-	drawSymbol(shipx,shipy--,'I');
-
+	drawSymbol(shipx,shipy+2,'I');
+	drawSymbol(shipx,shipy+3,'I');
+	drawSymbol(shipx,shipy+4,'I');
+	for (i=0; i<4000000; i++){}
+    deleteSymbol(shipx,shipy+2);
+    deleteSymbol(shipx,shipy+3);
+    deleteSymbol(shipx,shipy+4);
 
 	}
 

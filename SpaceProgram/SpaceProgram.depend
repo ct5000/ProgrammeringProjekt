@@ -196,10 +196,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560503284 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
+1560509264 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560430953 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
+1560509264 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -271,7 +271,7 @@
 1560429352 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\system_stm32f30x.c
 	"stm32f30x.h"
 
-1560508796 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1560510294 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -284,6 +284,7 @@
 	"LCD.h"
 	"charset.h"
 	"SpaceShip.h"
+	"Landscape.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -618,7 +619,15 @@
 	<stdint.h>
 	<stdlib.h>
 
-1560506849 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1560510517 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 	<string.h>
+
+1560510080 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
+	<stdio.h>
+	"ansi.h"
+	"SpaceShip.h"
+
+1560510630 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
+	"Landscape.h"
 

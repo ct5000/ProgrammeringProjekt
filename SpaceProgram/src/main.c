@@ -23,6 +23,7 @@
 #include "LCD.h"
 #include "charset.h"
 #include "SpaceShip.h"
+#include "Landscape.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,18 +37,20 @@
 int main(void){
     uart_init(9600);
     clrscr();
-    writeS();
-    writeS();
+    color(0,7);
+    setup_pot();
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
 
-    initSpaceShip(ship, 10, 10);
+    initSpaceShip(ship, 5, 5);
+
+    drawLandscape();
 
     while(1){
 
     char dirct = uart_get_char();
-    updateSpaceShip(ship, dirct, 2);
+    updateSpaceShip(ship, dirct, inBounds(ship));
     drill(ship, dirct);
 
 

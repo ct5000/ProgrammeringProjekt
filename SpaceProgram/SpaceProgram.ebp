@@ -93,6 +93,7 @@
 		<Unit filename="inc\ansi.h" />
 		<Unit filename="inc\ball.h" />
 		<Unit filename="inc\charset.h" />
+		<Unit filename="inc\Landscape.h" />
 		<Unit filename="inc\LCD.h" />
 		<Unit filename="inc\LUTsin.h" />
 		<Unit filename="inc\mbed.h" />
@@ -203,6 +204,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\charset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\Landscape.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\LCD.c">
