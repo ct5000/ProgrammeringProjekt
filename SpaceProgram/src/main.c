@@ -25,6 +25,7 @@
 #include "SpaceShip.h"
 #include "Landscape.h"
 #include "menu.h"
+#include "Cannon.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,11 +37,27 @@
 
 
 int main(void){
+
     uart_init(9600);
-    runningMenu();
+//    runningMenu();
+    setup_pot();
+
 
     clrscr();
-    drawLandscape();
+//    drawLandscape();
+    int a=0;
+    int p=-1;
+    int i;
+    int vinkel =0;
+    cannonBall_t can;
+    SpaceShip_t spac;
+
+
+    initSpaceShip(&spac,20,20,100);
+
+    cannonBall_t ammo[50];
+
+
 
     /*
     color(0,7);
@@ -59,7 +76,25 @@ int main(void){
     updateSpaceShip(ship, dirct, inBounds(ship));
     drill(ship, dirct);
     */
-    while(1){}
+
+    while(1){
+    if (uart_get_count() > 0) {
+
+       if (uart_get_char()=='g'){
+            p++;
+            initCannon((&ammo[p]), &spac);
+       }
+    }
+    for (i=0; i<=p; i++){
+        if (inBallBounds((&ammo[p]))){
+            updateBallPosition((&ammo[p]));
+        }
+        else {
+            deleteSymbol((ammo[p]).x >> 14,(ammo[p]).y >> 14);
+        }
+    }
+
+    }
 
 
 
