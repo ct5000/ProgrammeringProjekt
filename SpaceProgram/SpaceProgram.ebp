@@ -90,6 +90,7 @@
 		<Unit filename="cmsis\core_cmFunc.h" />
 		<Unit filename="cmsis\core_cmInstr.h" />
 		<Unit filename="inc\30010_io.h" />
+		<Unit filename="inc\aliens.h" />
 		<Unit filename="inc\ansi.h" />
 		<Unit filename="inc\ball.h" />
 		<Unit filename="inc\charset.h" />
@@ -195,6 +196,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\30010_io.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\aliens.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\ansi.c">
