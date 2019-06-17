@@ -1,11 +1,12 @@
 #ifndef LANDSCAPE_H
 #define LANDSCAPE_H
 
-# include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-# include "ansi.h"
-#include "SpaceShip.h"
+
+#include "ansi.h"
+//#include "SpaceShip.h"
 
 # define SCREEN_WIDTH 240
 # define SCREEN_HEIGHT 76
@@ -17,7 +18,7 @@ typedef struct{
 } mineral_t;
 
 void drawLandscape();
-int8_t inBounds(SpaceShip_t * p);
+
 int randomNumber(int8_t mini, int8_t maxi);
 void initMineral(mineral_t *p);
 void drawMinerals(mineral_t minerals[]);

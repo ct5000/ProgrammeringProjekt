@@ -484,6 +484,23 @@ void moveCursorDown(int i) {
     printf("%c[%dB", ESC, i);
 }
 
+void drawAlien(int x, int y) {
+    gotoxy(x - 1,y - 1);
+    printf("%c%c%c", 201, 207, 187);
+    gotoxy(x - 1, y);
+    printf("%c%c%c", 40, 178, 41);
+    gotoxy(x - 1, y + 1);
+    printf("%c%c%c", 242, 176, 242);
+}
+void deleteAlien(int x, int y) {
+    int i, j;
+    for (i = x - 1; i <= x + 1; i++) {
+            for (j = y - 1; j <= y + 1; j++) {
+                    deleteSymbol(i, j);
+            }
+    }
+}
+
 
 void fgcolor(uint8_t foreground) {
 /*  Value      foreground     Value     foreground

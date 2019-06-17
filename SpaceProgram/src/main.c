@@ -37,6 +37,7 @@
 
 
 int main(void){
+<<<<<<< HEAD
 
     uart_init(9600);
 //    runningMenu();
@@ -58,20 +59,60 @@ int main(void){
     cannonBall_t ammo[50];
 
 
+=======
+    int pos;
+    uint8_t buffer[512];
+    uart_init(96000);
 
-    /*
-    color(0,7);
-    setup_pot();
+    lcd_init();
+
+
+
+    memset(buffer, 0x00, 512);
+
+    lcd_push_buffer(buffer);
+
+    color(7,0);
+    //runningMenu();
+    set_timer();
+    start_stop();
+    drawLandscape();
+    fgcolor(0);
+>>>>>>> 8924af2ff669864e805cdb915595bd8189b1a588
+
+
+
+    //setup_pot();
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
+    initSpaceShip(ship, 5, 5, 100);
 
-    initSpaceShip(ship, 5, 5);
+    mineral_t m1;
+    mineral_t m2;
+    mineral_t m3;
+
+    initMineral(&m1);
+    initMineral(&m2);
+    initMineral(&m3);
+
+    mineral_t minerals[] = {m1, m2, m3};
+
+    drawMinerals(minerals);
+
+
+
+
+    addfuel(ship);
+
+
+
 
 
 
     while(1){
 
+<<<<<<< HEAD
     char dirct = uart_get_char();
     updateSpaceShip(ship, dirct, inBounds(ship));
     drill(ship, dirct);
@@ -95,7 +136,21 @@ int main(void){
     }
 
     }
+=======
+>>>>>>> 8924af2ff669864e805cdb915595bd8189b1a588
 
+
+        char dirct = uart_get_char();
+        updateSpaceShip(ship, dirct, inBounds(ship));
+        pos = inBounds(ship);
+        drill(ship, dirct,pos, minerals);
+
+        lcd_write_string("2", buffer, 2,2);
+        lcd_push_buffer(buffer);
+
+       // updatefuelBar(ship, dirct);
+
+    }
 
 
 
@@ -119,16 +174,15 @@ int main(void){
 
 
 
+/*
+
+   char *text = calloc(100, sizeof(char));
+    int i;
+    char *s = calloc(256, sizeof(char));
+    rollingtext_t *test;
 
 
-  //  char *text = calloc(100, sizeof(char));
-   // int i;
-    //char *s = calloc(256, sizeof(char));
-    //rollingtext_t *test;
-     /*
-     int i;
     char textStr[10];
-    uint8_t buffer[512];
 
     LED_setup();
     joystick_setup();
@@ -148,16 +202,18 @@ int main(void){
 
     lcd_push_buffer(buffer);
 
-*/
 
-   // while(1){
-/*
+
+    while(1){
+
+
 
        // printf("%d\n",readPotLeft());
         //measPot(readPotLeft());
         //printf("\n\n");
         measPot(readPotLeft(), &textStr);
-//        strcpy(textStr ,measPot(readPotLeft()));
+
+        printf("%s", textStr );
 
         //printf("%s\n", textStr);
         lcd_write_string(textStr, buffer, 1 ,1);
@@ -167,9 +223,9 @@ int main(void){
         lcd_push_buffer(buffer);
 
         for (i=0; i<4000000; i++){}
-            */
- //   }
-//}
+
+    }
+}
 
 
-
+*/

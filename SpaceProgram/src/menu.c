@@ -1,6 +1,8 @@
 #include "menu.h"
 
-
+/*
+Draws the menu of the game in the middle. It takes no parameters and has no return value.
+*/
 void drawMenu() {
     clrscr();
     gotoxy(70, 3);
@@ -75,7 +77,7 @@ void drawHelp() {
 void runningMenu() {
     int menuArrow= 1;
     int menu = 1;
-    char keyStroke = 'a';
+    char keyStroke;
     drawMenu();
     //Keeps the player in the menu until it hits enter at START
     while(menu) {
