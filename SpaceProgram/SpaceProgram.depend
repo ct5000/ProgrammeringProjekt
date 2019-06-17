@@ -196,10 +196,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560524151 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
+1560761647 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560524150 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
+1560761647 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -266,12 +266,12 @@
 	"serialRead.h"
 	<string.h>
 
-1560522432 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
+1560767051 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
 
 1560429352 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\system_stm32f30x.c
 	"stm32f30x.h"
 
-1560761040 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1560777447 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -613,7 +613,7 @@
 	"ansi.h"
 	"30010_io.h"
 
-1560761444 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
+1560777424 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -622,22 +622,22 @@
 	"LUTsin.h"
 	"trigonometric.h"
 	"Landscape.h"
+	"LCD.h"
 	<stdio.h>
 	<stdint.h>
 	<string.h>
 	<stdlib.h>
 
-1560760174 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1560777439 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
-	<string.h>
 
-1560761444 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
+1560762722 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"ansi.h"
 
-1560761444 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
+1560772965 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 
 1560514620 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
@@ -665,4 +665,12 @@
 	<time.h>
 	"ansi.h"
 	"SpaceShip.h"
+
+1560761647 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\aliens.c
+	"aliens.h"
+
+1560761647 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\aliens.h
+	"ansi.h"
+	"30010_io.h"
+	"Landscape.h"
 

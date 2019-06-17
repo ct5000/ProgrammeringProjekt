@@ -8,9 +8,9 @@
 #include "ansi.h"
 //#include "SpaceShip.h"
 
-# define SCREEN_WIDTH 192
-# define SCREEN_HEIGHT 55
-# define GROUND_HEIGHT 40
+# define SCREEN_WIDTH 240
+# define SCREEN_HEIGHT 76
+# define GROUND_HEIGHT 56
 
 typedef struct{
     int8_t x,y;

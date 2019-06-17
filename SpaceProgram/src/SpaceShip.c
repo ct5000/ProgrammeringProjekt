@@ -16,16 +16,19 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
         if (dirct == 'w' && (*ship).fuel>0){          //up
                 (*ship).y--;
                 (*ship).fuel--;
+                subfuel(ship);
                 deleteSymbol(prevX,prevY);
         }
         else if (dirct == 'a' && (*ship).fuel>0){     //left
                 (*ship).x--;
                 (*ship).fuel--;
+                subfuel(ship);
                 deleteSymbol(prevX,prevY);
         }
         else if (dirct == 'd' && (*ship).fuel>0){     //right
                 (*ship).x++;
                 (*ship).fuel--;
+                subfuel(ship);
                 deleteSymbol(prevX,prevY);
         }
         else {
@@ -38,11 +41,24 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
 	}
 
 
-	drawSymbol((*ship).x,(*ship).y, 'A');
+	//drawSymbol((*ship).x,(*ship).y, 'A');
+	drawShip((*ship).x, (*ship).y);
+
 	gotoxy(91,5);
 
 	printf("fuel: %3d", (*ship).fuel);
 
+}
+
+void drawShip(int x, int y) {
+    fgcolor(1);
+    gotoxy(x - 1,y - 1);
+    printf("%c%c%c", 201, 207, 187);
+    gotoxy(x - 1, y);
+    printf("%c%c%c", 40, 178, 41);
+    gotoxy(x - 1, y + 1);
+    printf("%c%c%c", 242, 176, 242);
+    fgcolor(0);
 }
 
 int8_t inBounds(SpaceShip_t *p){
@@ -68,40 +84,76 @@ int8_t inBounds(SpaceShip_t *p){
     return 0;
 }
 
-void drill(SpaceShip_t * ship, char dirct, int8_t place){
+//Skibets drill til at få mineraler
+void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[]){
 	int i;
+	int j;
 
-	if (dirct == 'e' && place == 3){
-        for (i = 0; i <= SCREEN_HEIGHT; i++ ){
-            gotoxy((*ship).x, GROUND_HEIGHT+i);
-                printf("%c",186);
-        }
-        for (i = SCREEN_HEIGHT; i >= 0; i-- ){
-                gotoxy((*ship).x, GROUND_HEIGHT+i);
-                printf("%c",219);
-        }
+	if ((dirct == 'e' || dirct == 'E')  && place == 3){ //Hvis der trykkes 'e' og skibet står på jorden,
 
+            i = checkMinerals(ship, minerals); //mineralets placering
+
+            if (i){ //Hvis skibet er over et mineral
+
+                (*ship).fuel += (*minerals).fuel;
+
+
+                for (j = GROUND_HEIGHT; j <= (minerals[i - 1]).y; j++ ){
+                    gotoxy((*ship).x, j);
+                    printf("%c",186);
+                }
+                for (j = (minerals[i - 1]).y; j >= GROUND_HEIGHT; j-- ){
+                    gotoxy((*ship).x, j);
+                    printf("%c",219);
+                }
+
+                addfuel(ship);
+
+            }
+            else { //Hvis skibet ikke er over et mineral
+
+                for (i = 0; i <= SCREEN_HEIGHT; i++ ){
+                    gotoxy((*ship).x, GROUND_HEIGHT+i);
+                    printf("%c",186);
+                }
+                for (i = SCREEN_HEIGHT; i >= 0; i-- ){
+                    gotoxy((*ship).x, GROUND_HEIGHT+i);
+                    printf("%c",219);
+                }
+            }
 
 	}
 
 }
-void drawfuelBar(SpaceShip_t * ship){
+
+//lægger fuel til fuelbaren
+void addfuel(SpaceShip_t * ship){
     int i;
-    gotoxy(1,1);
-    for (i=0; i < (*ship).fuel; i++){
-        printf("%c",219);
-    }
+        fgcolor(0);
+        gotoxy(1,1);
+        for(i=0; i < (*ship).fuel; i++){
+            gotoxy(i,1);
+            printf("%c",219);
+        }
 }
 
-void usefuelBar(SpaceShip_t * ship, char dirct){
-    if (dirct == 'w' || 'a' || 'd'){
-            gotoxy((*ship).fuel+1,1);
+//Trækker fuel fra fuelbaren
+void subfuel(SpaceShip_t * ship){
+        gotoxy((*ship).fuel+1,1);
             printf(" ");
-    }
-
-
-
-
 }
 
+// Finder det mineral skibet står over
+int checkMinerals(SpaceShip_t *ship, mineral_t minerals[]){
+    int i;
+        for (i=1; i<4; i++){
 
+            if ((*ship).x == (minerals[i - 1]).x){
+            return i;
+
+            }
+
+        }
+    return 0;
+
+}
