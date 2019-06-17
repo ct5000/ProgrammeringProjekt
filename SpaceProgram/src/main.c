@@ -37,11 +37,12 @@
 
 
 int main(void){
-    alien_t aliens[5];
-    alien_t alien;
+    alien_t aliens[25];
     int8_t numAliens = 0;
-    uart_init(9600);
+    int8_t noYet = 1;
+    uart_init(96000);
     //runningMenu();
+    set_timer();
 
     clrscr();
     drawLandscape();
@@ -57,9 +58,9 @@ int main(void){
     initSpaceShip(ship, 5, 5, 100);
 
     drawfuelBar(ship);
-    init_alien(&alien);
-    aliens[0] = alien;
+    makeAlien(aliens, numAliens);
     numAliens++;
+    start_stop();
 
 
 
@@ -72,8 +73,10 @@ int main(void){
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
-            if (getFlag()== 100) {
-                    alienKilled(&aliens[0]);
+            if (getFlag() > 15000 && noYet) {
+                    alienKilled(aliens, 1, numAliens);
+                    numAliens--;
+                    noYet = 0;
             }
             updateAliens(aliens, numAliens);
             char dirct = uart_get_char();

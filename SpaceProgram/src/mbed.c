@@ -307,7 +307,7 @@ int gethour(){
     return(time/(100*60*60));
 }
 
-int8_t getFlag(){
+int getFlag(){
     return flag;
 }
 

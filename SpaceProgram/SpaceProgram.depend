@@ -547,7 +547,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560769093 source:d:\dtu\programmering\spaceprogram\src\main.c
+1560780138 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -567,7 +567,7 @@
 	<stdio.h>
 	<string.h>
 
-1560499105 d:\dtu\programmering\spaceprogram\inc\mbed.h
+1560776413 d:\dtu\programmering\spaceprogram\inc\mbed.h
 	"stm32f30x_rcc.h"
 	"serialRead.h"
 	<string.h>
@@ -579,7 +579,7 @@
 	<stdint.h>
 	<stdlib.h>
 
-1560767352 source:d:\dtu\programmering\spaceprogram\src\mbed.c
+1560776413 source:d:\dtu\programmering\spaceprogram\src\mbed.c
 	"mbed.h"
 
 1560433311 source:d:\dtu\programmering\spaceprogram\src\serialread.c
@@ -667,10 +667,10 @@
 	<time.h>
 	"ansi.h"
 
-1560769162 source:d:\dtu\programmering\spaceprogram\src\aliens.c
+1560780045 source:d:\dtu\programmering\spaceprogram\src\aliens.c
 	"aliens.h"
 
-1560769162 d:\dtu\programmering\spaceprogram\inc\aliens.h
+1560779712 d:\dtu\programmering\spaceprogram\inc\aliens.h
 	"ansi.h"
 	"30010_io.h"
 	"Landscape.h"
