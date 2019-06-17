@@ -599,7 +599,7 @@
 	"trigonometric.h"
 	<stdio.h>
 
-1560520304 source:d:\dtu\programmering\spaceprogram\src\menu.c
+1560520964 source:d:\dtu\programmering\spaceprogram\src\menu.c
 	"menu.h"
 
 1560520509 d:\dtu\programmering\spaceprogram\inc\menu.h
@@ -642,7 +642,7 @@
 	"SpaceShip.h"
 	<string.h>
 
-1560514620 d:\dtu\programmering\spaceprogram\inc\spaceship.h
+1560524592 d:\dtu\programmering\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -657,8 +657,10 @@
 1560514620 source:d:\dtu\programmering\spaceprogram\src\landscape.c
 	"Landscape.h"
 
-1560514620 d:\dtu\programmering\spaceprogram\inc\landscape.h
+1560524592 d:\dtu\programmering\spaceprogram\inc\landscape.h
 	<stdio.h>
+	<stdlib.h>
+	<time.h>
 	"ansi.h"
 	"SpaceShip.h"
 
