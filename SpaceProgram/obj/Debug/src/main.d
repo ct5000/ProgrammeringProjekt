@@ -15,4 +15,4 @@ obj\debug\src\main.o: src\main.c inc/stm32f30x_conf.h \
  inc/trigonometric.h inc/ball.h inc/mbed.h inc/serialRead.h \
  inc/30010_io.h inc/serialRead.h inc/LCD.h inc/charset.h inc/mbed.h \
  inc/charset.h inc/SpaceShip.h inc/vectors.h inc/ansi.h inc/Landscape.h \
- inc/SpaceShip.h inc/menu.h
+ inc/Landscape.h inc/menu.h

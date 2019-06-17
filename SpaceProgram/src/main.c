@@ -42,25 +42,33 @@ int main(void){
     clrscr();
     drawLandscape();
 
-    /*
-    color(0,7);
+
+    bgcolor(6);
     setup_pot();
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
 
-    initSpaceShip(ship, 5, 5);
+    initSpaceShip(ship, 5, 5, 100);
+
+    drawfuelBar(ship);
+
+
+
 
 
 
     while(1){
 
-    char dirct = uart_get_char();
-    updateSpaceShip(ship, dirct, inBounds(ship));
-    drill(ship, dirct);
-    */
-    while(1){}
 
+
+        char dirct = uart_get_char();
+        updateSpaceShip(ship, dirct, inBounds(ship));
+        drill(ship, dirct,inBounds(ship));
+
+        usefuelBar(ship, dirct);
+
+    }
 
 
 

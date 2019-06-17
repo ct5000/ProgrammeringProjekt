@@ -11,4 +11,5 @@ obj\debug\src\spaceship.o: src\SpaceShip.c inc/SpaceShip.h inc/vectors.h \
  SPL\inc/stm32f30x_opamp.h SPL\inc/stm32f30x_pwr.h \
  SPL\inc/stm32f30x_rcc.h SPL\inc/stm32f30x_rtc.h SPL\inc/stm32f30x_spi.h \
  SPL\inc/stm32f30x_tim.h SPL\inc/stm32f30x_usart.h \
- SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h inc/mbed.h inc/ansi.h
+ SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h inc/mbed.h inc/ansi.h \
+ inc/Landscape.h
