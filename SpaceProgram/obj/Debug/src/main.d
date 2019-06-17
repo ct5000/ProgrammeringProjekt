@@ -15,4 +15,16 @@ obj\debug\src\main.o: src\main.c inc/stm32f30x_conf.h \
  inc/trigonometric.h inc/ball.h inc/mbed.h inc/serialRead.h \
  inc/30010_io.h inc/serialRead.h inc/LCD.h inc/charset.h inc/mbed.h \
  inc/charset.h inc/SpaceShip.h inc/vectors.h inc/ansi.h inc/Landscape.h \
+<<<<<<< HEAD
  inc/LCD.h inc/aliens.h inc/Landscape.h inc/menu.h inc/aliens.h
+=======
+<<<<<<< HEAD
+ inc/SpaceShip.h inc/menu.h inc/Cannon.h
+=======
+<<<<<<< HEAD
+ inc/LCD.h inc/Landscape.h inc/menu.h
+=======
+ inc/Landscape.h inc/menu.h inc/aliens.h
+>>>>>>> be5e28b7c080a3826cda49ee573a4390cb1b3e77
+>>>>>>> 8924af2ff669864e805cdb915595bd8189b1a588
+>>>>>>> 24e6c46dbab08b96cbcd9be82c9edd10a5d811b0

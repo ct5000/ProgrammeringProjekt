@@ -685,3 +685,352 @@
 	"30010_io.h"
 	"Landscape.h"
 
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_adc.c
+	"stm32f30x_adc.h"
+	"stm32f30x_rcc.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_adc.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\stm32f30x.h
+	"core_cm4.h"
+	"system_stm32f30x.h"
+	<stdint.h>
+	"stm32f30x_conf.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\cmsis\core_cm4.h
+	<stdint.h>
+	<core_cmInstr.h>
+	<core_cmFunc.h>
+	<core_cm4_simd.h>
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\cmsis\core_cminstr.h
+	<cmsis_iar.h>
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\cmsis\core_cmfunc.h
+	<cmsis_iar.h>
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\cmsis\core_cm4_simd.h
+	<cmsis_iar.h>
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\system_stm32f30x.h
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\stm32f30x_conf.h
+	"stm32f30x_adc.h"
+	"stm32f30x_can.h"
+	"stm32f30x_crc.h"
+	"stm32f30x_comp.h"
+	"stm32f30x_dac.h"
+	"stm32f30x_dbgmcu.h"
+	"stm32f30x_dma.h"
+	"stm32f30x_exti.h"
+	"stm32f30x_flash.h"
+	"stm32f30x_gpio.h"
+	"stm32f30x_syscfg.h"
+	"stm32f30x_i2c.h"
+	"stm32f30x_iwdg.h"
+	"stm32f30x_opamp.h"
+	"stm32f30x_pwr.h"
+	"stm32f30x_rcc.h"
+	"stm32f30x_rtc.h"
+	"stm32f30x_spi.h"
+	"stm32f30x_tim.h"
+	"stm32f30x_usart.h"
+	"stm32f30x_wwdg.h"
+	"stm32f30x_misc.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_can.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_crc.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_comp.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_dac.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_dbgmcu.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_dma.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_exti.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_flash.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_gpio.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_syscfg.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_i2c.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_iwdg.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_opamp.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_pwr.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_rcc.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_rtc.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_spi.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_tim.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_usart.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_wwdg.h
+	"stm32f30x.h"
+
+1560429974 c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\inc\stm32f30x_misc.h
+	"stm32f30x.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_can.c
+	"stm32f30x_can.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_comp.c
+	"stm32f30x_comp.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_crc.c
+	"stm32f30x_crc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_dac.c
+	"stm32f30x_dac.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_dbgmcu.c
+	"stm32f30x_dbgmcu.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_dma.c
+	"stm32f30x_dma.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_exti.c
+	"stm32f30x_exti.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_flash.c
+	"stm32f30x_flash.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_gpio.c
+	"stm32f30x_gpio.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_i2c.c
+	"stm32f30x_i2c.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_iwdg.c
+	"stm32f30x_iwdg.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_misc.c
+	"stm32f30x_misc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_opamp.c
+	"stm32f30x_opamp.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_pwr.c
+	"stm32f30x_pwr.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_rcc.c
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_rtc.c
+	"stm32f30x_rtc.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_spi.c
+	"stm32f30x_spi.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_syscfg.c
+	"stm32f30x_syscfg.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_tim.c
+	"stm32f30x_tim.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_usart.c
+	"stm32f30x_usart.h"
+	"stm32f30x_rcc.h"
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_wwdg.c
+	"stm32f30x_wwdg.h"
+	"stm32f30x_rcc.h"
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\30010_io.c
+	"30010_io.h"
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\30010_io.h
+	"stm32f30x_conf.h"
+	<stdio.h>
+
+1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\ansi.c
+	"ansi.h"
+
+1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\ansi.h
+	"stm32f30x_conf.h"
+	<stdio.h>
+	<stdint.h>
+	<string.h>
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\ball.c
+	"vectors.h"
+	"ball.h"
+	<stdio.h>
+	"ansi.h"
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\vectors.h
+	"LUTsin.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\lutsin.h
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\trigonometric.h
+	"LUTsin.h"
+	<stdio.h>
+	<stdint.h>
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\ball.h
+	"LUTsin.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\charset.c
+	"charset.h"
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\charset.h
+
+1560765562 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
+	"Landscape.h"
+
+1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\landscape.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"ansi.h"
+	"SpaceShip.h"
+
+1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\spaceship.h
+	"vectors.h"
+	"serialRead.h"
+	"mbed.h"
+	"vectors.h"
+	"ansi.h"
+	"LUTsin.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\serialread.h
+	"30010_io.h"
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+
+1560515333 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\mbed.h
+	"stm32f30x_rcc.h"
+	"serialRead.h"
+	<string.h>
+	<stdio.h>
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\lcd.c
+	"LCD.h"
+
+1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\lcd.h
+	"30010_io.h"
+	<string.h>
+	"charset.h"
+	"mbed.h"
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\lutsin.c
+	"LUTsin.h"
+
+1560515333 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\mbed.c
+	"mbed.h"
+
+1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\menu.c
+	"menu.h"
+
+1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\menu.h
+	"ansi.h"
+	"30010_io.h"
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\serialread.c
+	"serialRead.h"
+	<string.h>
+
+1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\spaceship.c
+	"SpaceShip.h"
+	<string.h>
+
+1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\startup_stm32f30x.s
+
+1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\system_stm32f30x.c
+	"stm32f30x.h"
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\trigonometric.c
+	"trigonometric.h"
+	<stdio.h>
+
+1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\vectors.c
+	"vectors.h"
+	"trigonometric.h"
+	<stdio.h>
+
+1560781920 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\cannon.c
+	"Cannon.h"
+
+1560781272 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\cannon.h
+	"mbed.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+	"ansi.h"
+	"SpaceShip.h"
+	"vectors.h"
+
+1560782206 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\main.c
+	"stm32f30x_conf.h"
+	"30010_io.h"
+	"ansi.h"
+	"LUTsin.h"
+	"trigonometric.h"
+	"vectors.h"
+	"ball.h"
+	"mbed.h"
+	"serialRead.h"
+	"LCD.h"
+	"charset.h"
+	"SpaceShip.h"
+	"Landscape.h"
+	"menu.h"
+	"Cannon.h"
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1560765562 c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
+	"Landscape.h"
+
