@@ -12,30 +12,31 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
 	int prevX = (*ship).x;
 	int prevY = (*ship).y;
 
+    deleteAlien((*ship).x,(*ship).y);
 
         if (dirct == 'w' && (*ship).fuel>0){          //up
                 (*ship).y--;
                 (*ship).fuel--;
                 subfuel(ship);
-                deleteSymbol(prevX,prevY);
+
         }
         else if (dirct == 'a' && (*ship).fuel>0){     //left
                 (*ship).x--;
                 (*ship).fuel--;
                 subfuel(ship);
-                deleteSymbol(prevX,prevY);
+
         }
         else if (dirct == 'd' && (*ship).fuel>0){     //right
                 (*ship).x++;
                 (*ship).fuel--;
                 subfuel(ship);
-                deleteSymbol(prevX,prevY);
+
         }
         else {
                 if (place!=3){
                 //falling down due to gravity
                 (*ship).y++;
-                deleteSymbol(prevX,prevY);
+
                 }
 
 	}
@@ -50,16 +51,8 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
 
 }
 
-void drawShip(int x, int y) {
-    fgcolor(1);
-    gotoxy(x - 1,y - 1);
-    printf("%c%c%c", 201, 207, 187);
-    gotoxy(x - 1, y);
-    printf("%c%c%c", 40, 178, 41);
-    gotoxy(x - 1, y + 1);
-    printf("%c%c%c", 242, 176, 242);
-    fgcolor(0);
-}
+
+
 
 int8_t inBounds(SpaceShip_t *p){
 //følgende er de forskellige tilfælde den kan overstige grænserne
@@ -74,7 +67,7 @@ int8_t inBounds(SpaceShip_t *p){
         return 2;
     }
     //spilleren forsøger at grave sig ned i jorden
-    else if ((*p).y==GROUND_HEIGHT-1){
+    else if ((*p).y==GROUND_HEIGHT-2){
         return 3;
     }
     //spilleren flyver ud af banen

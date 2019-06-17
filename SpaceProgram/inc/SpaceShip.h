@@ -10,6 +10,7 @@
 #include "trigonometric.h"
 #include "Landscape.h"
 #include "LCD.h"
+#include "aliens.h"
 
 #include <stdio.h>
 #include <stdint.h>
@@ -31,7 +32,7 @@ int checkMinerals( SpaceShip_t *p, mineral_t minerals[]);
 void addfuel(SpaceShip_t * ship);
 void subfuel(SpaceShip_t * ship);
 
-void drawShip(int x, int y); // skal flyttes til ansi
+
 
 #endif
 

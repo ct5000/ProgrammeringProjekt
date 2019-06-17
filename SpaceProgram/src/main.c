@@ -25,6 +25,7 @@
 #include "SpaceShip.h"
 #include "Landscape.h"
 #include "menu.h"
+#include "aliens.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,8 +37,11 @@
 
 
 int main(void){
+    alien_t aliens[25];
+    int8_t numAliens = 0;
     int pos;
     uint8_t buffer[512];
+    int8_t noYet = 1;
     uart_init(96000);
 
     lcd_init();
@@ -86,18 +90,30 @@ int main(void){
 
 
     while(1){
+            if(spawnAlien(aliens, numAliens)) {
+                    numAliens++;
+            }
+            if (getFlag() > 15000 && noYet) {
+                    alienKilled(aliens, 1, numAliens);
+                    numAliens--;
+                    noYet = 0;
+            }
+            updateAliens(aliens, numAliens);
 
 
 
-        char dirct = uart_get_char();
-        updateSpaceShip(ship, dirct, inBounds(ship));
-        pos = inBounds(ship);
-        drill(ship, dirct,pos, minerals);
+            char dirct = uart_get_char();
 
-        lcd_write_string("2", buffer, 2,2);
-        lcd_push_buffer(buffer);
 
-       // updatefuelBar(ship, dirct);
+            updateSpaceShip(ship, dirct, inBounds(ship));
+            pos = inBounds(ship);
+            drill(ship, dirct,pos, minerals);
+
+
+            lcd_write_string("2", buffer, 2,2);
+            lcd_push_buffer(buffer);
+
+           // updatefuelBar(ship, dirct);
 
     }
 

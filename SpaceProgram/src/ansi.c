@@ -492,6 +492,17 @@ void drawAlien(int x, int y) {
     gotoxy(x - 1, y + 1);
     printf("%c%c%c", 242, 176, 242);
 }
+void drawShip(int x, int y) {
+    fgcolor(1);
+    gotoxy(x - 1,y - 1);
+    printf("%c%c%c", 217, 65, 192);
+    gotoxy(x - 1, y);
+    printf("%c%c%c", 219, 206, 219);
+    gotoxy(x - 1, y + 1);
+    printf("%c%c%c", 201, 190, 187);
+    fgcolor(0);
+}
+
 void deleteAlien(int x, int y) {
     int i, j;
     for (i = x - 1; i <= x + 1; i++) {
