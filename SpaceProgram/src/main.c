@@ -25,6 +25,7 @@
 #include "SpaceShip.h"
 #include "Landscape.h"
 #include "menu.h"
+#include "aliens.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,15 +37,19 @@
 
 
 int main(void){
+    alien_t aliens[5];
+    alien_t alien;
+    int8_t numAliens = 0;
     uart_init(9600);
-    runningMenu();
+    //runningMenu();
 
     clrscr();
     drawLandscape();
 
 
+
     bgcolor(6);
-    setup_pot();
+    //setup_pot();
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
@@ -52,6 +57,10 @@ int main(void){
     initSpaceShip(ship, 5, 5, 100);
 
     drawfuelBar(ship);
+    init_alien(&alien);
+    aliens[0] = alien;
+    numAliens++;
+
 
 
 
@@ -60,13 +69,18 @@ int main(void){
 
     while(1){
 
+            if(spawnAlien(aliens, numAliens)) {
+                    numAliens++;
+            }
+            if (getFlag()== 100) {
+                    alienKilled(&aliens[0]);
+            }
+            updateAliens(aliens, numAliens);
+            char dirct = uart_get_char();
+            updateSpaceShip(ship, dirct, inBounds(ship));
+            drill(ship, dirct,inBounds(ship));
 
-
-        char dirct = uart_get_char();
-        updateSpaceShip(ship, dirct, inBounds(ship));
-        drill(ship, dirct,inBounds(ship));
-
-        usefuelBar(ship, dirct);
+            usefuelBar(ship, dirct);
 
     }
 

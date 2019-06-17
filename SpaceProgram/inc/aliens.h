@@ -14,6 +14,10 @@ typedef struct {
 
 void init_alien(alien_t *alien);
 void updateAlien(alien_t *alien);
+void updateAliens(alien_t aliens[], int8_t numAliens);
+void alienKilled(alien_t *alien);
+int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex);
+
 
 #endif
 
