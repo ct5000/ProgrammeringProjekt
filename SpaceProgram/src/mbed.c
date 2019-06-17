@@ -286,10 +286,8 @@ int split_time1(){
 }
 
 void TIM2_IRQHandler(void) {
-
     flag++;
     time++;
-
     TIM2->SR &= ~0x0001; // Clear interrupt bit
  }
 
@@ -309,9 +307,8 @@ int gethour(){
     return(time/(100*60*60));
 }
 
-int8_t getFlag(){
-
-return flag;
+int getFlag(){
+    return flag;
 }
 
 void rstFlag(){

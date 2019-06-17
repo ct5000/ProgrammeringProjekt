@@ -25,7 +25,7 @@ void start_stop();
 
 int split_time1();
 
-int8_t getFlag();
+int getFlag();
 void rstFlag();
 
 void setup_pot();
