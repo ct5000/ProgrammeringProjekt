@@ -70,29 +70,7 @@ void makeAlien(alien_t aliens[], int8_t emptyIndex) {
     aliens[emptyIndex] = alien;
 }
 
-int* killAliens(alien_t aliens[], cannonBall_t cannonballs[]){
-    int a = sizeof(aliens)/sizeof(aliens[0]);
-    int c = sizeof(cannonballs)/sizeof(cannonballs[0]);
-    int i,j;
-    int inX,inY;
-    int deadAliens[a];
-    int p=0;
 
-    for (i=0; i<c; i++){
-
-        for (j=0; j<a; j++){
-            inX=(cannonballs[i].x>=aliens[j].x-1 && cannonballs[i].x<=aliens[j].x+1);
-            inY=(cannonballs[i].y>=aliens[j].y-1 && cannonballs[i].y<=aliens[j.y+1]);
-            if (inX && inY){
-                    deleteAlien(aliens[x],aliens[y]);
-                    a[p]=j;
-                    p++;
-            }
-
-    }
-
-}
-}
 
 /*
 Kode fra main
