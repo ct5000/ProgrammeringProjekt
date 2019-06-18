@@ -266,12 +266,12 @@
 	"serialRead.h"
 	<string.h>
 
-1560847993 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
+1560867100 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
 
 1560429352 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\system_stm32f30x.c
 	"stm32f30x.h"
 
-1560849819 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1560866835 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -617,7 +617,7 @@
 	"ansi.h"
 	"30010_io.h"
 
-1560850560 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
+1560852206 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -633,7 +633,7 @@
 	<string.h>
 	<stdlib.h>
 
-1560850560 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1560852190 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
 1560849813 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
@@ -642,7 +642,7 @@
 	<time.h>
 	"ansi.h"
 
-1560850140 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
+1560852456 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 
 1560845773 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
@@ -681,14 +681,13 @@
 	"30010_io.h"
 	"Landscape.h"
 
-1560850560 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\aliens.c
+1560851500 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\aliens.c
 	"aliens.h"
 
-1560850560 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\aliens.h
+1560851500 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\aliens.h
 	"ansi.h"
 	"30010_io.h"
 	"Landscape.h"
-	"Cannon.h"
 
 1560429974 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\spl\src\stm32f30x_adc.c
 	"stm32f30x_adc.h"
@@ -1044,46 +1043,38 @@
 1560765562 c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
 	"Landscape.h"
 
-1560783282 D
+1560783023 D
 
-<<<<<<< HEAD
-1560850560 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\cannon.c
-=======
-1560850212 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\aliens.c
-=======
-<<<<<<< HEAD
-1560765562 D
-
-1560783282 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\cannon.c
->>>>>>> 4ffb37c975614628b4896b9c3427991d998cae75
+1560867412 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\cannon.c
 	"Cannon.h"
 
-1560783282 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\cannon.h
-
 1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\aliens.c
->>>>>>> 5e2f28639a4cf2aef77455085c69cc5b9c6d221c
+
+1560783023 b37c975614628b4896b9c3427991d998cae75
+	"Cannon.h"
+
+1560863227 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\cannon.h
+	"mbed.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+	"ansi.h"
+	"SpaceShip.h"
+	"vectors.h"
+	"aliens.h"
+
+1560782802 f28639a4cf2aef77455085c69cc5b9c6d221c
 	"aliens.h"
 
 1560850247 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\aliens.h
 	"ansi.h"
 	"30010_io.h"
 	"Landscape.h"
-<<<<<<< HEAD
 
 1560782802 .h"
 
 1560782802 604dbb0850c25fae6b73a712675310ecb9aaa
 
-=======
-<<<<<<< HEAD
-
-1560782802 .h"
-
-=======
-=======
->>>>>>> 1f5604dbb0850c25fae6b73a712675310ecb9aaa
->>>>>>> 5e2f28639a4cf2aef77455085c69cc5b9c6d221c
->>>>>>> 4ffb37c975614628b4896b9c3427991d998cae75
 1560783023 source:d:\dtu\programmering\spaceprogram\src\cannon.c
 	"Cannon.h"
 
@@ -1097,9 +1088,4 @@
 	"ansi.h"
 	"SpaceShip.h"
 	"vectors.h"
-<<<<<<< HEAD
-=======
-
-1560783023 060c210c2341417bf0915076d40034612bc4c
->>>>>>> 4ffb37c975614628b4896b9c3427991d998cae75
 

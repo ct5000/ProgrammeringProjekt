@@ -19,7 +19,7 @@ typedef struct {
 
 
 
-void initCannon(char activate, cannonBall_t *p, SpaceShip_t *r);
+void initCannon(cannonBall_t *p, SpaceShip_t *r);
 
 void updateBallPosition(cannonBall_t *p);
 
@@ -31,7 +31,11 @@ void rotateDirection(cannonBall_t *p, int grader);
 
 int32_t readDegree();
 
-int* killAliens(alien_t aliens[], cannonBall_t cannonballs[]);
+int hitAliens(alien_t aliens[], cannonBall_t cannonballs[], int numAliens, int numBalls);
+
+void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls);
+
+int8_t createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship);
 
 #endif
 

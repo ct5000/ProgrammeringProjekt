@@ -36,7 +36,7 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
     for (i=0; i < numMinerals;i++){
         fgcolor(1);
         gotoxy((minerals[i]).x,(minerals[i]).y);
-        printf("%c",i+49); //i+49 to show numbers
+        printf("%c",219); //i+49 to show numbers
         fgcolor(0);
     }
 

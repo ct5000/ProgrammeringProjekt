@@ -143,13 +143,13 @@ int8_t inBounds(SpaceShip_t *p){
 }
 
 //Skibets drill til at få mineraler
-void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[]){
+void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals){
 	int i;
 	int j;
 
 	if ((dirct == 'e' || dirct == 'E')  && place == 3){ //Hvis der trykkes 'e' og skibet står på jorden,
 
-            i = checkMinerals(ship, minerals); //mineralets placering
+            i = checkMinerals(ship, minerals, numMinerals); //mineralets placering
 
             if (i){ //Hvis skibet er over et mineral
 
@@ -202,9 +202,9 @@ void subfuel(SpaceShip_t * ship){
 }
 
 // Finder det mineral skibet står over
-int checkMinerals(SpaceShip_t *ship, mineral_t minerals[]){
+int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
     int i;
-        for (i=1; i<4; i++){
+        for (i=1; i<numMinerals; i++){
 
             if ((*ship).x == (minerals[i - 1]).x){
             return i;
