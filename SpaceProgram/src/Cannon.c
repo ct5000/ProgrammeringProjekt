@@ -75,6 +75,7 @@ int hitAliens(alien_t aliens[], cannonBall_t cannonballs[], int numAliens, int n
 
 
     }
+<<<<<<< HEAD
    // gotoxy(100,31);
    // printf("alienX: %3d alienY: %3d ", aliens[1].posX, aliens[1].posY);
     //gotoxy(100,32);
@@ -87,6 +88,9 @@ int8_t createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *sh
             initCannon(&cannonBall, ship);
             cannonBalls[emptyIndex] = cannonBall;
             return 1;
+=======
+    return deadAliens;
+>>>>>>> f6dfef2230629f53df05ed986f3b3e2c8c53b718
 
 }
 
