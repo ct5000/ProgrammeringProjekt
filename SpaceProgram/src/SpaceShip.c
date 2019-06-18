@@ -4,42 +4,63 @@
 void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     (*ship).x=x;
     (*ship).y=y;
+    (*ship).vx = 0;
+    (*ship).vy = 0;
+    (*ship).lives = 5;
     (*ship).fuel=fuel;
-    drawSymbol(x,y,'A');
+    drawShip(x,y);
 }
 
-void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
-	int prevX = (*ship).x;
-	int prevY = (*ship).y;
-
+void updateSpaceShip(SpaceShip_t * ship, int8_t place){
+    int8_t bounds;
     deleteAlien((*ship).x,(*ship).y);
-
-        if (dirct == 'w' && (*ship).fuel>0){          //up
-                (*ship).y--;
-                (*ship).fuel--;
-                subfuel(ship);
-
-        }
-        else if (dirct == 'a' && (*ship).fuel>0){     //left
-                (*ship).x--;
-                (*ship).fuel--;
-                subfuel(ship);
-
-        }
-        else if (dirct == 'd' && (*ship).fuel>0){     //right
-                (*ship).x++;
-                (*ship).fuel--;
-                subfuel(ship);
-
-        }
-        else {
-                if (place!=3){
-                //falling down due to gravity
-                (*ship).y++;
-
-                }
-
-	}
+    (*ship).x += (*ship).vx;
+    (*ship).y += (*ship).vy;
+    bounds = inBounds(ship);
+    switch (bounds) {
+        case 1:
+            (*ship).x = 1;
+            (*ship).vx = 0;
+            break;
+        case 2:
+            (*ship).x = SCREEN_WIDTH - 1;
+            (*ship).vx = 0;
+            break;
+        case 3:
+            (*ship).y = GROUND_HEIGHT - 2;
+            (*ship).vy = 0;
+            break;
+        case 4:
+            (*ship).y = 1;
+            (*ship).vy = 0;
+            break;
+        case 5:
+            (*ship).y = GROUND_HEIGHT - 2;
+            (*ship).vy = 0;
+            (*ship).x = 1;
+            (*ship).vx = 0;
+            break;
+        case 6:
+            (*ship).y = GROUND_HEIGHT - 2;
+            (*ship).vy = 0;
+            (*ship).x = SCREEN_WIDTH - 1;
+            (*ship).vx = 0;
+            break;
+        case 7:
+            (*ship).y = 1;
+            (*ship).vy = 0;
+            (*ship).x = 1;
+            (*ship).vx = 0;
+            break;
+        case 8:
+            (*ship).y = 1;
+            (*ship).vy = 0;
+            (*ship).x = SCREEN_WIDTH - 1;
+            (*ship).vx = 0;
+            break;
+        default:
+            break;
+    }
 
 
 	//drawSymbol((*ship).x,(*ship).y, 'A');
@@ -51,7 +72,26 @@ void updateSpaceShip(SpaceShip_t * ship, char dirct, int8_t place){
 
 }
 
-
+void updateVelocity(SpaceShip_t * ship, char dirct) {
+    if (dirct == 'w' && (*ship).fuel>0){
+        (*ship).vy -= 2;
+        (*ship).fuel--;
+        subfuel(ship);
+    }
+    else if (dirct == 'a' && (*ship).fuel>0){
+        (*ship).vx -= 2;
+        (*ship).fuel--;
+        subfuel(ship);
+    }
+    else if (dirct == 'd' && (*ship).fuel>0){
+        (*ship).vx += 2;
+        (*ship).fuel--;
+        subfuel(ship);
+    }
+    else {
+        (*ship).vy++;
+	}
+}
 
 
 int8_t inBounds(SpaceShip_t *p){
@@ -59,19 +99,37 @@ int8_t inBounds(SpaceShip_t *p){
 
     //hver af returværdierne svarer til at frakoble en bestemt tast
     //skibet er for langt til venstre
-    if ((*p).x<=0){
+
+
+    //Spilleren er i nederste venstre hjørne
+    if ((*p).x <= 1 && (*p).y >= GROUND_HEIGHT - 2) {
+        return 5;
+    }
+    //Spilleren er i nederste højre hjørne
+    else if ((*p).x >= SCREEN_WIDTH - 1 && (*p).y >= GROUND_HEIGHT - 2) {
+        return 6;
+    }
+    //Spilleren er i øverste venstre hjørne
+    else if ((*p).x <= 1 && (*p).y <= 2) {
+        return 7;
+    }
+    //Spilleren er i øverste højre hjørne
+    else if ((*p).x >= SCREEN_WIDTH - 1 && (*p).y <= 2) {
+        return 8;
+    }
+    else if ((*p).x<=1){
         return 1;
     }
     //skibet er for langt til højre
-    else if ((*p).x>=SCREEN_WIDTH){
+    else if ((*p).x>=SCREEN_WIDTH - 1){
         return 2;
     }
     //spilleren forsøger at grave sig ned i jorden
-    else if ((*p).y==GROUND_HEIGHT-2){
+    else if ((*p).y>=GROUND_HEIGHT - 2){
         return 3;
     }
     //spilleren flyver ud af banen
-    else if ((*p).y>SCREEN_HEIGHT){
+    else if ((*p).y < 2){
        return 4;
     }
     return 0;

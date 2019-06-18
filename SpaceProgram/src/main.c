@@ -41,45 +41,38 @@ int main(void){
     alien_t aliens[25];
     int8_t numAliens = 0;
 
-    int pos;
-    uint8_t buffer[512];
-    int8_t noYet = 1;
+    mineral_t minerals[25];
+    int8_t numMinerals = 0;
     uart_init(96000);
-
-    lcd_init();
-
-
-
-    memset(buffer, 0x00, 512);
-
-    lcd_push_buffer(buffer);
-
     color(7,0);
-    //runningMenu();
+
+
+
     set_timer();
     start_stop();
+    runningMenu();
+    srand(getTime());
+    resetTime();
+    start_stop();
+
+    clrscr();
+
     drawLandscape();
+    groundDraw();
     fgcolor(0);
 
-
-
-    //setup_pot();
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
     initSpaceShip(ship, 5, 5, 100);
 
-    mineral_t m1;
-    mineral_t m2;
-    mineral_t m3;
+    for (numMinerals = 0; numMinerals < 25; numMinerals++) {
+            createMineral(minerals, numMinerals);
+    }
 
-    initMineral(&m1);
-    initMineral(&m2);
-    initMineral(&m3);
 
-    mineral_t minerals[] = {m1, m2, m3};
 
-    drawMinerals(minerals);
+    drawMinerals(minerals, numMinerals);
 
 
 
@@ -95,23 +88,14 @@ int main(void){
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
-            if (getFlag() > 15000 && noYet) {
-                    alienKilled(aliens, 1, numAliens);
-                    numAliens--;
-                    noYet = 0;
-            }
             updateAliens(aliens, numAliens);
 
             char dirct = uart_get_char();
 
+            updateVelocity(ship, dirct);
+            updateSpaceShip(ship, inBounds(ship));
+            drill(ship, dirct,inBounds(ship), minerals);
 
-            updateSpaceShip(ship, dirct, inBounds(ship));
-            pos = inBounds(ship);
-            drill(ship, dirct,pos, minerals);
-
-
-            lcd_write_string("2", buffer, 2,2);
-            lcd_push_buffer(buffer);
 
            // updatefuelBar(ship, dirct);
 
