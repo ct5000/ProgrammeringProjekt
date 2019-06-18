@@ -40,6 +40,7 @@
 int main(void){
     alien_t aliens[25];
     int8_t numAliens = 0;
+    char dirct;
 //    runningMenu();
     //setup_pot();
 
@@ -93,11 +94,12 @@ int main(void){
             }
             updateAliens(aliens, numAliens);
 
-            char dirct = uart_get_char();
+            dirct = uart_get_char();
 
             updateVelocity(ship, dirct);
-            updateSpaceShip(ship, inBounds(ship));
             pos = inBounds(ship);
+            updateSpaceShip(ship);
+
             drill(ship, dirct,pos, minerals);
 
 

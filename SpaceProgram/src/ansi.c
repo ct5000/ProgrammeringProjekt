@@ -451,6 +451,82 @@ void writeL(int8_t sizeColumn) {
     returnCursor();
     moveCursorRight(sizeColumn);
 }
+void writeO(int8_t sizeColumn) {
+    int i;
+    saveCursor();
+    printf("%c", 218);
+    for (i = 1; i < sizeColumn - 2; i++) {
+            printf("%c", 196);
+    }
+    printf("%c", 191);
+    moveCursorLeft(1);
+    moveCursorDown(1);
+    for (i= 0; i< sizeColumn - 1; i++) {
+            printf("%c", 179);
+            moveCursorDown(1);
+            moveCursorLeft(1);
+    }
+    printf("%c", 217);
+    moveCursorLeft(2);
+    for (i = 0; i < sizeColumn - 2; i++) {
+            printf("%c", 196);
+            moveCursorLeft(2);
+    }
+    printf("%c", 192);
+    moveCursorLeft(1);
+    moveCursorUp(1);
+    for (i = 0; i < sizeColumn - 1; i++) {
+            printf("%c", 179);
+    }
+    returnCursor();
+    moveCursorRight((sizeColumn));
+}
+void writeG(int8_t sizeColumn) {
+    int i;
+    saveCursor();
+    printf("%c", 218);
+    for (i = 1; i < sizeColumn - 2; i++) {
+            printf("%c", 196);
+    }
+    returnCursor();
+    moveCursorDown(1);
+    for (i = 1; i < sizeColumn - 1; i++) {
+            printf("%c", 179);
+            moveCursorDown(1);
+            moveCursorLeft(1);
+    }
+    printf("%c", 192);
+    for (i = 1; i < sizeColumn - 2; i++) {
+            printf("%c", 196);
+    }
+    printf("%c", 217);
+    moveCursorLeft(1);
+    moveCursorUp(1);
+    for (i = 0; i < sizeColumn / 3; i++) {
+            printf("%c", 179);
+            moveCursorLeft(1);
+            moveCursorLeft(1);
+    }
+    printf("%c", 191);
+    moveCursorLeft(2);
+    for (i = 0; i < 2; i++) {
+            printf("%c", 196);
+            moveCursorLeft(2);
+    }
+    returnCursor();
+    moveCursorRight(sizeColumn);
+}
+void writeM(int8_t sizeColumn) {
+    int i;
+    saveCursor();
+    for (i = 0; sizeColumn + 1; i++) {
+        printf("%c", 179);
+        moveCursorLeft(1);
+        moveCursorDown(1);
+    }
+    returnCursor();
+}
+
 void deleteLetter(int8_t sizeColumn) {
     int i, j;
     saveCursor();

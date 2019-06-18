@@ -548,7 +548,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560785117 source:d:\dtu\programmering\spaceprogram\src\main.c
+1560846481 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -644,10 +644,10 @@
 1560772965 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 
-1560787133 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
+1560845773 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
-1560785045 d:\dtu\programmering\spaceprogram\inc\spaceship.h
+1560846493 d:\dtu\programmering\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"

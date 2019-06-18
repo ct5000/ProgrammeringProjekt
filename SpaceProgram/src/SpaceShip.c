@@ -11,7 +11,7 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     drawShip(x,y);
 }
 
-void updateSpaceShip(SpaceShip_t * ship, int8_t place){
+void updateSpaceShip(SpaceShip_t * ship){
     int8_t bounds;
     deleteAlien((*ship).x,(*ship).y);
     (*ship).x += (*ship).vx;
@@ -19,7 +19,7 @@ void updateSpaceShip(SpaceShip_t * ship, int8_t place){
     bounds = inBounds(ship);
     switch (bounds) {
         case 1:
-            (*ship).x = 1;
+            (*ship).x = 2;
             (*ship).vx = 0;
             break;
         case 2:
@@ -37,7 +37,7 @@ void updateSpaceShip(SpaceShip_t * ship, int8_t place){
         case 5:
             (*ship).y = GROUND_HEIGHT - 2;
             (*ship).vy = 0;
-            (*ship).x = 1;
+            (*ship).x = 2;
             (*ship).vx = 0;
             break;
         case 6:
@@ -47,13 +47,13 @@ void updateSpaceShip(SpaceShip_t * ship, int8_t place){
             (*ship).vx = 0;
             break;
         case 7:
-            (*ship).y = 1;
+            (*ship).y = 2;
             (*ship).vy = 0;
-            (*ship).x = 1;
+            (*ship).x = 2;
             (*ship).vx = 0;
             break;
         case 8:
-            (*ship).y = 1;
+            (*ship).y = 2;
             (*ship).vy = 0;
             (*ship).x = SCREEN_WIDTH - 1;
             (*ship).vx = 0;
@@ -90,6 +90,12 @@ void updateVelocity(SpaceShip_t * ship, char dirct) {
     }
     else {
         (*ship).vy++;
+        if ((*ship).vx > 0) {
+            (*ship).vx--;
+        }
+        else if ((*ship).vx < 0) {
+            (*ship).vx++;
+        }
 	}
 }
 
@@ -98,7 +104,7 @@ int8_t inBounds(SpaceShip_t *p){
 //følgende er de forskellige tilfælde den kan overstige grænserne
 
     //hver af returværdierne svarer til at frakoble en bestemt tast
-    //skibet er for langt til venstre
+
 
 
     //Spilleren er i nederste venstre hjørne
@@ -117,6 +123,7 @@ int8_t inBounds(SpaceShip_t *p){
     else if ((*p).x >= SCREEN_WIDTH - 1 && (*p).y <= 2) {
         return 8;
     }
+    //skibet er for langt til venstre
     else if ((*p).x<=1){
         return 1;
     }
