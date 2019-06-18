@@ -12,9 +12,5 @@ obj\debug\src\cannon.o: src\Cannon.c inc/Cannon.h inc/mbed.h \
  SPL\inc/stm32f30x_tim.h SPL\inc/stm32f30x_usart.h \
  SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h inc/serialRead.h \
  inc/30010_io.h inc/trigonometric.h inc/LUTsin.h inc/ansi.h \
-<<<<<<< HEAD
- inc/SpaceShip.h inc/vectors.h inc/Landscape.h inc/LCD.h inc/charset.h
-=======
  inc/SpaceShip.h inc/vectors.h inc/Landscape.h inc/LCD.h inc/charset.h \
  inc/aliens.h
->>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c

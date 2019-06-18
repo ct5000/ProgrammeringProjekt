@@ -39,7 +39,6 @@
 
 int main(void){
     alien_t aliens[25];
-<<<<<<< HEAD
     uart_init(96000);
     color(7,0);
     int8_t numAliens = 0;
@@ -53,9 +52,6 @@ int main(void){
 
     clrscr();
 
-
-=======
-    int8_t numAliens = 0;
 //    runningMenu();
     //setup_pot();
 
@@ -67,12 +63,10 @@ int main(void){
     //int8_t noYet = 1;
     uart_init(96000);
     color(7,0);
->>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
     //runningMenu();
     set_timer();
     start_stop();
     drawLandscape();
-    groundDraw();
     //drawHills();
     fgcolor(0);
 
@@ -103,30 +97,32 @@ int main(void){
 
 
 
-
-
-
     while(1){
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
             updateAliens(aliens, numAliens);
 
-<<<<<<< HEAD
+
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
             updateAliens(aliens, numAliens);
-=======
+
             char dirct = uart_get_char();
 
             updateVelocity(ship, dirct);
             updateSpaceShip(ship, inBounds(ship));
             pos = inBounds(ship);
             drill(ship, dirct,pos, minerals);
+            initCannon(dirct,&(ammo[p]),&ship);
+            p++;
+            killAliens(aliens,ammo);
 
 
-           // updatefuelBar(ship, dirct);
+            for (i=0; i<=p; i++){
+                    updateBallPosition(&(ammo[p]));
+            }
 
     }
 
@@ -217,3 +213,4 @@ int main(void){
 }
 
 
+*/

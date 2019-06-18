@@ -15,9 +15,5 @@ obj\debug\src\main.o: src\main.c inc/stm32f30x_conf.h \
  inc/trigonometric.h inc/ball.h inc/mbed.h inc/serialRead.h \
  inc/30010_io.h inc/serialRead.h inc/LCD.h inc/charset.h inc/mbed.h \
  inc/charset.h inc/SpaceShip.h inc/vectors.h inc/ansi.h inc/Landscape.h \
-<<<<<<< HEAD
- inc/LCD.h inc/Landscape.h inc/menu.h inc/Cannon.h inc/SpaceShip.h
-=======
  inc/LCD.h inc/aliens.h inc/Landscape.h inc/menu.h inc/aliens.h \
  inc/Cannon.h inc/SpaceShip.h
->>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
