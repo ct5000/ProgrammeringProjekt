@@ -105,8 +105,15 @@ void runningMenu() {
 void gameOver(int8_t condition) {
     clrscr();
     gotoxy(70,3);
-
-
+    writeG(COLUMNSIZE);
+    writeA(COLUMNSIZE);
+    writeM(COLUMNSIZE);
+    writeE(COLUMNSIZE);
+    writeBlank(COLUMNSIZE);
+    writeO(COLUMNSIZE);
+    writeV(COLUMNSIZE);
+    writeE(COLUMNSIZE);
+    writeR(COLUMNSIZE);
 
 }
 

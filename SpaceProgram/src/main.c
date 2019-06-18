@@ -38,6 +38,7 @@
 
 
 int main(void){
+
     alien_t aliens[25];
 <<<<<<< HEAD
     uart_init(96000);
