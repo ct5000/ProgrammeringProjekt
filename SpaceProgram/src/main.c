@@ -38,16 +38,6 @@
 
 
 int main(void){
-<<<<<<< HEAD
-
-=======
-    uart_init(96000);
-    gameOver(1);
-    while(1){}
-}
-
-/*
->>>>>>> f6dfef2230629f53df05ed986f3b3e2c8c53b718
     alien_t aliens[25];
     int8_t numAliens = 0;
     int8_t killedAliens;
