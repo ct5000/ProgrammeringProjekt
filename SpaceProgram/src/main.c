@@ -52,43 +52,64 @@ int main(void){
 
     clrscr();
 
+<<<<<<< HEAD
+=======
+
+=======
+    int8_t numAliens = 0;
+<<<<<<< HEAD
+=======
+    char dirct;
+>>>>>>> 5e2f28639a4cf2aef77455085c69cc5b9c6d221c
 //    runningMenu();
     //setup_pot();
+>>>>>>> 1f5604dbb0850c25fae6b73a712675310ecb9aaa
 
-
-    clrscr();
-//    drawLandscape();
-
-    int pos;
-    //int8_t noYet = 1;
+    mineral_t minerals[25];
+    int8_t numMinerals = 0;
     uart_init(96000);
     color(7,0);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+
+    set_timer();
+    start_stop();
+    runningMenu();
+    srand(getTime());
+    resetTime();
+    start_stop();
+=======
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
+>>>>>>> 5e2f28639a4cf2aef77455085c69cc5b9c6d221c
     //runningMenu();
     set_timer();
     start_stop();
     drawLandscape();
     //drawHills();
     fgcolor(0);
+>>>>>>> 1f5604dbb0850c25fae6b73a712675310ecb9aaa
 
+    clrscr();
 
+    drawLandscape();
+    groundDraw();
+    fgcolor(0);
 
-    //setup_pot();
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
     initSpaceShip(ship, 5, 5, 100);
 
-    mineral_t m1;
-    mineral_t m2;
-    mineral_t m3;
+    for (numMinerals = 0; numMinerals < 25; numMinerals++) {
+            createMineral(minerals, numMinerals);
+    }
 
-    initMineral(&m1);
-    initMineral(&m2);
-    initMineral(&m3);
 
-    mineral_t minerals[] = {m1, m2, m3};
 
-    drawMinerals(minerals);
+    drawMinerals(minerals, numMinerals);
 
 
 
@@ -103,21 +124,40 @@ int main(void){
             }
             updateAliens(aliens, numAliens);
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+            dirct = uart_get_char();
+||||||| merged common ancestors
+            char dirct = uart_get_char();
+=======
+<<<<<<< HEAD
+>>>>>>> 5e2f28639a4cf2aef77455085c69cc5b9c6d221c
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
             updateAliens(aliens, numAliens);
 
             char dirct = uart_get_char();
+>>>>>>> 999ec77e69105d45b8fb397ab04c3214ccdfc59b
 
             updateVelocity(ship, dirct);
+<<<<<<< HEAD
             updateSpaceShip(ship, inBounds(ship));
+            drill(ship, dirct,inBounds(ship), minerals);
+=======
             pos = inBounds(ship);
+            updateSpaceShip(ship);
+
             drill(ship, dirct,pos, minerals);
+<<<<<<< HEAD
             initCannon(dirct,&(ammo[p]),&ship);
             p++;
             killAliens(aliens,ammo);
+=======
+>>>>>>> 1f5604dbb0850c25fae6b73a712675310ecb9aaa
+>>>>>>> 5e2f28639a4cf2aef77455085c69cc5b9c6d221c
 
 
             for (i=0; i<=p; i++){
