@@ -43,6 +43,7 @@ void writeL(int8_t sizeColumn);
 void deleteLetter(int8_t sizeColumn);
 
 void drawAlien(int x, int y);
+void drawShip(int x, int y);
 void deleteAlien(int x, int y);
 
 void drawArrow();

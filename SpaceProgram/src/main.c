@@ -25,6 +25,7 @@
 #include "SpaceShip.h"
 #include "Landscape.h"
 #include "menu.h"
+#include "aliens.h"
 #include "Cannon.h"
 #include "aliens.h"
 
@@ -38,6 +39,7 @@
 
 int main(void){
     alien_t aliens[25];
+<<<<<<< HEAD
     uart_init(96000);
     color(7,0);
     int8_t numAliens = 0;
@@ -52,6 +54,20 @@ int main(void){
     clrscr();
 
 
+=======
+    int8_t numAliens = 0;
+//    runningMenu();
+    //setup_pot();
+
+
+    clrscr();
+//    drawLandscape();
+
+    int pos;
+    //int8_t noYet = 1;
+    uart_init(96000);
+    color(7,0);
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
     //runningMenu();
     set_timer();
     start_stop();
@@ -91,11 +107,85 @@ int main(void){
 
 
     while(1){
-
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
             updateAliens(aliens, numAliens);
+
+<<<<<<< HEAD
+            if(spawnAlien(aliens, numAliens)) {
+                    numAliens++;
+            }
+            updateAliens(aliens, numAliens);
+=======
+            char dirct = uart_get_char();
+
+            updateVelocity(ship, dirct);
+            updateSpaceShip(ship, inBounds(ship));
+            pos = inBounds(ship);
+            drill(ship, dirct,pos, minerals);
+
+
+           // updatefuelBar(ship, dirct);
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+   char *text = calloc(100, sizeof(char));
+    int i;
+    char *s = calloc(256, sizeof(char));
+    rollingtext_t *test;
+
+
+    char textStr[10];
+
+    LED_setup();
+    joystick_setup();
+    setup_pot();
+
+    set_timer();
+    start_stop();
+
+
+    lcd_init();
+
+
+    color(0,7);
+    clrscr();
+
+    memset(buffer, 0x00, 512);
+
+    lcd_push_buffer(buffer);
+
+
+
+    while(1){
+
+
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
 
             char dirct = uart_get_char();
 

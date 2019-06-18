@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <EmBitz_layout_file>
 	<ActiveTarget name="Debug" />
+<<<<<<< HEAD
 	<File name="inc\ansi.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="191" topLine="0" />
@@ -42,10 +43,39 @@
 		</Cursor>
 	</File>
 	<File name="inc\trigonometric.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+	<File name="inc\ansi.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="64" topLine="0" />
+			<Cursor1 position="1290" topLine="18" />
 		</Cursor>
 	</File>
+	<File name="inc\Landscape.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="232" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="inc\serialRead.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="inc\SpaceShip.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="818" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="src\aliens.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2084" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="src\ansi.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
+		<Cursor>
+			<Cursor1 position="12036" topLine="481" />
+		</Cursor>
+	</File>
+<<<<<<< HEAD
 	<File name="src\aliens.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1296" topLine="27" />
@@ -99,6 +129,31 @@
 	<File name="src\serialRead.c" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="209" topLine="0" />
+=======
+	<File name="src\ball.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="495" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="src\Landscape.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="736" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="src\main.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2041" topLine="77" />
+		</Cursor>
+	</File>
+	<File name="src\mbed.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\menu.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="70" />
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
 		</Cursor>
 	</File>
 	<File name="src\SpaceShip.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -106,6 +161,7 @@
 			<Cursor1 position="2276" topLine="71" />
 		</Cursor>
 	</File>
+<<<<<<< HEAD
 	<File name="src\startup_stm32f30x.S" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3768" topLine="125" />
@@ -124,6 +180,16 @@
 	<File name="src\vectors.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="98" topLine="0" />
+=======
+	<File name="src\SpaceShip.c" open="1" top="1" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1163" topLine="110" />
+		</Cursor>
+	</File>
+	<File name="src\startup_stm32f30x.S" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3768" topLine="151" />
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
 		</Cursor>
 	</File>
 </EmBitz_layout_file>
