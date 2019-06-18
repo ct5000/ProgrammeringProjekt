@@ -25,39 +25,18 @@ int8_t inBallBounds(cannonBall_t *p){
     int y = (*p).y >>14;
 
 
-    if (x>=0 && x <=240 && y >= 0){
+    if (x>=1 && x <=238 && y >= 2){
         return 1;
     }
     return 0;
 }
 
-
-void gravitate(cannonBall_t *p, int gravity){
-
-//    switch(gravity){
-//        case 1:
-//            rotateDirection(p, 30);
-//            break;
-//        case 2:
-//            rotateDirection(p, 45);
-//            break;
-//        case 3:
-//            rotateDirection(p, 60);
-//            break;
-//    }
-
-}
-
-void rotateDirection(cannonBall_t *p, int grader){
-//    int32_t tempx = (*p).x;
-//    (*p).x = FIX14_MULT((*p).x,Cos(grader))-FIX14_MULT((*p).y,Sin(grader));
-//    (*p).y = FIX14_MULT(tempx,(-1)*Sin(grader))+FIX14_MULT((*p).y,Cos(grader));
-}
-
-
 int32_t readDegree(){
     return  (readPotRight())/(22);
 }
+
+
+
 
 /*
 Fra main

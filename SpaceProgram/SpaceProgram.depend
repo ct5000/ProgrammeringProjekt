@@ -880,10 +880,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\ansi.c
+1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\ansi.h
+1560782802 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -919,17 +919,16 @@
 
 1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\charset.h
 
-1560765562 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
+1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
 	"Landscape.h"
 
-1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\landscape.h
+1560782802 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\landscape.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"ansi.h"
-	"SpaceShip.h"
 
-1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\spaceship.h
+1560782802 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -937,8 +936,11 @@
 	"ansi.h"
 	"LUTsin.h"
 	"trigonometric.h"
+	"Landscape.h"
+	"LCD.h"
 	<stdio.h>
 	<stdint.h>
+	<string.h>
 	<stdlib.h>
 
 1560435558 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\serialread.h
@@ -947,7 +949,7 @@
 	<stdint.h>
 	<stdlib.h>
 
-1560515333 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\mbed.h
+1560782802 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\mbed.h
 	"stm32f30x_rcc.h"
 	"serialRead.h"
 	<string.h>
@@ -965,10 +967,10 @@
 1560435558 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560515333 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\mbed.c
+1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\mbed.c
 	"mbed.h"
 
-1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\menu.c
+1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\menu.c
 	"menu.h"
 
 1560524510 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\menu.h
@@ -979,9 +981,8 @@
 	"serialRead.h"
 	<string.h>
 
-1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\spaceship.c
+1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
-	<string.h>
 
 1560524510 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\startup_stm32f30x.s
 
@@ -997,7 +998,7 @@
 	"trigonometric.h"
 	<stdio.h>
 
-1560781920 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\cannon.c
+1560847435 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\cannon.c
 	"Cannon.h"
 
 1560781272 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\cannon.h
@@ -1009,7 +1010,7 @@
 	"SpaceShip.h"
 	"vectors.h"
 
-1560782206 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\main.c
+1560784300 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -1030,5 +1031,13 @@
 	<string.h>
 
 1560765562 c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
+	"Landscape.h"
+
+1560782802 source:c:\users\philip holm\desktop\gitmappe\spaceprogram\src\aliens.c
+	"aliens.h"
+
+1560782802 c:\users\philip holm\desktop\gitmappe\spaceprogram\inc\aliens.h
+	"ansi.h"
+	"30010_io.h"
 	"Landscape.h"
 
