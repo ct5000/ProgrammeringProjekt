@@ -101,3 +101,13 @@ void runningMenu() {
         }
     }
 }
+
+void gameOver(int8_t condition) {
+    clrscr();
+    gotoxy(70,3);
+
+
+
+}
+
+

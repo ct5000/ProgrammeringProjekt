@@ -40,6 +40,9 @@ void writeU(int8_t sizeColumn);
 void writeT(int8_t sizeColumn);
 void writeH(int8_t sizeColumn);
 void writeL(int8_t sizeColumn);
+void writeO(int8_t sizeColumn);
+void writeG(int8_t sizeColumn);
+void writeM(int8_t sizeColumn);
 void deleteLetter(int8_t sizeColumn);
 
 void drawAlien(int x, int y);
