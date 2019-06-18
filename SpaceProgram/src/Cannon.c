@@ -59,6 +59,7 @@ int* killAliens(alien_t aliens[], cannonBall_t cannonballs[]){
             }
 
     }
+    return deadAliens;
 
 }
 }

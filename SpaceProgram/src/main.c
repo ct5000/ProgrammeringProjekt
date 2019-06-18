@@ -38,7 +38,12 @@
 
 
 int main(void){
+    uart_init(96000);
+    gameOver(1);
+    while(1){}
+}
 
+/*
     alien_t aliens[25];
     uart_init(96000);
     color(7,0);
@@ -171,7 +176,7 @@ int main(void){
 
 }
 
-
+*/
 
 
 

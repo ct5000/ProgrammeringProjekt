@@ -469,7 +469,7 @@ void writeO(int8_t sizeColumn) {
     }
     printf("%c", 217);
     moveCursorLeft(2);
-    for (i = 0; i < sizeColumn - 2; i++) {
+    for (i = 0; i < sizeColumn - 3; i++) {
             printf("%c", 196);
             moveCursorLeft(2);
     }
@@ -478,6 +478,8 @@ void writeO(int8_t sizeColumn) {
     moveCursorUp(1);
     for (i = 0; i < sizeColumn - 1; i++) {
             printf("%c", 179);
+            moveCursorLeft(1);
+            moveCursorUp(1);
     }
     returnCursor();
     moveCursorRight((sizeColumn));
@@ -505,7 +507,7 @@ void writeG(int8_t sizeColumn) {
     moveCursorUp(1);
     for (i = 0; i < sizeColumn / 3; i++) {
             printf("%c", 179);
-            moveCursorLeft(1);
+            moveCursorUp(1);
             moveCursorLeft(1);
     }
     printf("%c", 191);
@@ -520,26 +522,28 @@ void writeG(int8_t sizeColumn) {
 void writeM(int8_t sizeColumn) {
     int i;
     saveCursor();
-    for (i = 0; i < sizeColumn + 1; i++) {
+    moveCursorDown(1);
+    for (i = 0; i < sizeColumn - 1; i++) {
         printf("%c", 179);
         moveCursorLeft(1);
         moveCursorDown(1);
     }
     returnCursor();
-    moveCursorDown(1);
-    moveCursorRight(1);
-    for (i = 0; i < sizeColumn / 3; i++) {
+    for (i = 0; i < sizeColumn / 3 + 1; i++) {
         printf("%c", 92);
         moveCursorDown(1);
+
     }
-    for (i = 0; i < sizeColumn / 3; i++) {
+    moveCursorUp(1);
+    for (i = 0; i < sizeColumn / 3 + 1; i++) {
         printf("%c", 47);
         moveCursorUp(1);
     }
-    for (i = 0; i < sizeColumn + 1; i++) {
-        printf("%c", 179);
+    moveCursorDown(1);
+    for (i = 0; i < sizeColumn - 1; i++) {
         moveCursorDown(1);
         moveCursorLeft(1);
+        printf("%c", 179);
     }
     returnCursor();
     moveCursorRight(sizeColumn);
@@ -548,12 +552,12 @@ void writeM(int8_t sizeColumn) {
 void writeV(int8_t sizeColumn) {
     int i;
     saveCursor();
-    for (i = 0; i < sizeColumn / 2; i++) {
+    for (i = 0; i < sizeColumn / 2 + 1; i++) {
             printf("%c", 179);
             moveCursorLeft(1);
             moveCursorDown(1);
     }
-    for (i = 0; i < sizeColumn / 2; i++) {
+    for (i = 0; i < sizeColumn / 2 - 1; i++) {
             printf("%c", 92);
             moveCursorDown(1);
     }
@@ -562,10 +566,10 @@ void writeV(int8_t sizeColumn) {
             moveCursorUp(1);
     }
     moveCursorLeft(1);
-    for (i = 0; i < sizeColumn / 2; i++) {
+    for (i = 0; i < sizeColumn / 2 + 1; i++) {
             printf("%c", 179);
             moveCursorLeft(1);
-            moveCursorUp(1):
+            moveCursorUp(1);
     }
     returnCursor();
     moveCursorRight(sizeColumn);

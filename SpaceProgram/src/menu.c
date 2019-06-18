@@ -114,6 +114,22 @@ void gameOver(int8_t condition) {
     writeV(COLUMNSIZE);
     writeE(COLUMNSIZE);
     writeR(COLUMNSIZE);
+    gotoxy(70, 15);
+    switch (condition) {
+    case 1: //The player left the planet
+        printf("Congratulations you survived the aliens attacks and escaped the planet! YOU WON");
+        break;
+    case 2: //The player ran out of fuel
+        printf("You ran out of fuel and can no longer get off the planet. The aliens will be here soon... YOU LOST");
+        break;
+    case 3: //The player got killed
+        printf("The aliens have overpowered you and your spaceship has been destroyed. YOU LOST");
+        break;
+    default:
+        printf("ERROR");
+    }
+    gotoxy(70, 30);
+    printf("Press enter to return to the menu");
 
 }
 
