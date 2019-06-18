@@ -27,6 +27,7 @@
 #include "menu.h"
 #include "aliens.h"
 #include "Cannon.h"
+#include "aliens.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,9 +37,24 @@
 
 
 
-
 int main(void){
     alien_t aliens[25];
+<<<<<<< HEAD
+    uart_init(96000);
+    color(7,0);
+    int8_t numAliens = 0;
+    int p=0;
+    int i;
+    cannonBall_t ammo[50];
+
+    runningMenu();
+    //setup_pot();
+
+
+    clrscr();
+
+
+=======
     int8_t numAliens = 0;
     char dirct;
 //    runningMenu();
@@ -52,10 +68,13 @@ int main(void){
     //int8_t noYet = 1;
     uart_init(96000);
     color(7,0);
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
     //runningMenu();
     set_timer();
     start_stop();
     drawLandscape();
+    groundDraw();
+    //drawHills();
     fgcolor(0);
 
 
@@ -94,7 +113,19 @@ int main(void){
             }
             updateAliens(aliens, numAliens);
 
+<<<<<<< HEAD
             dirct = uart_get_char();
+||||||| merged common ancestors
+            char dirct = uart_get_char();
+=======
+<<<<<<< HEAD
+            if(spawnAlien(aliens, numAliens)) {
+                    numAliens++;
+            }
+            updateAliens(aliens, numAliens);
+=======
+            char dirct = uart_get_char();
+>>>>>>> 999ec77e69105d45b8fb397ab04c3214ccdfc59b
 
             updateVelocity(ship, dirct);
             pos = inBounds(ship);
@@ -162,25 +193,35 @@ int main(void){
     while(1){
 
 
+>>>>>>> 6c1060c210c2341417bf0915076d40034612bc4c
 
-       // printf("%d\n",readPotLeft());
-        //measPot(readPotLeft());
-        //printf("\n\n");
-        measPot(readPotLeft(), &textStr);
+            char dirct = uart_get_char();
 
-        printf("%s", textStr );
+            updateVelocity(ship, dirct);
+            updateSpaceShip(ship, dirct, inBounds(ship));
+            drill(ship, dirct,inBounds(ship), minerals);
 
-        //printf("%s\n", textStr);
-        lcd_write_string(textStr, buffer, 1 ,1);
+             if (uart_get_count() > 0) {
+
+               if (uart_get_char()=='g'){
+                    p++;
+                    initCannon(&(ammo[p]), &ship);
+               }
+            }
+            for (i=0; i<=p; i++){
+                if (inBallBounds(&(ammo[p]))){
+                    updateBallPosition(&(ammo[p]));
+                    if (killAliens())
+                }
+                else {
+                    deleteSymbol((ammo[p]).x >>14, (ammo[p]).y>>14);
+                }
+                   // updatefuelBar(ship, dirct);
+            }
 
 
 
-        lcd_push_buffer(buffer);
 
-        for (i=0; i<4000000; i++){}
-
-    }
 }
 
 
-*/
