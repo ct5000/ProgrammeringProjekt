@@ -497,10 +497,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560760720 source:d:\dtu\programmering\spaceprogram\src\ansi.c
+1560783453 source:d:\dtu\programmering\spaceprogram\src\ansi.c
 	"ansi.h"
 
-1560759742 d:\dtu\programmering\spaceprogram\inc\ansi.h
+1560783453 d:\dtu\programmering\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
@@ -548,7 +548,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560780138 source:d:\dtu\programmering\spaceprogram\src\main.c
+1560785117 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -564,6 +564,7 @@
 	"Landscape.h"
 	"menu.h"
 	"aliens.h"
+	"Cannon.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -643,10 +644,10 @@
 1560772965 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 
-1560761738 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
+1560787133 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
-1560761738 d:\dtu\programmering\spaceprogram\inc\spaceship.h
+1560785045 d:\dtu\programmering\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -655,21 +656,23 @@
 	"LUTsin.h"
 	"trigonometric.h"
 	"Landscape.h"
+	"LCD.h"
+	"aliens.h"
 	<stdio.h>
 	<stdint.h>
 	<string.h>
 	<stdlib.h>
 
-1560761738 source:d:\dtu\programmering\spaceprogram\src\landscape.c
+1560781337 source:d:\dtu\programmering\spaceprogram\src\landscape.c
 	"Landscape.h"
 
-1560761738 d:\dtu\programmering\spaceprogram\inc\landscape.h
+1560781337 d:\dtu\programmering\spaceprogram\inc\landscape.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"ansi.h"
 
-1560780045 source:d:\dtu\programmering\spaceprogram\src\aliens.c
+1560780899 source:d:\dtu\programmering\spaceprogram\src\aliens.c
 	"aliens.h"
 
 1560779712 d:\dtu\programmering\spaceprogram\inc\aliens.h
@@ -1033,4 +1036,16 @@
 
 1560765562 c:\users\philip holm\desktop\gitmappe\spaceprogram\src\landscape.c
 	"Landscape.h"
+
+1560783023 source:d:\dtu\programmering\spaceprogram\src\cannon.c
+	"Cannon.h"
+
+1560783023 d:\dtu\programmering\spaceprogram\inc\cannon.h
+	"mbed.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+	"ansi.h"
+	"SpaceShip.h"
+	"vectors.h"
 
