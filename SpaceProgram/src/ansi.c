@@ -1,16 +1,17 @@
 #define ESC 0x1B
 #include "ansi.h"
 
-void clrscr(){
+
+void clrscr(){ // clears the terminal
     printf("%c[2J",ESC);
 }
-void clreol(){
+void clreol(){  // clears the rest of a line
     printf("%c[0K",ESC);
 }
-void gotoxy(int x, int y){
+void gotoxy(int x, int y){ // moves to cursor to a x, y position
     printf("%c[%d;%dH",ESC,y,x);
 }
-void underline(uint8_t on){
+void underline(uint8_t on){ // makes a underline
     int u;
     u = on ? 4 : 24;
     printf("%c[%dm",ESC,u);
