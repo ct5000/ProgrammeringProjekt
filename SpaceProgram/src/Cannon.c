@@ -1,23 +1,28 @@
 #include "Cannon.h"
 
 
-void initCannon(cannonBall_t *p, SpaceShip_t *r){
-    (*p).x=(*r).x <<14;
-    (*p).y=((*r).y-1) <<14;
+void initCannon(char activate, cannonBall_t *p, SpaceShip_t *r){
+    if (activate=='g'){
+        (*p).x=(*r).x <<14;
+        (*p).y=((*r).y-1) <<14;
 
-    (*p).vx =  2 * Cos(readDegree());
-    (*p).vy = -2 * Sin(readDegree());
-
+        (*p).vx =  2 * Cos(readDegree());
+        (*p).vy = -2 * Sin(readDegree());
+    }
 }
 
 void updateBallPosition(cannonBall_t *p){
-    deleteSymbol((*p).x>>14, (*p).y>>14);
+    if (inBallBounds(p)){
+        deleteSymbol((*p).x>>14, (*p).y>>14);
 
-    (*p).x+=(*p).vx;
-    (*p).y+=(*p).vy;
+        (*p).x+=(*p).vx;
+        (*p).y+=(*p).vy;
 
-    drawSymbol((*p).x>>14,(*p).y >>14, 'O');
-
+        drawSymbol((*p).x>>14,(*p).y >>14, 'O');
+    }
+    else {
+        deleteSymbol((*p).x >>14, (*p).y>>14);
+    }
 }
 
 int8_t inBallBounds(cannonBall_t *p){
@@ -34,7 +39,29 @@ int8_t inBallBounds(cannonBall_t *p){
 int32_t readDegree(){
     return  (readPotRight())/(22);
 }
+int* killAliens(alien_t aliens[], cannonBall_t cannonballs[]){
+    int a = sizeof(aliens)/sizeof(aliens[0]);
+    int c = sizeof(cannonballs)/sizeof(cannonballs[0]);
+    int i,j;
+    int inX,inY;
+    int deadAliens[a];
+    int p=0;
 
+    for (i=0; i<c; i++){
+
+        for (j=0; j<a; j++){
+            inX=(cannonballs[i].x>=aliens[j].posX-1 && cannonballs[i].x<=aliens[j].posX+1);
+            inY=(cannonballs[i].y>=aliens[j].posX-1 && cannonballs[i].y<=aliens[j].posY+1);
+            if (inX && inY){
+                    deleteAlien(aliens[j].posX,aliens[j].posY);
+                    deadAliens[p]=j;
+                    p++;
+            }
+
+    }
+
+}
+}
 
 
 

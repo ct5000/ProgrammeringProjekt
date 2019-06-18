@@ -13,14 +13,16 @@
 # define GROUND_HEIGHT 56
 
 typedef struct{
-    int8_t x,y;
+    int32_t x,y;
     int8_t fuel;
 } mineral_t;
 
 void drawLandscape();
 
-int randomNumber(int8_t mini, int8_t maxi);
+int randomNumber(int32_t mini, int32_t maxi);
 void initMineral(mineral_t *p);
-void drawMinerals(mineral_t minerals[]);
+void drawMinerals(mineral_t minerals[], int numMinerals);
+int8_t createMineral(mineral_t minerals[], int8_t emptyIndex);
+void groundDraw();
 
 #endif
