@@ -103,6 +103,7 @@ void runningMenu() {
 }
 
 void gameOver(int8_t condition) {
+    char user;
     clrscr();
     gotoxy(70,3);
     writeG(COLUMNSIZE);
@@ -130,6 +131,14 @@ void gameOver(int8_t condition) {
     }
     gotoxy(70, 30);
     printf("Press enter to return to the menu");
+
+    while(1) {
+            user = uart_get_char();
+            if (user == 0x0D) {
+                    uart_clear();
+                    break;
+            }
+    }
 
 }
 
