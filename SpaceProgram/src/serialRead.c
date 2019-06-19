@@ -22,7 +22,6 @@ char* serialRead(char *s){
         s = calloc(256, sizeof(char));
     }
     return rs;
-
 }
 /*
 char* serialRead(char *sequence, int p)

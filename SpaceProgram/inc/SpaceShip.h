@@ -26,16 +26,17 @@ typedef struct {
 
 void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y, int16_t fuel);
 void updateSpaceShip(SpaceShip_t * ship);
-void updateVelocity(SpaceShip_t * ship, char dirct);
-void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals);
+void updateVelocity(SpaceShip_t * ship, char dirct,  int *buffer);
+void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, int *buffer);
 
 int8_t inBounds(SpaceShip_t *p);
 int checkMinerals( SpaceShip_t *p, mineral_t minerals[],int numMinerals);
 
-void addfuel(SpaceShip_t * ship);
-void subfuel(SpaceShip_t * ship);
+void addfuel(SpaceShip_t * ship, int *buffer);
+void subfuel(SpaceShip_t * ship, int *buffer);
 
-
+void addLives(SpaceShip_t * ship, int *buffer);
+void subLives(SpaceShip_t * ship, int *buffer);
 
 #endif
 

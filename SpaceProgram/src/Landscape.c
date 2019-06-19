@@ -8,14 +8,13 @@ void drawLandscape(){
 
     bgcolor(6);
     clrscr();
-    bgcolor(3);
+    bgcolor(2+rand()%7);
+    fgcolor(2+rand()%15);
     for (i=0; i<SCREEN_WIDTH*12; i++){
         printf("%c",176);
     }
-    bgcolor(6);
-}
 
-//ser om skibet overstiger banens grænser
+}
 
 
 int randomNumber(int32_t mini, int32_t maxi){
@@ -26,8 +25,6 @@ void initMineral(mineral_t *p){
     (*p).x=randomNumber(1, 240);
     (*p).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-1) ;
     (*p).fuel=randomNumber(10, 20);
-
-
 }
 
 void drawMinerals(mineral_t minerals[], int numMinerals){
@@ -39,7 +36,6 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
         printf("%c",219); //i+49 to show numbers
         fgcolor(0);
     }
-
 }
 
 int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
@@ -48,13 +44,16 @@ int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
             initMineral(&mineral);
             minerals[emptyIndex] = mineral;
             return 1;
-
 }
 
 void groundDraw(){
    int i;
-   fgcolor(10);
-   bgcolor(3);
+   int color = rand()%17;
+   if (color == 1 || color == 6){
+    color++;
+   }
+
+   fgcolor(color);
     for(i=1; i <=240; i++){
         int r = rand()%20;
         gotoxy(i,56);

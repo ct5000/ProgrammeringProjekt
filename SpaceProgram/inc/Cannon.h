@@ -25,8 +25,6 @@ void updateBallPosition(cannonBall_t *p);
 
 int8_t inBallBounds(cannonBall_t *p);
 
-void gravitate(cannonBall_t *p, int gravity);
-
 void rotateDirection(cannonBall_t *p, int grader);
 
 int32_t readDegree();
@@ -35,7 +33,9 @@ int hitAliens(alien_t aliens[], cannonBall_t cannonballs[], int numAliens, int n
 
 void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls);
 
-int8_t createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship);
+void createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship);
+
+void gravitate(cannonBall_t *p);
 
 #endif
 

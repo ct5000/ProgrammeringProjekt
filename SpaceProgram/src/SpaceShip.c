@@ -61,32 +61,29 @@ void updateSpaceShip(SpaceShip_t * ship){
         default:
             break;
     }
-
-
-	//drawSymbol((*ship).x,(*ship).y, 'A');
 	drawShip((*ship).x, (*ship).y);
 
-	gotoxy(91,5);
+	gotoxy(1,1);
 
 	printf("fuel: %3d", (*ship).fuel);
 
 }
 
-void updateVelocity(SpaceShip_t * ship, char dirct) {
+void updateVelocity(SpaceShip_t * ship, char dirct, int *buffer) {
     if (dirct == 'w' && (*ship).fuel>0){
         (*ship).vy -= 2;
         (*ship).fuel--;
-        subfuel(ship);
+        subfuel(ship, buffer);
     }
     else if (dirct == 'a' && (*ship).fuel>0){
         (*ship).vx -= 2;
         (*ship).fuel--;
-        subfuel(ship);
+        subfuel(ship, buffer);
     }
     else if (dirct == 'd' && (*ship).fuel>0){
         (*ship).vx += 2;
         (*ship).fuel--;
-        subfuel(ship);
+        subfuel(ship, buffer);
     }
     else {
         (*ship).vy++;
@@ -104,9 +101,6 @@ int8_t inBounds(SpaceShip_t *p){
 //følgende er de forskellige tilfælde den kan overstige grænserne
 
     //hver af returværdierne svarer til at frakoble en bestemt tast
-
-
-
     //Spilleren er i nederste venstre hjørne
     if ((*p).x <= 1 && (*p).y >= GROUND_HEIGHT - 2) {
         return 5;
@@ -143,7 +137,7 @@ int8_t inBounds(SpaceShip_t *p){
 }
 
 //Skibets drill til at få mineraler
-void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals){
+void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, int *buffer){
 	int i;
 	int j;
 
@@ -155,7 +149,6 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
 
                 (*ship).fuel += (*minerals).fuel;
 
-
                 for (j = GROUND_HEIGHT; j <= (minerals[i - 1]).y; j++ ){
                     gotoxy((*ship).x, j);
                     printf("%c",186);
@@ -165,7 +158,7 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
                     printf("%c",219);
                 }
 
-                addfuel(ship);
+                addfuel(ship,buffer); //printer fuel på lcd.
 
             }
             else { //Hvis skibet ikke er over et mineral
@@ -179,26 +172,31 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
                     printf("%c",219);
                 }
             }
-
 	}
-
 }
 
 //lægger fuel til fuelbaren
-void addfuel(SpaceShip_t * ship){
+void addfuel(SpaceShip_t * ship, int *buffer){
     int i;
-        fgcolor(0);
+
         gotoxy(1,1);
         for(i=0; i < (*ship).fuel; i++){
-            gotoxy(i,1);
-            printf("%c",219);
+
+        lcd_write_bar("E", buffer, 0,25+i);
+
+        lcd_push_buffer(buffer);
+
+       // lcd_push_buffer(buffer);
         }
 }
 
 //Trækker fuel fra fuelbaren
-void subfuel(SpaceShip_t * ship){
-        gotoxy((*ship).fuel+1,1);
-            printf(" ");
+void subfuel(SpaceShip_t * ship, int *buffer){
+
+        lcd_write_bar(" ", buffer, 0,25+(*ship).fuel);
+
+        lcd_push_buffer(buffer);
+
 }
 
 // Finder det mineral skibet står over
@@ -208,10 +206,30 @@ int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
 
             if ((*ship).x == (minerals[i - 1]).x){
             return i;
-
             }
-
         }
     return 0;
+}
 
+//Lægger liv til livbaren
+void addLives(SpaceShip_t * ship, int *buffer){
+    int i;
+
+        for(i=0; i < (*ship).lives; i++){
+
+        lcd_write_string("<3", buffer, 1,30+((i*5)*2));
+
+        lcd_push_buffer(buffer);
+
+       // lcd_push_buffer(buffer);
+        }
+}
+
+//Trækker live fra livbaren
+void subLives(SpaceShip_t * ship, int *buffer){
+        (*ship).lives--;
+        lcd_write_string(" ", buffer, 1,30+(((*ship).lives*5)*2));
+        lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));
+
+        lcd_push_buffer(buffer);
 }

@@ -1,11 +1,5 @@
 #include "vectors.h"
-#include "trigonometric.h"
-#include <stdio.h>
 
-#define FIX14_SHIFT 14
-
-#define FIX14_MULT(a,b) ( (a)*(b) >> FIX14_SHIFT )
-#define FIX14_DIV(a,b) ( ((a) << FIX14_SHIFT) / b)
 
 void initVector(vector_t *vec, int32_t x, int32_t y){
     (*vec).x = x << FIX14_SHIFT;

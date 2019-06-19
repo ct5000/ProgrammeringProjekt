@@ -50,8 +50,20 @@ int main(void){
 
     int i;
 
+    SpaceShip_t skib;
+    SpaceShip_t *ship = &skib;
+    initSpaceShip(ship, 5, 5, 50);
+
+    int buffer[512];
+
     uart_init(96000);
 
+    lcd_init();
+    memset(buffer, 0x00, 512);
+    lcd_push_buffer(buffer);
+    lcd_write_string("FUEL:",buffer,0,0);
+    lcd_write_string("Lives:",buffer,1,0);
+    lcd_push_buffer(buffer);
 
     setup_pot();
 
@@ -59,7 +71,7 @@ int main(void){
     set_timer();
     start_stop();
     color(7,0);
-    //runningMenu();
+    runningMenu();
     srand(getTime());
     resetTime();
     start_stop();
@@ -70,33 +82,16 @@ int main(void){
     groundDraw();
     fgcolor(0);
 
-
-    SpaceShip_t skib;
-    SpaceShip_t *ship = &skib;
-    initSpaceShip(ship, 5, 5, 100);
-
     for (numMinerals = 0; numMinerals < 25; numMinerals++) {
             createMineral(minerals, numMinerals);
     }
 
-
-
     drawMinerals(minerals, numMinerals);
 
-
-
-
-    addfuel(ship);
-    //makeAlien(aliens, 0);
-    //numAliens++;
-
-
-
-
-
+    addfuel(ship,buffer);
+    addLives(ship, buffer);
 
     while(1){
-            //if time%x
             if(spawnAlien(aliens, numAliens)) {
                     numAliens++;
             }
@@ -104,17 +99,16 @@ int main(void){
 
             char dirct = uart_get_char();
 
-            updateVelocity(ship, dirct);
+            updateVelocity(ship, dirct, buffer);
             updateSpaceShip(ship);
 
+            drill(ship, dirct,inBounds(ship), minerals, numMinerals, buffer);
 
-            drill(ship, dirct,inBounds(ship), minerals, numMinerals);
-            if (dirct=='g'){
-
+            if (dirct==' '){
                     createBall(cannonBalls, numBalls, ship);
                     numBalls++;
-
             }
+
             for (i=0; i<numBalls; i++){
                     updateBallPosition(&(cannonBalls[i]));
 
@@ -126,16 +120,13 @@ int main(void){
                     }
             }
 
-         //  gotoxy(115,8);
-          //  printf("a:%d b:%2d", numAliens, numBalls);
-
+            if (dirct =='q'){
+                    subLives(ship, buffer);
+            }
     }
-
-
-
 }
 
-*/
+
 
 
 
