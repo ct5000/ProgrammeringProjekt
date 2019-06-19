@@ -18,11 +18,11 @@ void lcd_write_string(char t[], uint8_t *buffer, int8_t line, int8_t slice){
 }
 
 void lcd_update(rollingtext_t *p,uint8_t * buffer){
-    if (getFlag() == 4){
+    if (getAlienFlag() == 4){
         memset(buffer, 0x00, 512);
         (*p).slice--;
         lcd_write_string((*p).t, buffer, (*p).line, (*p).slice);
-        rstFlag();
+        resetAlienFlag();
     }
 }
 

@@ -25,8 +25,10 @@ void start_stop();
 
 int split_time1();
 
-int getFlag();
-void rstFlag();
+int getAlienFlag();
+void resetAlienFlag();
+int getBulletFlag();
+void resetBulletFlag();
 
 void setup_pot();
 int16_t readPotLeft();

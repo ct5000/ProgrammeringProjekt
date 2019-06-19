@@ -63,15 +63,15 @@ void updateSpaceShip(SpaceShip_t * ship){
     }
 	drawShip((*ship).x, (*ship).y);
 
-	gotoxy(1,1);
+	//gotoxy(1,1);
 
-	printf("fuel: %3d", (*ship).fuel);
+	//printf("fuel: %3d", (*ship).fuel);
 
 }
 
-void updateVelocity(SpaceShip_t * ship, char dirct, int *buffer) {
+void updateVelocity(SpaceShip_t * ship, char dirct, uint8_t *buffer, int place) {
     if (dirct == 'w' && (*ship).fuel>0){
-        (*ship).vy -= 2;
+        (*ship).vy -= 6;
         (*ship).fuel--;
         subfuel(ship, buffer);
     }
@@ -84,6 +84,10 @@ void updateVelocity(SpaceShip_t * ship, char dirct, int *buffer) {
         (*ship).vx += 2;
         (*ship).fuel--;
         subfuel(ship, buffer);
+    }
+    else if (place == 3){
+        (*ship).vx = 0;
+        (*ship).vy =0;
     }
     else {
         (*ship).vy++;
@@ -137,7 +141,7 @@ int8_t inBounds(SpaceShip_t *p){
 }
 
 //Skibets drill til at få mineraler
-void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, int *buffer){
+void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer){
 	int i;
 	int j;
 
@@ -176,7 +180,7 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
 }
 
 //lægger fuel til fuelbaren
-void addfuel(SpaceShip_t * ship, int *buffer){
+void addfuel(SpaceShip_t * ship, uint8_t *buffer){
     int i;
 
         gotoxy(1,1);
@@ -191,7 +195,7 @@ void addfuel(SpaceShip_t * ship, int *buffer){
 }
 
 //Trækker fuel fra fuelbaren
-void subfuel(SpaceShip_t * ship, int *buffer){
+void subfuel(SpaceShip_t * ship, uint8_t *buffer){
 
         lcd_write_bar(" ", buffer, 0,25+(*ship).fuel);
 
@@ -212,7 +216,7 @@ int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
 }
 
 //Lægger liv til livbaren
-void addLives(SpaceShip_t * ship, int *buffer){
+void addLives(SpaceShip_t * ship, uint8_t *buffer){
     int i;
 
         for(i=0; i < (*ship).lives; i++){
@@ -226,7 +230,7 @@ void addLives(SpaceShip_t * ship, int *buffer){
 }
 
 //Trækker live fra livbaren
-void subLives(SpaceShip_t * ship, int *buffer){
+void subLives(SpaceShip_t * ship, uint8_t *buffer){
         (*ship).lives--;
         lcd_write_string(" ", buffer, 1,30+(((*ship).lives*5)*2));
         lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));

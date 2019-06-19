@@ -15,7 +15,8 @@
 */
 
     int time =0;
-    int flag =0;
+    int alienFlag =0;
+    int bulletFlag = 0;
 
 void LED_setup(){
 
@@ -286,10 +287,27 @@ int split_time1(){
 }
 
 void TIM2_IRQHandler(void) {
-    flag++;
+    alienFlag++;
+    bulletFlag++;
     time++;
     TIM2->SR &= ~0x0001; // Clear interrupt bit
  }
+
+int getAlienFlag() {
+    return alienFlag;
+ }
+
+void resetAlienFlag() {
+    alienFlag = 0;
+}
+
+int getBulletFlag() {
+    return bulletFlag;
+ }
+
+void resetBulletFlag() {
+    bulletFlag = 0;
+}
 
 int getTime(){
     return(time%100);
@@ -307,13 +325,6 @@ int gethour(){
     return(time/(100*60*60));
 }
 
-int getFlag(){
-    return flag;
-}
-
-void rstFlag(){
-    flag = 0;
-}
 
 void setup_pot(){
     RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A

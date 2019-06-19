@@ -37,6 +37,7 @@ void createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship
 
 void gravitate(cannonBall_t *p);
 
+
 #endif
 
 

@@ -30,13 +30,13 @@ void updateAlien(alien_t *alien) {
     drawAlien((*alien).posX, (*alien).posY);
 }
 
-void updateAliens(alien_t aliens[], int8_t numAliens) {
+void updateAliens(alien_t aliens[],SpaceShip_t * ship , int8_t numAliens, uint8_t *buffer) {
     int i;
     for (i = 0; i < numAliens; i++) {
             updateAlien(&aliens[i]);
             if (aliens[i].posY >= GROUND_HEIGHT - 3) {
                 alienKilled(aliens, i, numAliens);
-                //Damage player
+                subLives(ship,buffer);
             }
     }
 }
@@ -53,8 +53,8 @@ void alienKilled(alien_t aliens[], int8_t index, int8_t numAliens) {
 
 int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex) {
     alien_t alien;
-    int num = randomNumber(0, 100);
-    if (num == 50) {
+    int num = randomNumber(0, 50);
+    if (num == 25) {
             //aliens = realloc(aliens, (emptyIndex + 1) * sizeof(alien_t));
             init_alien(&alien);
             aliens[emptyIndex] = alien;
@@ -68,6 +68,33 @@ void makeAlien(alien_t aliens[], int8_t emptyIndex) {
     //aliens = realloc(aliens, (emptyIndex + 1) * sizeof(alien_t));
     init_alien(&alien);
     aliens[emptyIndex] = alien;
+}
+
+int8_t collide(alien_t aliens[], SpaceShip_t *ship, int numAliens, uint8_t *buffer){
+    int j;
+    int inX,inY;
+    int shipX;
+    int aliX;
+    int shipY;
+    int aliY;
+    int aliensHit = 0;
+
+
+        for (j=0; j< numAliens; j++){
+            shipX = (*ship).x;
+            aliX = aliens[j].posX;
+            shipY = (*ship).y;
+            aliY = aliens[j].posY;
+
+            inX= (shipX >= aliX - 2 && shipX <= aliX + 2);
+            inY= (shipY >= aliY - 2 && shipY <= aliY + 2);
+            if (inX && inY){
+                    subLives(ship, buffer);
+                    alienKilled(aliens,j,numAliens);
+                    aliensHit++;
+            }
+        }
+    return aliensHit;
 }
 
 

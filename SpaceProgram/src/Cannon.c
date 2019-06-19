@@ -15,7 +15,7 @@ void updateBallPosition(cannonBall_t *p){
     (*p).x+=(*p).vx;
     (*p).y+=(*p).vy;
 
-   // gravitate(p);
+   gravitate(p);
 
     if (inBallBounds(p)){
         drawSymbol((*p).x>>14,(*p).y >>14, 169);
@@ -27,7 +27,7 @@ int8_t inBallBounds(cannonBall_t *p){
     int x = (*p).x >>14;
     int y = (*p).y >>14;
 
-    if (x>=1 && x <=238 && y >= 2){
+    if (x>=1 && x <=238 && y >= 2 && y < GROUND_HEIGHT-1){
         return 1;
     }
     return 0;
@@ -78,14 +78,26 @@ void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls) {
 }
 
 void gravitate(cannonBall_t *p){
-    int32_t tempx = (*p).x;
-    int grader = 1;
+    int32_t tempx = (*p).vx;
+    int grader = 2;
 
-    (*p).x = FIX14_MULT((*p).x,Cos(grader))-FIX14_MULT((*p).y,Sin(grader));
-    gotoxy(30,30);
-    printf("x : %d", (FIX14_MULT((*p).x,Cos(grader))-FIX14_MULT((*p).y,Sin(grader)))>>14);
-    (*p).y = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).y,Cos(grader));
+    if ((*p).vx > 0){
+    (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
+    (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
+    }
+    else if(((*p).vx < 0)){
+    grader *= -1;
+    (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
+    (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
+    }
+    else{
+    (*p).vy += grader <<6;
+    }
+
+    //(*p).y = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).y,Cos(grader));
+
 }
+
 
 
 

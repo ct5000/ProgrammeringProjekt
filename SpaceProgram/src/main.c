@@ -52,11 +52,11 @@ int main(void){
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
-    initSpaceShip(ship, 5, 5, 50);
+    initSpaceShip(ship, 115, 52, 50);
 
-    int buffer[512];
+    uint8_t buffer[512];
 
-    uart_init(96000);
+    uart_init(2000000);
 
     lcd_init();
     memset(buffer, 0x00, 512);
@@ -67,10 +67,10 @@ int main(void){
 
     setup_pot();
 
+    color(7,0);
 
     set_timer();
     start_stop();
-    color(7,0);
     runningMenu();
     srand(getTime());
     resetTime();
@@ -92,36 +92,62 @@ int main(void){
     addLives(ship, buffer);
 
     while(1){
-            if(spawnAlien(aliens, numAliens)) {
-                    numAliens++;
+
+
+            if (getAlienFlag() >= 10) {
+                if (numAliens <= 20){
+                    if(spawnAlien(aliens, numAliens)) {
+                            numAliens++;
+                    }
+                }
+                updateAliens(aliens,ship ,numAliens, buffer);
+                resetAlienFlag();
             }
-            updateAliens(aliens, numAliens);
+
+
+
+
 
             char dirct = uart_get_char();
 
-            updateVelocity(ship, dirct, buffer);
-            updateSpaceShip(ship);
-
+            updateVelocity(ship, dirct, buffer, inBounds(ship) );
             drill(ship, dirct,inBounds(ship), minerals, numMinerals, buffer);
 
+            if ( ( ((*ship).vy != 0) || ((*ship).vx != 0) ) || inBounds(ship) == 0 ){
+
+                updateSpaceShip(ship);
+                if (collide(aliens, ship, numAliens, buffer)) {
+                        numAliens--;
+                }
+
+            }
+
+
+
             if (dirct==' '){
+
                     createBall(cannonBalls, numBalls, ship);
                     numBalls++;
             }
+            if (getBulletFlag() >= 8) {
 
-            for (i=0; i<numBalls; i++){
-                    updateBallPosition(&(cannonBalls[i]));
+                for (i=0; i<numBalls; i++){
+                        updateBallPosition(&(cannonBalls[i]));
 
-                    killedAliens = hitAliens(aliens, cannonBalls, numAliens, numBalls);
-                    numAliens -= killedAliens;
-                    if((!inBallBounds(&(cannonBalls[i]))) || killedAliens) {
-                           ballKilled(cannonBalls, i, numBalls);
-                           numBalls--;
-                    }
+                        killedAliens = hitAliens(aliens, cannonBalls, numAliens, numBalls);
+                        numAliens -= killedAliens;
+
+                        if((!inBallBounds(&(cannonBalls[i]))) || killedAliens) {
+                               ballKilled(cannonBalls, i, numBalls);
+                               numBalls--;
+                        }
+                }
+                resetBulletFlag();
             }
 
-            if (dirct =='q'){
-                    subLives(ship, buffer);
+            if( (*ship).fuel== 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)  || (*ship).lives == 0 ){
+                gotoxy(30,30);
+                printf("Game Over");
             }
     }
 }
