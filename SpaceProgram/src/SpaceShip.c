@@ -90,7 +90,7 @@ void updateVelocity(SpaceShip_t * ship, char dirct, uint8_t *buffer, int place) 
         (*ship).vy =0;
     }
     else {
-        (*ship).vy++;
+       // (*ship).vy++;
         if ((*ship).vx > 0) {
             (*ship).vx--;
         }
@@ -236,4 +236,17 @@ void subLives(SpaceShip_t * ship, uint8_t *buffer){
         lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));
 
         lcd_push_buffer(buffer);
+}
+
+int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
+    if ((*ship).fuel== 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)){
+            return 2;
+    }
+    else if ( (*ship).lives == 0){
+            return 3;
+    }
+    else if ( (*ship).y < 2){
+            return 1;
+    }
+    return 0;
 }

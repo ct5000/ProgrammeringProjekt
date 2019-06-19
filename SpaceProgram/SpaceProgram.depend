@@ -270,7 +270,7 @@
 	<stdint.h>
 	<stdlib.h>
 
-1560940436 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
+1560944929 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -305,7 +305,7 @@
 1560431300 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560941808 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1560946667 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -333,14 +333,14 @@
 1560937952 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\mbed.c
 	"mbed.h"
 
-1560931488 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
+1560945258 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
 	"menu.h"
 
 1560928119 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\serialread.c
 	"serialRead.h"
 	<string.h>
 
-1560941857 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1560946685 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
 1560934530 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s

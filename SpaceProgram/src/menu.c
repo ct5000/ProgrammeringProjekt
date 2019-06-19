@@ -103,6 +103,7 @@ void runningMenu() {
 }
 
 void gameOver(int8_t condition) {
+    color(7,0);
     char user;
     clrscr();
     gotoxy(70,3);
@@ -126,6 +127,7 @@ void gameOver(int8_t condition) {
     case 3: //The player got killed
         printf("The aliens have overpowered you and your spaceship has been destroyed. YOU LOST");
         break;
+
     default:
         printf("ERROR");
     }
