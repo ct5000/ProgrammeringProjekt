@@ -21,14 +21,15 @@ typedef struct {
     int32_t x, y;
     int8_t vx, vy;
     int8_t lives;
-    int8_t fuel;
+    uint8_t fuel;
     int8_t powerUp;
 } SpaceShip_t;
 
 void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y, int16_t fuel);
 void updateSpaceShip(SpaceShip_t * ship);
 void updateVelocity(SpaceShip_t * ship, char dirct,  uint8_t *buffer, int place);
-void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer);
+int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer);
+void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals);
 
 int8_t inBounds(SpaceShip_t *p);
 int checkMinerals( SpaceShip_t *p, mineral_t minerals[],int numMinerals);

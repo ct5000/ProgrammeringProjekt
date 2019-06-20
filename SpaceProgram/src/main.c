@@ -45,6 +45,7 @@ int main(void){
 
     mineral_t minerals[25];
     int8_t numMinerals = 0;
+    int8_t mineralIndex;
 
     cannonBall_t cannonBalls[50];
     int8_t numBalls = 0;
@@ -56,9 +57,14 @@ int main(void){
     int endgame = 0;
     int where = 1;
     char dirct;
+<<<<<<< HEAD
     int spawnRate = 50;
 
     int score = 1000;
+=======
+    int pos;
+    //int readyDirct = 1;
+>>>>>>> 6617ebcf99c773ec366712aae0282b0eec929fef
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
@@ -101,7 +107,11 @@ int main(void){
                 }
 
                 drawMinerals(minerals, numMinerals);
+<<<<<<< HEAD
                 initSpaceShip(ship, 115, 54, 100);
+=======
+                initSpaceShip(ship, 115, 54, 30);
+>>>>>>> 6617ebcf99c773ec366712aae0282b0eec929fef
                 numAliens = 0;
 
                 addfuel(ship,buffer);
@@ -141,12 +151,16 @@ int main(void){
                         uart_clear();
 
                     }
+                    pos = inBounds(ship);
+                    updateVelocity(ship, dirct, buffer, pos );
+                    mineralIndex = drill(ship, dirct,pos, minerals, numMinerals, buffer);
+                    if (mineralIndex) {
+                            mineralKilled(minerals, mineralIndex, numMinerals);
+                            numMinerals--;
+                    }
 
-                    updateVelocity(ship, dirct, buffer, inBounds(ship) );
-                    drill(ship, dirct,inBounds(ship), minerals, numMinerals, buffer);
 
-
-                    if ( (( ((*ship).vy != 0) || ((*ship).vx != 0) ) || inBounds(ship) == 0) && getShipFlag3() > 4){
+                    if ( (( ((*ship).vy != 0) || ((*ship).vx != 0) ) || pos == 0) && getShipFlag3() > 4){
 
                             updateSpaceShip(ship);
                             if (collide(aliens, ship, numAliens, buffer)) {
@@ -160,9 +174,10 @@ int main(void){
                             createBall(cannonBalls, numBalls, ship);
                             numBalls++;
                     }
-                    else if (dirct == 'g') {
+                    else if (dirct == 'g' && (*ship).powerUp > 0) {
                             createPowerBullet(powerBullets, numPowerBullets, ship);
                             numPowerBullets++;
+                            (*ship).powerUp--;
                     }
                     if (getBulletFlag() >= 8) {
 
@@ -190,7 +205,8 @@ int main(void){
 
                                 }
                         }
-                        for (i=0; i<numPowerBullets; i++){
+
+                        for (i=0; i< numPowerBullets; i++){
                                 updatePowerBulletPosition(&(powerBullets[i]));
 
                                 killedAliens = powerHitAliens(aliens, powerBullets, numAliens, numPowerBullets);
@@ -201,7 +217,7 @@ int main(void){
 
 
                                 if((!inPowerBulletBounds(&(powerBullets[i])))) {
-                                       powerBulletKilled(powerBullets, i, numBalls);
+                                       powerBulletKilled(powerBullets, i, numPowerBullets);
                                        numPowerBullets--;
 
                                 }

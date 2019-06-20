@@ -73,7 +73,7 @@ void createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship
 void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls) {
     int i;
     deleteSymbol( (((cannonBalls[index]).x) >> 14) , (((cannonBalls[index]).y) >> 14) );
-    for (i = index; i < numBalls - 1; i ++) {
+    for (i = index; i < numBalls - 1; i++) {
         cannonBalls[i] = cannonBalls[i + 1];
     }
 }
@@ -83,16 +83,16 @@ void gravitate(cannonBall_t *p){
     int grader = 2;
 
     if ((*p).vx > 0){
-    (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
-    (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
+        (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
+        (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
     }
     else if(((*p).vx < 0)){
     grader *= -1;
-    (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
-    (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
+        (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
+        (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
     }
     else{
-    (*p).vy += grader <<6;
+        (*p).vy += grader <<6;
     }
 
     //(*p).y = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).y,Cos(grader));
