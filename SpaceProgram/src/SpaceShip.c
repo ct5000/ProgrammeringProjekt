@@ -82,22 +82,19 @@ void updateVelocity(SpaceShip_t * ship, char dirct, uint8_t *buffer, int place) 
     if (dirct == 'a' && (*ship).fuel>0){
         if ((*ship).vx > -3) {
             (*ship).vx -= 1;
-            (*ship).fuel--;
-            subfuel(ship, buffer);
+            subfuel(ship, buffer, 1);
         }
     }
     else if (dirct == 'd' && (*ship).fuel>0){
         if ((*ship).vx < 3) {
             (*ship).vx += 1;
-            (*ship).fuel--;
-            subfuel(ship, buffer);
+            subfuel(ship, buffer, 1);
         }
     }
     else if (dirct == 'w' && (*ship).fuel>0){
         if ((*ship).vy > -3) {
             (*ship).vy -= 1;
-            (*ship).fuel--;
-            subfuel(ship, buffer);
+            subfuel(ship, buffer, 4);
         }
     }
     else if (place == 3){
@@ -185,6 +182,7 @@ int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[],
                 }
 
                 addfuel(ship,buffer); //printer fuel på lcd.
+                addPowerBullet((*ship).powerUp,buffer);
                 return i - 1;
 
             }
@@ -219,12 +217,16 @@ void addfuel(SpaceShip_t * ship, uint8_t *buffer){
 }
 
 //Trækker fuel fra fuelbaren
-void subfuel(SpaceShip_t * ship, uint8_t *buffer){
+void subfuel(SpaceShip_t * ship, uint8_t *buffer, int fuelsub){
+        int i;
 
-        lcd_write_bar(" ", buffer, 0,25+(*ship).fuel);
+        for (i=0; i < fuelsub; i++){
+            (*ship).fuel--;
+            lcd_write_bar(" ", buffer, 0,25+(*ship).fuel);
+            lcd_push_buffer(buffer);
 
-        lcd_push_buffer(buffer);
 
+        }
 }
 
 // Finder det mineral skibet står over
@@ -268,8 +270,8 @@ void subLives(SpaceShip_t * ship, uint8_t *buffer){
         lcd_push_buffer(buffer);
 }
 
-int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
-    if ((*ship).fuel== 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)){
+int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score){
+    if ((*ship).fuel <= 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)){
             return 2;
     }
     else if ( (*ship).lives == 0){
@@ -277,6 +279,9 @@ int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals
     }
     else if ( (*ship).y < 3){
             return 1;
+    }
+    else if ( score == 0){
+            return 4;
     }
     return 0;
 }

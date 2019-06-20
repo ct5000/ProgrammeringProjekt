@@ -576,6 +576,53 @@ void writeV(int8_t sizeColumn) {
     moveCursorRight(sizeColumn);
 }
 
+void writeX(int8_t sizeColumn) {
+    int i;
+    saveCursor();
+    for (i=0; i<sizeColumn; i++){
+        printf("%c",219);
+        moveCursorDown(1);
+    }
+
+
+    returnCursor();
+    moveCursorRight(sizeColumn - 1);
+    for (i=0; i<sizeColumn; i++){
+        printf("%c",219);
+        moveCursorDown(1);
+        moveCursorLeft(2);
+    }
+
+
+    returnCursor();
+    moveCursorRight(sizeColumn);
+}
+
+void writeN(int8_t sizeColumn) {
+    int i;
+    saveCursor();
+    for (i=0; i<sizeColumn;i++){
+        printf("%c",219);
+        moveCursorDown(1);
+        moveCursorLeft(1);
+    }
+    returnCursor();
+    for (i=0; i<sizeColumn-2; i++){
+        printf("%c",219);
+        moveCursorDown(1);
+    }
+    returnCursor();
+    moveCursorRight(sizeColumn-2);
+    for (i=0; i<sizeColumn;i++){
+        printf("%c",219);
+        moveCursorDown(1);
+        moveCursorLeft(1);
+}
+
+    returnCursor();
+    moveCursorRight(sizeColumn);
+}
+
 
 void deleteLetter(int8_t sizeColumn) {
     int i, j;
@@ -626,7 +673,7 @@ void drawShip(int x, int y) {
     printf("%c%c%c", 219, 206, 219);
     gotoxy(x - 1, y + 1);
     printf("%c%c%c", 201, 190, 187);
-    fgcolor(0);
+    fgcolor(7);
 }
 
 void deleteAlien(int x, int y) {

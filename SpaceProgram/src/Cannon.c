@@ -3,7 +3,7 @@
 
 void initCannon(cannonBall_t *p, SpaceShip_t *r){
     (*p).x=(*r).x <<14;
-    (*p).y=((*r).y-1) <<14;
+    (*p).y=((*r).y-2) <<14;
 
     (*p).vx =  (-2 * Cos(readDegree()));
     (*p).vy = (-2 * Sin(readDegree()));

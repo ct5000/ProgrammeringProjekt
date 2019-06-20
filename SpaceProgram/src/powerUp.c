@@ -2,7 +2,7 @@
 
 void initPowerBullet(powerBullet_t *p, SpaceShip_t *r) {
     (*p).x=(*r).x <<14;
-    (*p).y=((*r).y-1) <<14;
+    (*p).y=((*r).y-3) <<14;
 
     (*p).vx =  (-2 * Cos(readDegree()));
     (*p).vy = (-2 * Sin(readDegree()));
@@ -25,7 +25,7 @@ int8_t inPowerBulletBounds(powerBullet_t *p) {
     int x = (*p).x >>14;
     int y = (*p).y >>14;
 
-    if (x>=1 && x <=238 && y >= 2 && y < GROUND_HEIGHT-1){
+    if (x>=1 && x <=238 && y >= 2 && y < GROUND_HEIGHT-2){
         return 1;
     }
     return 0;
@@ -91,6 +91,29 @@ void gravitatePowerBullet(powerBullet_t *p) {
     }
 
     //(*p).y = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).y,Cos(grader));
+
+}
+
+void addPowerBullet(int numPowerBullets, uint8_t *buffer){
+    int i;
+
+        for(i=0; i < numPowerBullets; i++){
+
+        lcd_write_string("O", buffer, 2,30+i*5);
+
+        lcd_push_buffer(buffer);
+        }
+}
+
+//Trækker live fra livbaren
+void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer){
+        int i;
+        int copyPowerUp = (*ship).powerUp;
+        for (i=0; i<copyPowerUp; i++){
+            (*ship).powerUp--;
+            lcd_write_string(" ", buffer, 2,30+(*ship).powerUp*5);
+            lcd_push_buffer(buffer);
+        }
 
 }
 

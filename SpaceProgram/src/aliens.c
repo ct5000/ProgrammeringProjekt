@@ -2,17 +2,17 @@
 
 void init_alien(alien_t *alien) {
     (*alien).dir = 1; //1 means alien going right, 2 means alien going left
-    (*alien).posX = 2;
-    (*alien).posY = 5;
+    (*alien).posX = randomNumber(3,SCREEN_WIDTH-3);
+    (*alien).posY = 3;
     drawAlien((*alien).posX, (*alien).posY);
 }
 
 void updateAlien(alien_t *alien) {
+    int num = randomNumber(0, 15);
     deleteAlien((*alien).posX, (*alien).posY);
     if ((*alien).dir == 1) {
             if ((*alien).posX + 2 >= SCREEN_WIDTH) {
                     (*alien).dir = 2;
-                    (*alien).posY += 3;
             }
             else {
                     (*alien).posX++;
@@ -26,6 +26,9 @@ void updateAlien(alien_t *alien) {
             else {
                     (*alien).posX--;
             }
+    }
+    if (num == 0) {
+            (*alien).posY += 3;
     }
     drawAlien((*alien).posX, (*alien).posY);
 }

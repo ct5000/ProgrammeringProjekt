@@ -44,9 +44,10 @@ int main(void){
     int8_t numAliens = 0;
     int8_t killedAliens;
 
-    mineral_t minerals[25];
+    mineral_t minerals[50];
     int8_t numMinerals = 0;
     int8_t mineralIndex;
+    int8_t level=1;
 
     cannonBall_t cannonBalls[50];
     int8_t numBalls = 0;
@@ -55,12 +56,14 @@ int main(void){
     int8_t numPowerBullets = 0;
 
     int i;
+    int on = 0;
     int endgame = 0;
     int where = 1;
     int oldWhere = 1;
     char dirct;
 
-    int spawnRate = 50;
+    int spawnRate;
+    int startSpawnRate = 50;
 
     int score = 1000;
 
@@ -82,9 +85,10 @@ int main(void){
     memset(buffer, 0x00, 512);
     lcd_push_buffer(buffer);
     lcd_write_string("FUEL:",buffer,0,0);
-    lcd_write_string("Lives:",buffer,1,0);
+    lcd_write_string("LIVES:",buffer,1,0);
+    lcd_write_string("POW B:",buffer,2,0);
     lcd_push_buffer(buffer);
-
+    LED_setup();
     setup_pot();
 
     color(7,0);
@@ -102,9 +106,9 @@ int main(void){
 
                 drawLandscape();
                 groundDraw();
-                fgcolor(0);
+                fgcolor(7);
 
-                for (numMinerals = 0; numMinerals < 25; numMinerals++) {
+                for (numMinerals = 0; numMinerals < 50; numMinerals++) {
                         createMineral(minerals, numMinerals);
                 }
 
@@ -124,8 +128,7 @@ int main(void){
                     if (getSpawnRateFlag() >= 500 && spawnRate > 10){
                             spawnRate--;
                             resetSpawnRateFlag();
-                            gotoxy(1,1);
-                            printf("%d", spawnRate);
+
                     }
 
 
@@ -137,6 +140,20 @@ int main(void){
                             }
                         }
                         updateAliens(aliens,ship ,numAliens, buffer);
+                        if ((*ship).fuel >= 40){
+                            if (on) {
+                                    writeLED(0);
+                                    on = 0;
+                            }
+                            else {
+                                    writeLED(2);
+                                    on = 1;
+                            }
+
+                        }
+                        else {
+                            writeLED(0);
+                        }
                         resetAlienFlag();
                     }
 
@@ -168,22 +185,20 @@ int main(void){
                     }
 
 
-                    if (dirct==' '){
+                    if (dirct==' ' && numBalls < 5){
                             createBall(cannonBalls, numBalls, ship);
                             numBalls++;
                     }
-                    else if (dirct == 'g' && (*ship).powerUp > 0) {
+                    else if (dirct == 'g' && (*ship).powerUp > 0 && numPowerBullets < 2) {
                             createPowerBullet(powerBullets, numPowerBullets, ship);
                             numPowerBullets++;
-                            (*ship).powerUp--;
+                            subPowerBullet(ship,buffer);
                     }
                     if (getBulletFlag() >= 8) {
-
-
                             score--;
 
-                                    gotoxy(115,1);
-                                    printf("%03d", score);
+                            gotoxy(115,1);
+                            printf("%03d", score);
 
 
                         for (i=0; i<numBalls; i++){
@@ -218,26 +233,38 @@ int main(void){
                                        powerBulletKilled(powerBullets, i, numPowerBullets);
                                        numPowerBullets--;
 
+
+                                gotoxy(1,1);
+                                printf("%3d", numPowerBullets);
+
                                 }
                         }
 
 
                         resetBulletFlag();
                     }
-                    endgame = endGameCondition(ship, minerals,numMinerals);
-                    if (endgame){
+                    endgame = endGameCondition(ship, minerals,numMinerals, score);
+                    if (endgame == 2 || endgame == 3 || score == 0){
 
                         where = 3;
                     }
+                    else if (endgame == 1){
+                        where = 5;
+                    }
                     dirct = 0x0D;
+
+
 
 
                     break;
 
 
             case 3:
-                    gameOver(endgame, score);
+                    gameOver(endgame, score, level);
                     where = 1;
+                    score = 1000;
+                    subfuel(ship, buffer,(*ship).fuel);
+                    subPowerBullet(ship,buffer);
                     break;
             case 4:
                     start_stop();
@@ -251,11 +278,50 @@ int main(void){
                         drawMinerals(minerals, numMinerals);
                         drawShip((*ship).x, (*ship).y);
                         where = 2;
-                        fgcolor(0);
+                        fgcolor(7);
                         start_stop();
                     //}
                     break;
+            case 5:
+                    nextLevel(score, level);
 
+                    score += 1000;
+
+                    if (startSpawnRate >= 15){
+                    startSpawnRate -= 5;
+                    }
+                    spawnRate = startSpawnRate;
+
+                    where = 2;
+                    drawLandscape();
+                    groundDraw();
+                    resetTime();
+                    start_stop();
+
+                    subfuel(ship, buffer, (*ship).fuel);
+                    (*ship).x=randomNumber(60, 180);
+                    (*ship).y=54;
+                    (*ship).vx=0;
+                    (*ship).vy=0;
+                    (*ship).fuel = 30;
+
+                    drawShip((*ship).x,(*ship).y);
+
+
+                    addfuel(ship,buffer);
+
+                    numMinerals =0;
+                    numAliens =0;
+                    numBalls = 0;
+                    numPowerBullets =0;
+
+                    for (numMinerals = 0; numMinerals < 50-level*3; numMinerals++) {
+                        createMineral(minerals, numMinerals);
+                    }
+
+                    drawMinerals(minerals, numMinerals);
+                    level++;
+                    break;
         }
     }
 }

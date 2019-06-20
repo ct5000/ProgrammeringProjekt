@@ -12,8 +12,8 @@ void drawMenu();
 void drawHelp();
 int8_t updateArrow(char key, int8_t menu);
 void runningMenu();
-void gameOver(int8_t condition, int score);
-void nextLevel(int8_t condition, int score);
+void gameOver(int8_t condition, int score, int level);
+void nextLevel( int score, int level);
 
 
 #endif

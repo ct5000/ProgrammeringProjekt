@@ -81,10 +81,14 @@ void runningMenu() {
     drawMenu();
     //Keeps the player in the menu until it hits enter at START
     while(menu) {
-        keyStroke = uart_get_char();
+        if (uart_get_count() > 0) {
+                keyStroke = uart_get_char();
+                uart_clear();
+            }
         if (keyStroke == 'b') {
                 bossKey();
                 runningMenu();
+                break;
         }
         else if (menu == 2 && keyStroke == 0x0D) {
                 menu = 1;
@@ -103,10 +107,11 @@ void runningMenu() {
                 }
             }
         }
+        keyStroke = ' ';
     }
 }
 
-void gameOver(int8_t condition, int score) {
+void gameOver(int8_t condition, int score, int level) {
     color(7,0);
     char user;
     clrscr();
@@ -131,6 +136,9 @@ void gameOver(int8_t condition, int score) {
     case 3: //The player got killed
         printf("The aliens have overpowered you and your spaceship has been destroyed. YOU LOST");
         break;
+    case 4: //score is 0
+        printf("You're too slow. YOU LOST");
+        break;
 
     default:
         printf("ERROR");
@@ -139,28 +147,70 @@ void gameOver(int8_t condition, int score) {
     printf("Press enter to return to the menu");
     gotoxy(110, 25);
     printf("Score: %06d", score);
+    gotoxy(110, 26);
+    printf("Level: %06d", level);
 
     while(1) {
-            user = uart_get_char();
+            if (uart_get_count() > 0) {
+                user = uart_get_char();
+                uart_clear();
+            }
             if (user == 0x0D) {
                     uart_clear();
                     break;
             }
             else if (user == 'b') {
                     bossKey();
-                    gameOver(condition, score);
+                    gameOver(condition, score, level);
+                    break;
             }
+            user = ' ';
     }
 
 }
 
-void nextLevel(int8_t condition, int score){
+void nextLevel(int score, int level){
     color(7,0);
     char user;
     clrscr();
-    gotoxy(70,3);
+    gotoxy(88, 15);
+    writeN(COLUMNSIZE);
+    writeE(COLUMNSIZE);
+    writeX(COLUMNSIZE);
+    moveCursorRight(1);
+    writeT(COLUMNSIZE);
 
+    writeBlank(COLUMNSIZE);
 
+    writeL(COLUMNSIZE);
+    writeE(COLUMNSIZE);
+    writeV(COLUMNSIZE);
+    writeE(COLUMNSIZE);
+    writeL(COLUMNSIZE);
+
+    gotoxy(70, 30);
+    printf("Press enter to start");
+    gotoxy(110, 25);
+    printf("Score: %06d", score);
+    gotoxy(110, 26);
+    printf("Level: %06d", level);
+
+    while(1) {
+            if (uart_get_count() > 0) {
+                user = uart_get_char();
+                uart_clear();
+            }
+            if (user == 0x0D) {
+                    uart_clear();
+                    break;
+            }
+            else if (user == 'b') {
+                    bossKey();
+                    nextLevel( score, level);
+                    break;
+            }
+            user = ' ';
+    }
 
 }
 

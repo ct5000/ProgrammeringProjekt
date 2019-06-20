@@ -45,6 +45,7 @@ void writeS(int8_t sizeColumn);
 void writeL(int8_t sizeColumn);
 
 void writeM(int8_t sizeColumn);
+void writeN(int8_t sizeColumn);
 void writeO(int8_t sizeColumn);
 
 void writeQ(int8_t sizeColumn);
@@ -53,6 +54,8 @@ void writeR(int8_t sizeColumn);
 void writeT(int8_t sizeColumn);
 void writeU(int8_t sizeColumn);
 void writeV(int8_t sizeColumn);
+//void writeN(int8_t sizeColumn);
+void writeX(int8_t sizeColumn);
 
 void writeBlank(int8_t sizeColumn);
 
