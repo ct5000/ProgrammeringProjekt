@@ -82,7 +82,11 @@ void runningMenu() {
     //Keeps the player in the menu until it hits enter at START
     while(menu) {
         keyStroke = uart_get_char();
-        if (menu == 2 && keyStroke == 0x0D) {
+        if (keyStroke == 'b') {
+                bossKey();
+                runningMenu();
+        }
+        else if (menu == 2 && keyStroke == 0x0D) {
                 menu = 1;
                 drawMenu();
                 menuArrow = 1;
@@ -141,6 +145,10 @@ void gameOver(int8_t condition, int score) {
             if (user == 0x0D) {
                     uart_clear();
                     break;
+            }
+            else if (user == 'b') {
+                    bossKey();
+                    gameOver(condition, score);
             }
     }
 

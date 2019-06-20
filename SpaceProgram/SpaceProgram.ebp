@@ -93,6 +93,7 @@
 		<Unit filename="inc\aliens.h" />
 		<Unit filename="inc\ansi.h" />
 		<Unit filename="inc\ball.h" />
+		<Unit filename="inc\bossKey.h" />
 		<Unit filename="inc\Cannon.h" />
 		<Unit filename="inc\charset.h" />
 		<Unit filename="inc\Landscape.h" />
@@ -207,6 +208,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\ball.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\bossKey.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src\Cannon.c">
