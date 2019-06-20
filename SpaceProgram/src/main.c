@@ -57,14 +57,14 @@ int main(void){
     int endgame = 0;
     int where = 1;
     char dirct;
-<<<<<<< HEAD
+
     int spawnRate = 50;
 
     int score = 1000;
-=======
+
     int pos;
     //int readyDirct = 1;
->>>>>>> 6617ebcf99c773ec366712aae0282b0eec929fef
+
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
@@ -107,11 +107,8 @@ int main(void){
                 }
 
                 drawMinerals(minerals, numMinerals);
-<<<<<<< HEAD
-                initSpaceShip(ship, 115, 54, 100);
-=======
+
                 initSpaceShip(ship, 115, 54, 30);
->>>>>>> 6617ebcf99c773ec366712aae0282b0eec929fef
                 numAliens = 0;
 
                 addfuel(ship,buffer);
