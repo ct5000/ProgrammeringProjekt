@@ -132,11 +132,6 @@ int main(void){
                             if(spawnAlien(aliens, numAliens, spawnRate)) {
                                     numAliens++;
 
-
-
-
-
-
                             }
                         }
                         updateAliens(aliens,ship ,numAliens, buffer);

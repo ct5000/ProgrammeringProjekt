@@ -146,5 +146,15 @@ void gameOver(int8_t condition, int score) {
 
 }
 
+void nextLevel(int8_t condition, int score){
+    color(7,0);
+    char user;
+    clrscr();
+    gotoxy(70,3);
+
+
+
+}
+
 
 

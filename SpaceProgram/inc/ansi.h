@@ -29,21 +29,40 @@ void moveCursorUp(int i);
 void moveCursorDown(int i);
 
 void writeA(int8_t sizeColumn);
+
+void writeC(int8_t sizeColumn);
+
+void writeE(int8_t sizeColumn);
+
+void writeG(int8_t sizeColumn);
+void writeH(int8_t sizeColumn);
+
+
+
 void writeP(int8_t sizeColumn);
 void writeS(int8_t sizeColumn);
-void writeC(int8_t sizeColumn);
-void writeE(int8_t sizeColumn);
-void writeR(int8_t sizeColumn);
-void writeQ(int8_t sizeColumn);
-void writeBlank(int8_t sizeColumn);
-void writeU(int8_t sizeColumn);
-void writeT(int8_t sizeColumn);
-void writeH(int8_t sizeColumn);
+
 void writeL(int8_t sizeColumn);
-void writeO(int8_t sizeColumn);
-void writeG(int8_t sizeColumn);
+
 void writeM(int8_t sizeColumn);
+void writeO(int8_t sizeColumn);
+
+void writeQ(int8_t sizeColumn);
+void writeR(int8_t sizeColumn);
+
+void writeT(int8_t sizeColumn);
+void writeU(int8_t sizeColumn);
 void writeV(int8_t sizeColumn);
+
+void writeBlank(int8_t sizeColumn);
+
+
+
+
+
+
+
+
 void deleteLetter(int8_t sizeColumn);
 
 void drawAlien(int x, int y);
