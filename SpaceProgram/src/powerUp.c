@@ -68,7 +68,7 @@ void createPowerBullet(powerBullet_t powerBullets[], int8_t emptyIndex, SpaceShi
 void powerBulletKilled(powerBullet_t powerBullets[], int8_t index, int8_t numPowerBullets) {
     int i;
     deletePowerBullet( (((powerBullets[index]).x) >> 14) , (((powerBullets[index]).y) >> 14) );
-    for (i = index; i < numPowerBullets - 1; i ++) {
+    for (i = index; i < numPowerBullets - 1; i++) {
         powerBullets[i] = powerBullets[i + 1];
     }
 }
@@ -78,16 +78,16 @@ void gravitatePowerBullet(powerBullet_t *p) {
     int grader = 2;
 
     if ((*p).vx > 0){
-    (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
-    (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
+        (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
+        (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
     }
     else if(((*p).vx < 0)){
     grader *= -1;
-    (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
-    (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
+        (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
+        (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
     }
     else{
-    (*p).vy += grader <<6;
+        (*p).vy += grader <<6;
     }
 
     //(*p).y = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).y,Cos(grader));

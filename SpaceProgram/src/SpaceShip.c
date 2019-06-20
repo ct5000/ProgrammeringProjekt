@@ -162,7 +162,7 @@ int8_t inBounds(SpaceShip_t *p){
 }
 
 //Skibets drill til at få mineraler
-void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer){
+int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer){
 	int i;
 	int j;
 
@@ -185,6 +185,7 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
                 }
 
                 addfuel(ship,buffer); //printer fuel på lcd.
+                return i - 1;
 
             }
             else { //Hvis skibet ikke er over et mineral
@@ -199,6 +200,7 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
                 }
             }
 	}
+	return 0;
 }
 
 //lægger fuel til fuelbaren
@@ -236,6 +238,14 @@ int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
         }
     return 0;
 }
+
+void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals) {
+    int i;
+    for (i = index; i < numMinerals - 1; i++) {
+        minerals[i] = minerals[i + 1];
+    }
+}
+
 
 //Lægger liv til livbaren
 void addLives(SpaceShip_t * ship, uint8_t *buffer){
