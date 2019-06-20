@@ -51,10 +51,10 @@ void alienKilled(alien_t aliens[], int8_t index, int8_t numAliens) {
 
 }
 
-int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex) {
+int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex, int spawnRate) {
     alien_t alien;
-    int num = randomNumber(0, 50);
-    if (num == 25) {
+    int num = randomNumber(0, spawnRate);
+    if (num == 0) {
             //aliens = realloc(aliens, (emptyIndex + 1) * sizeof(alien_t));
             init_alien(&alien);
             aliens[emptyIndex] = alien;
@@ -92,6 +92,8 @@ int8_t collide(alien_t aliens[], SpaceShip_t *ship, int numAliens, uint8_t *buff
                     subLives(ship, buffer);
                     alienKilled(aliens,j,numAliens);
                     aliensHit++;
+
+
             }
         }
     return aliensHit;

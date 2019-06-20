@@ -23,24 +23,7 @@ char* serialRead(char *s){
     }
     return rs;
 }
-/*
-char* serialRead(char *sequence, int p)
-char c = uart_get_char;
-sequence[p]=c;
 
-if (c==0x0D){
-    return sequence;
-}
-else{
-    sequence[p];
-    p++;
-    serialRead(sequence,p);
-}
-
-
-return c==0x0D ? "notyet" : sequence();
-
-*/
 
 
 

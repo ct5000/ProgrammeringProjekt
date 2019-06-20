@@ -270,3 +270,6 @@ int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals
     }
     return 0;
 }
+
+
+

@@ -35,6 +35,8 @@ int getShipFlag2();
 void resetShipFlag2();
 int getShipFlag3();
 void resetShipFlag3();
+int getSpawnRateFlag();
+void resetSpawnRateFlag();
 
 void setup_pot();
 int16_t readPotLeft();

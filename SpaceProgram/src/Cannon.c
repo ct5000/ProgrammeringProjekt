@@ -56,6 +56,8 @@ int hitAliens(alien_t aliens[], cannonBall_t cannonballs[], int numAliens, int n
             if (inX && inY){
                     alienKilled(aliens,j,numAliens);
                     aliensHit++;
+
+
             }
         }
     }

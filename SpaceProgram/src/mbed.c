@@ -20,6 +20,7 @@
     int shipFlag1 = 0;
     int shipFlag2 = 0;
     int shipFlag3 = 0;
+    int spawnRateFlag =0;
 
 void LED_setup(){
 
@@ -295,6 +296,7 @@ void TIM2_IRQHandler(void) {
     shipFlag1++;
     shipFlag2++;
     shipFlag3++;
+    spawnRateFlag++;
     time++;
     TIM2->SR &= ~0x0001; // Clear interrupt bit
  }
@@ -329,6 +331,14 @@ int getShipFlag3() {
 
 void resetShipFlag3() {
     shipFlag3 = 0;
+}
+
+int getSpawnRateFlag() {
+    return spawnRateFlag;
+ }
+
+void resetSpawnRateFlag() {
+    spawnRateFlag = 0;
 }
 
 

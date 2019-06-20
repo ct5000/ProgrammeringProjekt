@@ -56,7 +56,9 @@ int main(void){
     int endgame = 0;
     int where = 1;
     char dirct;
-    //int readyDirct = 1;
+    int spawnRate = 50;
+
+    int score = 1000;
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
@@ -67,6 +69,7 @@ int main(void){
     uart_init(960000);
 
     set_timer();
+    start_stop();
     lcd_init();
     memset(buffer, 0x00, 512);
     lcd_push_buffer(buffer);
@@ -81,6 +84,7 @@ int main(void){
     while(1){
         switch(where){
             case 1:
+                spawnRate = 50;
                 runningMenu();
                 srand(getTime());
                 resetTime();
@@ -97,7 +101,7 @@ int main(void){
                 }
 
                 drawMinerals(minerals, numMinerals);
-                initSpaceShip(ship, 115, 54, 200);
+                initSpaceShip(ship, 115, 54, 100);
                 numAliens = 0;
 
                 addfuel(ship,buffer);
@@ -108,10 +112,24 @@ int main(void){
 
             case 2:
 
+                    if (getSpawnRateFlag() >= 500 && spawnRate > 10){
+                            spawnRate--;
+                            resetSpawnRateFlag();
+                            gotoxy(1,1);
+                            printf("%d", spawnRate);
+                    }
+
+
                     if (getAlienFlag() >= 10) {
                         if (numAliens <= 20){
-                            if(spawnAlien(aliens, numAliens)) {
+                            if(spawnAlien(aliens, numAliens, spawnRate)) {
                                     numAliens++;
+
+
+
+
+
+
                             }
                         }
                         updateAliens(aliens,ship ,numAliens, buffer);
@@ -147,15 +165,29 @@ int main(void){
                             numPowerBullets++;
                     }
                     if (getBulletFlag() >= 8) {
+
+
+                            score--;
+
+                                    gotoxy(115,1);
+                                    printf("%03d", score);
+
+
                         for (i=0; i<numBalls; i++){
                                 updateBallPosition(&(cannonBalls[i]));
 
                                 killedAliens = hitAliens(aliens, cannonBalls, numAliens, numBalls);
                                 numAliens -= killedAliens;
+                                if (killedAliens) {
+                                        score += 50;
+                                }
+
 
                                 if((!inBallBounds(&(cannonBalls[i]))) || killedAliens) {
                                        ballKilled(cannonBalls, i, numBalls);
                                        numBalls--;
+
+
                                 }
                         }
                         for (i=0; i<numPowerBullets; i++){
@@ -163,10 +195,15 @@ int main(void){
 
                                 killedAliens = powerHitAliens(aliens, powerBullets, numAliens, numPowerBullets);
                                 numAliens -= killedAliens;
+                                if (killedAliens) {
+                                        score += 50;
+                                }
+
 
                                 if((!inPowerBulletBounds(&(powerBullets[i])))) {
                                        powerBulletKilled(powerBullets, i, numBalls);
                                        numPowerBullets--;
+
                                 }
                         }
 
@@ -179,9 +216,13 @@ int main(void){
                         where = 3;
                     }
                     dirct = 0x0D;
+
+
                     break;
+
+
             case 3:
-                    gameOver(endgame);
+                    gameOver(endgame, score);
                     where = 1;
                     break;
         }

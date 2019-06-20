@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-char* serialRead();
 
+char* serialRead();
 #endif
 

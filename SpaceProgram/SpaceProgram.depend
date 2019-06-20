@@ -196,28 +196,28 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560940957 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\aliens.c
+1561022849 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\aliens.c
 	"aliens.h"
 
-1560940957 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\aliens.h
+1561022849 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\aliens.h
 	"ansi.h"
 	"30010_io.h"
 	"Landscape.h"
 	"SpaceShip.h"
 
-1560868449 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
+1561017434 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\ansi.h
 	"stm32f30x_conf.h"
 	<stdio.h>
 	<stdint.h>
 	<string.h>
 
-1560849813 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
+1561017434 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"ansi.h"
 
-1560868449 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
+1561017435 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ansi.c
 	"ansi.h"
 
 1560430993 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\ball.c
@@ -245,10 +245,10 @@
 	<stdio.h>
 	<stdint.h>
 
-1560934066 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\cannon.c
+1561021440 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\cannon.c
 	"Cannon.h"
 
-1560940974 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\cannon.h
+1561017434 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\cannon.h
 	"mbed.h"
 	"trigonometric.h"
 	<stdio.h>
@@ -258,19 +258,19 @@
 	"vectors.h"
 	"aliens.h"
 
-1560936909 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\mbed.h
+1561023237 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\mbed.h
 	"stm32f30x_rcc.h"
 	"serialRead.h"
 	<string.h>
 	<stdio.h>
 
-1560928119 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\serialread.h
+1561020060 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\serialread.h
 	"30010_io.h"
 	<stdio.h>
 	<stdint.h>
 	<stdlib.h>
 
-1560944929 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
+1561019991 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -296,7 +296,7 @@
 1560431104 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\charset.c
 	"charset.h"
 
-1560931703 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
+1561017435 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 
 1560938763 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\lcd.c
@@ -305,7 +305,7 @@
 1560431300 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560946667 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1561023237 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -322,28 +322,29 @@
 	"menu.h"
 	"aliens.h"
 	"Cannon.h"
+	"powerUp.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1560850560 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\menu.h
+1561021842 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\menu.h
 	"ansi.h"
 	"30010_io.h"
 
-1560937952 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\mbed.c
+1561023267 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\mbed.c
 	"mbed.h"
 
-1560945258 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
+1561022320 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\menu.c
 	"menu.h"
 
-1560928119 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\serialread.c
+1561020071 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\serialread.c
 	"serialRead.h"
 	<string.h>
 
-1560946685 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1561019991 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
-1560934530 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
+1560946714 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s
 
 1560429352 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\system_stm32f30x.c
 	"stm32f30x.h"
@@ -724,5 +725,19 @@
 	"Cannon.h"
 
 1560959569 source:d:\dtu\programmering\spaceprogram\src\powerup.c
+	"powerUp.h"
+
+1561017434 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\powerup.h
+	"mbed.h"
+	"trigonometric.h"
+	<stdio.h>
+	<stdint.h>
+	"ansi.h"
+	"SpaceShip.h"
+	"vectors.h"
+	"aliens.h"
+	"Cannon.h"
+
+1561017435 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\powerup.c
 	"powerUp.h"
 

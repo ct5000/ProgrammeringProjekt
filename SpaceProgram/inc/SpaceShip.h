@@ -41,5 +41,6 @@ void subLives(SpaceShip_t * ship, uint8_t *buffer);
 
 int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals);
 
+
 #endif
 

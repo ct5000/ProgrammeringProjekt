@@ -102,7 +102,7 @@ void runningMenu() {
     }
 }
 
-void gameOver(int8_t condition) {
+void gameOver(int8_t condition, int score) {
     color(7,0);
     char user;
     clrscr();
@@ -133,6 +133,8 @@ void gameOver(int8_t condition) {
     }
     gotoxy(70, 30);
     printf("Press enter to return to the menu");
+    gotoxy(110, 25);
+    printf("Score: %06d", score);
 
     while(1) {
             user = uart_get_char();
