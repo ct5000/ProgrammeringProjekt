@@ -553,10 +553,10 @@
 	"stm32f30x_conf.h"
 	<stdio.h>
 
-1560945636 source:d:\dtu\programmering\spaceprogram\src\aliens.c
+1561023886 source:d:\dtu\programmering\spaceprogram\src\aliens.c
 	"aliens.h"
 
-1560945636 d:\dtu\programmering\spaceprogram\inc\aliens.h
+1561023886 d:\dtu\programmering\spaceprogram\inc\aliens.h
 	"ansi.h"
 	"30010_io.h"
 	"Landscape.h"
@@ -574,7 +574,7 @@
 	<time.h>
 	"ansi.h"
 
-1561022362 d:\dtu\programmering\spaceprogram\inc\spaceship.h
+1561023886 d:\dtu\programmering\spaceprogram\inc\spaceship.h
 	"vectors.h"
 	"serialRead.h"
 	"mbed.h"
@@ -602,13 +602,13 @@
 	<stdio.h>
 	<stdint.h>
 
-1560932196 d:\dtu\programmering\spaceprogram\inc\serialread.h
+1561023886 d:\dtu\programmering\spaceprogram\inc\serialread.h
 	"30010_io.h"
 	<stdio.h>
 	<stdint.h>
 	<stdlib.h>
 
-1560953245 d:\dtu\programmering\spaceprogram\inc\mbed.h
+1561023886 d:\dtu\programmering\spaceprogram\inc\mbed.h
 	"stm32f30x_rcc.h"
 	"serialRead.h"
 	<string.h>
@@ -637,7 +637,7 @@
 	<stdio.h>
 	<stdint.h>
 
-1561020151 source:d:\dtu\programmering\spaceprogram\src\cannon.c
+1561023886 source:d:\dtu\programmering\spaceprogram\src\cannon.c
 	"Cannon.h"
 
 1560958029 d:\dtu\programmering\spaceprogram\inc\cannon.h
@@ -653,7 +653,7 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\charset.c
 	"charset.h"
 
-1561018730 source:d:\dtu\programmering\spaceprogram\src\landscape.c
+1561022750 source:d:\dtu\programmering\spaceprogram\src\landscape.c
 	"Landscape.h"
 
 1560945636 source:d:\dtu\programmering\spaceprogram\src\lcd.c
@@ -662,14 +662,15 @@
 1560433311 source:d:\dtu\programmering\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1560946868 source:d:\dtu\programmering\spaceprogram\src\menu.c
+1561023886 source:d:\dtu\programmering\spaceprogram\src\menu.c
 	"menu.h"
 
-1560850387 d:\dtu\programmering\spaceprogram\inc\menu.h
+1561027297 d:\dtu\programmering\spaceprogram\inc\menu.h
 	"ansi.h"
 	"30010_io.h"
+	"bossKey.h"
 
-1560932196 source:d:\dtu\programmering\spaceprogram\src\serialread.c
+1561023886 source:d:\dtu\programmering\spaceprogram\src\serialread.c
 	"serialRead.h"
 	<string.h>
 
@@ -685,7 +686,7 @@
 1560932196 source:d:\dtu\programmering\spaceprogram\src\vectors.c
 	"vectors.h"
 
-1561022284 source:d:\dtu\programmering\spaceprogram\src\main.c
+1561027214 source:d:\dtu\programmering\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -703,14 +704,15 @@
 	"aliens.h"
 	"Cannon.h"
 	"powerUp.h"
+	"bossKey.h"
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
 
-1560953273 source:d:\dtu\programmering\spaceprogram\src\mbed.c
+1561023886 source:d:\dtu\programmering\spaceprogram\src\mbed.c
 	"mbed.h"
 
-1561022273 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
+1561023886 source:d:\dtu\programmering\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
 1560958522 d:\dtu\programmering\spaceprogram\inc\powerup.h
@@ -740,4 +742,14 @@
 
 1561017435 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\powerup.c
 	"powerUp.h"
+
+1561026134 source:d:\dtu\programmering\spaceprogram\src\bosskey.c
+	"bossKey.h"
+
+1561025526 d:\dtu\programmering\spaceprogram\inc\bosskey.h
+	"30010_io.h"
+	<stdio.h>
+	<stdint.h>
+	<string.h>
+	<stdlib.h>
 

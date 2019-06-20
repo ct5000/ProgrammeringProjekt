@@ -28,6 +28,7 @@
 #include "aliens.h"
 #include "Cannon.h"
 #include "powerUp.h"
+#include "bossKey.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -56,6 +57,7 @@ int main(void){
     int i;
     int endgame = 0;
     int where = 1;
+    int oldWhere = 1;
     char dirct;
 
     int spawnRate = 50;
@@ -148,6 +150,10 @@ int main(void){
                         uart_clear();
 
                     }
+                    if (dirct == 'b') {
+                            where = 4;
+                            //oldWhere = 2;
+                    }
                     pos = inBounds(ship);
                     updateVelocity(ship, dirct, buffer, pos );
                     mineralIndex = drill(ship, dirct,pos, minerals, numMinerals, buffer);
@@ -238,6 +244,23 @@ int main(void){
                     gameOver(endgame, score);
                     where = 1;
                     break;
+            case 4:
+                    start_stop();
+                    bossKey();
+
+                    //where = oldWhere;
+                   // if (where == 2) {
+                        clrscr();
+                        drawLandscape();
+                        groundDraw();
+                        drawMinerals(minerals, numMinerals);
+                        drawShip((*ship).x, (*ship).y);
+                        where = 2;
+                        fgcolor(0);
+                        start_stop();
+                    //}
+                    break;
+
         }
     }
 }

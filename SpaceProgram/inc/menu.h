@@ -6,6 +6,7 @@
 //#include "stm32f30x_rcc.h"
 #include "ansi.h"
 #include "30010_io.h"
+#include "bossKey.h"
 
 void drawMenu();
 void drawHelp();
