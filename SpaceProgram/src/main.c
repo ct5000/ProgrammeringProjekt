@@ -27,6 +27,7 @@
 #include "menu.h"
 #include "aliens.h"
 #include "Cannon.h"
+#include "powerUp.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -48,9 +49,14 @@ int main(void){
     cannonBall_t cannonBalls[50];
     int8_t numBalls = 0;
 
+    powerBullet_t powerBullets[5];
+    int8_t numPowerBullets = 0;
+
     int i;
     int endgame = 0;
     int where = 1;
+    char dirct;
+    //int readyDirct = 1;
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
@@ -58,7 +64,7 @@ int main(void){
 
     uint8_t buffer[512];
 
-    uart_init(2000000);
+    uart_init(960000);
 
     set_timer();
     lcd_init();
@@ -75,9 +81,6 @@ int main(void){
     while(1){
         switch(where){
             case 1:
-
-
-
                 runningMenu();
                 srand(getTime());
                 resetTime();
@@ -94,7 +97,8 @@ int main(void){
                 }
 
                 drawMinerals(minerals, numMinerals);
-                initSpaceShip(ship, 115, 3, 50);
+                initSpaceShip(ship, 115, 54, 200);
+                numAliens = 0;
 
                 addfuel(ship,buffer);
                 addLives(ship, buffer);
@@ -114,25 +118,35 @@ int main(void){
                         resetAlienFlag();
                     }
 
-                    char dirct = uart_get_char();
+                    if (uart_get_count() > 0) {
+                        dirct = uart_get_char();
+                        uart_clear();
+
+                    }
 
                     updateVelocity(ship, dirct, buffer, inBounds(ship) );
                     drill(ship, dirct,inBounds(ship), minerals, numMinerals, buffer);
 
-                    if ( ( ((*ship).vy != 0) || ((*ship).vx != 0) ) || inBounds(ship) == 0 ){
 
-                        updateSpaceShip(ship);
-                        if (collide(aliens, ship, numAliens, buffer)) {
-                                numAliens--;
-                        }
+                    if ( (( ((*ship).vy != 0) || ((*ship).vx != 0) ) || inBounds(ship) == 0) && getShipFlag3() > 4){
+
+                            updateSpaceShip(ship);
+                            if (collide(aliens, ship, numAliens, buffer)) {
+                                    numAliens--;
+                            }
+                            resetShipFlag3();
                     }
+
 
                     if (dirct==' '){
                             createBall(cannonBalls, numBalls, ship);
                             numBalls++;
                     }
+                    else if (dirct == 'g') {
+                            createPowerBullet(powerBullets, numPowerBullets, ship);
+                            numPowerBullets++;
+                    }
                     if (getBulletFlag() >= 8) {
-
                         for (i=0; i<numBalls; i++){
                                 updateBallPosition(&(cannonBalls[i]));
 
@@ -144,6 +158,19 @@ int main(void){
                                        numBalls--;
                                 }
                         }
+                        for (i=0; i<numPowerBullets; i++){
+                                updatePowerBulletPosition(&(powerBullets[i]));
+
+                                killedAliens = powerHitAliens(aliens, powerBullets, numAliens, numPowerBullets);
+                                numAliens -= killedAliens;
+
+                                if((!inPowerBulletBounds(&(powerBullets[i])))) {
+                                       powerBulletKilled(powerBullets, i, numBalls);
+                                       numPowerBullets--;
+                                }
+                        }
+
+
                         resetBulletFlag();
                     }
                     endgame = endGameCondition(ship, minerals,numMinerals);
@@ -151,6 +178,7 @@ int main(void){
 
                         where = 3;
                     }
+                    dirct = 0x0D;
                     break;
             case 3:
                     gameOver(endgame);

@@ -1,5 +1,3 @@
-
-
 #ifndef CANNON_H
 #define CANNON_H
 
@@ -25,7 +23,6 @@ void updateBallPosition(cannonBall_t *p);
 
 int8_t inBallBounds(cannonBall_t *p);
 
-void rotateDirection(cannonBall_t *p, int grader);
 
 int32_t readDegree();
 

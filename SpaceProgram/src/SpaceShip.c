@@ -8,14 +8,22 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     (*ship).vy = 0;
     (*ship).lives = 5;
     (*ship).fuel=fuel;
+    (*ship).powerUp = 0;
     drawShip(x,y);
 }
 
 void updateSpaceShip(SpaceShip_t * ship){
     int8_t bounds;
+
     deleteAlien((*ship).x,(*ship).y);
-    (*ship).x += (*ship).vx;
-    (*ship).y += (*ship).vy;
+    //if (getShipFlag3() > 4) {
+        (*ship).x += (*ship).vx;
+       // resetShipFlag3();
+    //}
+    if (getShipFlag2() > 2){
+        (*ship).y += (*ship).vy;
+        resetShipFlag2();
+    }
     bounds = inBounds(ship);
     switch (bounds) {
         case 1:
@@ -70,27 +78,40 @@ void updateSpaceShip(SpaceShip_t * ship){
 }
 
 void updateVelocity(SpaceShip_t * ship, char dirct, uint8_t *buffer, int place) {
-    if (dirct == 'w' && (*ship).fuel>0){
-        (*ship).vy -= 6;
-        (*ship).fuel--;
-        subfuel(ship, buffer);
-    }
-    else if (dirct == 'a' && (*ship).fuel>0){
-        (*ship).vx -= 2;
-        (*ship).fuel--;
-        subfuel(ship, buffer);
+
+    if (dirct == 'a' && (*ship).fuel>0){
+        if ((*ship).vx > -3) {
+            (*ship).vx -= 1;
+            (*ship).fuel--;
+            subfuel(ship, buffer);
+        }
     }
     else if (dirct == 'd' && (*ship).fuel>0){
-        (*ship).vx += 2;
-        (*ship).fuel--;
-        subfuel(ship, buffer);
+        if ((*ship).vx < 3) {
+            (*ship).vx += 1;
+            (*ship).fuel--;
+            subfuel(ship, buffer);
+        }
+    }
+    else if (dirct == 'w' && (*ship).fuel>0){
+        if ((*ship).vy > -3) {
+            (*ship).vy -= 1;
+            (*ship).fuel--;
+            subfuel(ship, buffer);
+        }
     }
     else if (place == 3){
         (*ship).vx = 0;
         (*ship).vy =0;
     }
-    else {
-       // (*ship).vy++;
+    else if (getShipFlag1() > 20) {
+            if ((*ship).vy < 1) {
+            (*ship).vy++;
+            }
+            resetShipFlag1();
+
+
+
         if ((*ship).vx > 0) {
             (*ship).vx--;
         }
@@ -152,6 +173,7 @@ void drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], i
             if (i){ //Hvis skibet er over et mineral
 
                 (*ship).fuel += (*minerals).fuel;
+                (*ship).powerUp += (*minerals).powerUp;
 
                 for (j = GROUND_HEIGHT; j <= (minerals[i - 1]).y; j++ ){
                     gotoxy((*ship).x, j);
@@ -224,8 +246,6 @@ void addLives(SpaceShip_t * ship, uint8_t *buffer){
         lcd_write_string("<3", buffer, 1,30+((i*5)*2));
 
         lcd_push_buffer(buffer);
-
-       // lcd_push_buffer(buffer);
         }
 }
 
@@ -245,7 +265,7 @@ int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals
     else if ( (*ship).lives == 0){
             return 3;
     }
-    else if ( (*ship).y < 2){
+    else if ( (*ship).y < 3){
             return 1;
     }
     return 0;

@@ -29,6 +29,12 @@ int getAlienFlag();
 void resetAlienFlag();
 int getBulletFlag();
 void resetBulletFlag();
+int getShipFlag1();
+void resetShipFlag1();
+int getShipFlag2();
+void resetShipFlag2();
+int getShipFlag3();
+void resetShipFlag3();
 
 void setup_pot();
 int16_t readPotLeft();

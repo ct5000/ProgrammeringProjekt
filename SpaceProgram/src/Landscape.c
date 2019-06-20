@@ -22,9 +22,17 @@ int randomNumber(int32_t mini, int32_t maxi){
 }
 
 void initMineral(mineral_t *p){
+    int num;
     (*p).x=randomNumber(1, 240);
     (*p).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-1) ;
     (*p).fuel=randomNumber(10, 20);
+    num = randomNumber(0, 3);
+    if (num == 2) {
+            (*p).powerUp = 1;
+    }
+    else {
+            (*p).powerUp = 0;
+    }
 }
 
 void drawMinerals(mineral_t minerals[], int numMinerals){

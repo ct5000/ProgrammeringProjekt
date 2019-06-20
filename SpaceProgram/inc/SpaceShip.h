@@ -21,7 +21,8 @@ typedef struct {
     int32_t x, y;
     int8_t vx, vy;
     int8_t lives;
-    int32_t fuel;
+    int8_t fuel;
+    int8_t powerUp;
 } SpaceShip_t;
 
 void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y, int16_t fuel);

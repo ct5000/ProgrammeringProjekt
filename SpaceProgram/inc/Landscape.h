@@ -15,6 +15,7 @@
 typedef struct{
     int32_t x,y;
     int8_t fuel;
+    int8_t powerUp;
 } mineral_t;
 
 void drawLandscape();

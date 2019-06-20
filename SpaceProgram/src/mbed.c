@@ -17,6 +17,9 @@
     int time =0;
     int alienFlag =0;
     int bulletFlag = 0;
+    int shipFlag1 = 0;
+    int shipFlag2 = 0;
+    int shipFlag3 = 0;
 
 void LED_setup(){
 
@@ -289,6 +292,9 @@ int split_time1(){
 void TIM2_IRQHandler(void) {
     alienFlag++;
     bulletFlag++;
+    shipFlag1++;
+    shipFlag2++;
+    shipFlag3++;
     time++;
     TIM2->SR &= ~0x0001; // Clear interrupt bit
  }
@@ -300,6 +306,31 @@ int getAlienFlag() {
 void resetAlienFlag() {
     alienFlag = 0;
 }
+
+int getShipFlag1() {
+    return shipFlag1;
+ }
+
+void resetShipFlag1() {
+    shipFlag1 = 0;
+}
+
+int getShipFlag2() {
+    return shipFlag2;
+ }
+
+void resetShipFlag2() {
+    shipFlag2 = 0;
+}
+
+int getShipFlag3() {
+    return shipFlag3;
+ }
+
+void resetShipFlag3() {
+    shipFlag3 = 0;
+}
+
 
 int getBulletFlag() {
     return bulletFlag;

@@ -637,6 +637,23 @@ void deleteAlien(int x, int y) {
     }
 }
 
+void drawPowerBullet(int x, int y) {
+    gotoxy(x, y);
+    printf("%c%c", 218, 191);
+    moveCursorDown(1);
+    moveCursorLeft(2);
+    printf("%c%c", 192, 217);
+}
+
+void deletePowerBullet(int x, int y) {
+    int i, j;
+    for (i = x; i <= x + 1; i++) {
+            for(j = y; j <= y + 1; j++) {
+                    deleteSymbol(i, j);
+            }
+    }
+}
+
 
 void fgcolor(uint8_t foreground) {
 /*  Value      foreground     Value     foreground

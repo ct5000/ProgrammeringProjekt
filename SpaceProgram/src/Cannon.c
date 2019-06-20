@@ -20,7 +20,6 @@ void updateBallPosition(cannonBall_t *p){
     if (inBallBounds(p)){
         drawSymbol((*p).x>>14,(*p).y >>14, 169);
     }
-    else {}
 }
 
 int8_t inBallBounds(cannonBall_t *p){
