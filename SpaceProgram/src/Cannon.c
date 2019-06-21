@@ -1,41 +1,85 @@
 #include "Cannon.h"
 
+/*
+Function: initBullet
+This function intializes the the position of a bullet to the spaceships position.
+The velocity is set according to the potentiometer.
+bullet: A pointer to the bullet to be intialized
+ship: A pointer to the spaceship that is flying around, thats position
+will be used
 
-void initCannon(cannonBall_t *p, SpaceShip_t *r){
-    (*p).x=(*r).x <<14;
-    (*p).y=((*r).y-1) <<14;
+return: void
+*/
+void initCannon(cannonBall_t *bullet, SpaceShip_t *ship){
+    (*bullet).x=(*ship).x <<14;
+    (*bullet).y=((*ship).y-1) <<14;
 
-    (*p).vx =  (-2 * Cos(readDegree()));
-    (*p).vy = (-2 * Sin(readDegree()));
+    (*bullet).vx =  (-2 * Cos(readDegree()));
+    (*bullet).vy = (-2 * Sin(readDegree()));
 }
+/*
+Function: updateBulletPosition
+This function deletes the old symbol for the bullet. Determines the new position by adding the
+velocity. If the bullet is in the legal area it is drawn. The velocity is also affected by gravity.
 
-void updateBallPosition(cannonBall_t *p){
-    deleteSymbol((*p).x>>14, (*p).y>>14);
+bullet: A pointer to the bullet thats position is to be updated.
 
-    (*p).x+=(*p).vx;
-    (*p).y+=(*p).vy;
+return: void.
 
-   gravitate(p);
+*/
+void updateBallPosition(cannonBall_t *bullet){
+    deleteSymbol((*bullet).x>>14, (*bullet).y>>14);
 
-    if (inBallBounds(p)){
-        drawSymbol((*p).x>>14,(*p).y >>14, 169);
+    (*bullet).x+=(*bullet).vx;
+    (*bullet).y+=(*bullet).vy;
+
+    gravitate(bullet);
+
+    if (inBallBounds(bullet)){
+        drawSymbol((*bullet).x>>14,(*bullet).y >>14, 169);
     }
 }
+/* Function: inBulletBounds
+This function determines determines if the bullet is above the ground but still
+within the screen.
+bullet: A pointer to the bullet that must be determined if is in the legal area.
 
-int8_t inBallBounds(cannonBall_t *p){
-    int x = (*p).x >>14;
-    int y = (*p).y >>14;
+return: returns 1 if the bullet is in the legal area, otherwise 0.
+*/
 
-    if (x>=1 && x <=238 && y >= 2 && y < GROUND_HEIGHT-1){
+int8_t inBallBounds(cannonBall_t *bullet){
+    int x = (*bullet).x >>14;
+    int y = (*bullet).y >>14;
+
+    if (x>=1 && x <=(SCREEN_WIDTH-2) && y >= 2 && y < GROUND_HEIGHT-1){
         return 1;
     }
     return 0;
 }
 
-int32_t readDegree(){
+/*Function: readDegree
+This function interprets the input from the potentiometer as a degree between 0 and 180.
+Return: returns an integer between 0 and 180.
+*/
+
+
+int8_t readDegree(){
     return  (readPotRight()*100)/(2266);
 }
-int hitAliens(alien_t aliens[], cannonBall_t cannonballs[], int numAliens, int numBalls){
+
+/*Function: hitAliens
+This function determines if any of the flying bullets have hit an alien, by having the
+same position. A 2*2 box around the center of the alien is checked.
+
+aliens: An array of all the aliens.
+bullet: An array of all the bullets.
+numAliens: the number of flying aliens in the map.
+numBullets: the number of flying bullets in the map
+
+return: An integer representing the number of aliens hit.
+
+*/
+int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int8_t numBullets){
     int i,j;
     int inX,inY;
     int aliensHit = 0;
@@ -44,126 +88,88 @@ int hitAliens(alien_t aliens[], cannonBall_t cannonballs[], int numAliens, int n
     int cannY;
     int aliY;
 
-    for (i=0; i<numBalls; i++){
+    for (i=0; i<numBullets; i++){
         for (j=0; j< numAliens; j++){
-                        cannX = (cannonballs[i].x) >> 14;
+            cannX = (bullets[i].x) >> 14;
             aliX = aliens[j].posX;
-            cannY = (cannonballs[i].y) >> 14;
+            cannY = (bullets[i].y) >> 14;
             aliY = aliens[j].posY;
 
             inX= (cannX >= aliX - 2 && cannX <= aliX + 2);
             inY= (cannY >= aliY - 2 && cannY <= aliY + 2);
-            if (inX && inY){
-                    alienKilled(aliens,j,numAliens);
-                    aliensHit++;
 
-
-            }
+                if (inX && inY){
+                        alienKilled(aliens,j,numAliens);
+                        aliensHit++;
+                }
         }
     }
     return aliensHit;
 }
-void createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship) {
-    cannonBall_t cannonBall;
+/*Function: createBullet
+This function adds intializes a new bullet to the list of active bullets.
 
-    initCannon(&cannonBall, ship);
-    cannonBalls[emptyIndex] = cannonBall;
+bullets: an array of all the active bullets
+emptyIndex: the index where the new bullet is to be placed
+ship: a pointer to the active spaceship, which is used for the intialization
+
+return: void
+*/
+void createBall(cannonBall_t bullets[], int8_t emptyIndex, SpaceShip_t *ship) {
+    cannonBall_t bullet;
+
+    initCannon(&bullet, ship);
+    bullets[emptyIndex] = bullet;
 }
 
-void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls) {
-    int i;
-    deleteSymbol( (((cannonBalls[index]).x) >> 14) , (((cannonBalls[index]).y) >> 14) );
-    for (i = index; i < numBalls - 1; i++) {
-        cannonBalls[i] = cannonBalls[i + 1];
+/*Function: bulletKilled
+This function updates the array of active bullets so the deceased bullet is not included.
+This is either because it hit an alien or flew out of the map.
+
+bullets: An array of all the bullets
+index: where in the array the newly deceased bullet is
+numBullets: the number of active bullets in the map
+
+return: void
+
+*/
+void ballKilled(cannonBall_t bullets[], int8_t index, int8_t numBullets) {
+    int8_t i;
+    deleteSymbol( (((bullets[index]).x) >> 14) , (((bullets[index]).y) >> 14) );
+
+    for (i = index; i < numBullets - 1; i++) {
+        bullets[i] = bullets[i + 1];
     }
 }
+/*Function: gravitate
+This function updates the velocity of the bullet as if it was affected by gravity,
+depending on if it was fired straight up, to the left, or to the right of the spaceship.
+This is determined using vx.
 
-void gravitate(cannonBall_t *p){
-    int32_t tempx = (*p).vx;
-    int grader = 2;
+bullet: A pointer to the bullets thats velocity must be updated.
 
-    if ((*p).vx > 0){
-        (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
-        (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
-    }
-    else if(((*p).vx < 0)){
-    grader *= -1;
-        (*p).vx = FIX14_MULT((*p).vx,Cos(grader))-FIX14_MULT((*p).vy,Sin(grader));
-        (*p).vy = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).vy,Cos(grader));
-    }
-    else{
-        (*p).vy += grader <<6;
-    }
+return: void.
 
-    //(*p).y = FIX14_MULT(tempx,Sin(grader))+FIX14_MULT((*p).y,Cos(grader));
-
-}
-
-
-
-
-/*
-Fra main
-
-
-    uart_init(9600);
-//    runningMenu();
-    setup_pot();
-
-
-    clrscr();
-//    drawLandscape();
-    int a=0;
-    int p=-1;
-    int i;
-    int vinkel =0;
-    cannonBall_t can;
-    SpaceShip_t spac;
-
-
-    initSpaceShip(&spac,20,20,100);
-
-    cannonBall_t ammo[50];
-
-
-
-
-    color(0,7);
-    setup_pot();
-
-    SpaceShip_t skib;
-    SpaceShip_t *ship = &skib;
-
-    initSpaceShip(ship, 5, 5);
-
-
-
-    while(1){
-
-    char dirct = uart_get_char();
-    updateSpaceShip(ship, dirct, inBounds(ship));
-    drill(ship, dirct);
-
-
-    while(1){
-    if (uart_get_count() > 0) {
-
-       if (uart_get_char()=='g'){
-            p++;
-            initCannon(&(ammo[p]), &spac);
-       }
-    }
-    for (i=0; i<=p; i++){
-        if (inBallBounds(&(ammo[p]))){
-            updateBallPosition(&(ammo[p]));
-        }
-        else {
-            deleteSymbol(&(ammo[p]).x,&(ammo[p]).y);
-        }
-    }
-
-    }
 */
 
 
+void gravitate(cannonBall_t *bullet){
+    int32_t tempx = (*bullet).vx;
+    int8_t degree = 2;
 
+    if ((*bullet).vx > 0){
+        //FIX14_MULT is used to multiply numbers that are shifted 14
+        (*bullet).vx = FIX14_MULT((*bullet).vx,Cos(degree)) - FIX14_MULT((*bullet).vy,Sin(degree));
+        (*bullet).vy = FIX14_MULT(tempx,Sin(degree)) + FIX14_MULT((*bullet).vy,Cos(degree));
+    }
+    else if((*bullet).vx < 0){
+        degree *= -1;
+        (*bullet).vx = FIX14_MULT((*bullet).vx,Cos(degree)) - FIX14_MULT((*bullet).vy,Sin(degree));
+        (*bullet).vy = FIX14_MULT(tempx,Sin(degree)) + FIX14_MULT((*bullet).vy,Cos(degree));
+    }
+    else{
+        (*bullet).vy += degree <<6;
+    }
+
+
+}
