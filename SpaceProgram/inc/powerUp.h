@@ -12,6 +12,18 @@
 #include "Cannon.h"
 
 
+/*struct: bullet
+
+    x and y represent the position of the power bullet
+    x: An integer that represents the power bullets x position
+    y: An integer that represents the power bullets y position
+
+    vx and vy represent the velocity of the power bullet
+    vx: an integer that represents the velocity across the x-axis
+    vy: an integer that represents the velocity across the y-axis.
+
+*/
+
 typedef struct {
     int32_t x, y, vx, vy;
 } powerBullet_t;

@@ -2,9 +2,9 @@
 
 /*
 Function: initBullet
-This function intializes the the position of a bullet to the spaceships position.
+This function initializes the the position of a bullet to the spaceships position.
 The velocity is set according to the potentiometer.
-bullet: A pointer to the bullet to be intialized
+bullet: A pointer to the bullet to be initialized
 ship: A pointer to the spaceship that is flying around, thats position
 will be used
 
@@ -12,19 +12,9 @@ return: void
 */
 void initCannon(cannonBall_t *bullet, SpaceShip_t *ship){
     (*bullet).x=(*ship).x <<14;
-    (*bullet).y=((*ship).y-1) <<14;
-
-<<<<<<< HEAD
+    (*bullet).y=((*ship).y-2) <<14;
     (*bullet).vx =  (-2 * Cos(readDegree()));
     (*bullet).vy = (-2 * Sin(readDegree()));
-=======
-void initCannon(cannonBall_t *p, SpaceShip_t *r){
-    (*p).x=(*r).x <<14;
-    (*p).y=((*r).y-2) <<14;
-
-    (*p).vx =  (-2 * Cos(readDegree()));
-    (*p).vy = (-2 * Sin(readDegree()));
->>>>>>> 430e8c32032c5551dd0c290ae6b3aa2edba7acf9
 }
 /*
 Function: updateBulletPosition
@@ -118,7 +108,7 @@ int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int
 /*Function: createBullet
 This function adds intializes a new bullet to the list of active bullets.
 
-bullets: an array of all the active bullets
+bullets: an array of all the bullets
 emptyIndex: the index where the new bullet is to be placed
 ship: a pointer to the active spaceship, which is used for the intialization
 
@@ -175,8 +165,7 @@ void gravitate(cannonBall_t *bullet){
         degree *= -1;
         (*bullet).vx = FIX14_MULT((*bullet).vx,Cos(degree)) - FIX14_MULT((*bullet).vy,Sin(degree));
         (*bullet).vy = FIX14_MULT(tempx,Sin(degree)) + FIX14_MULT((*bullet).vy,Cos(degree));
-    }
-    else{
+    } else {
         (*bullet).vy += degree <<6;
     }
 
