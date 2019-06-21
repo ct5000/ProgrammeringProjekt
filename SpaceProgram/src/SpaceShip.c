@@ -1,6 +1,14 @@
 #include "SpaceShip.h"
 
-
+/*  Function: initSpaceShip.
+* -----------------------------------------------
+* initialize the spaceship
+*
+* *ship; initializes the spaceship.
+* x; The vertical start position of the spaceship.
+* y; The horizontal start position of the spaceship.
+*
+*/
 void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     (*ship).x=x;
     (*ship).y=y;
@@ -12,21 +20,23 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     drawShip(x,y);
 }
 
+/*  Function: updateSpaceShip.
+* -----------------------------------------------
+*   Deletes the spaceship, updates the ships positions inside the map, and draws the spaceship.
+*
+* *ship; a pointer to the spaceships, that updates its position.
+*
+*
+*/
+
 void updateSpaceShip(SpaceShip_t * ship){
     int8_t bounds;
-
     deleteAlien((*ship).x,(*ship).y);
-    //if (getShipFlag3() > 4) {
-        (*ship).x += (*ship).vx;
-       // resetShipFlag3();
-    //}
-    if (getShipFlag2() > 2){
-        (*ship).y += (*ship).vy;
-        resetShipFlag2();
-    }
+    (*ship).x += (*ship).vx;
+    (*ship).y += (*ship).vy;
     bounds = inBounds(ship);
     switch (bounds) {
-        case 1:
+        case 1: //far left
             (*ship).x = 2;
             (*ship).vx = 0;
             break;
@@ -70,44 +80,48 @@ void updateSpaceShip(SpaceShip_t * ship){
             break;
     }
 	drawShip((*ship).x, (*ship).y);
-
-	//gotoxy(1,1);
-
-	//printf("fuel: %3d", (*ship).fuel);
-
 }
 
-void updateVelocity(SpaceShip_t * ship, char dirct, uint8_t *buffer, int place) {
 
-    if (dirct == 'a' && (*ship).fuel>0){
-        if ((*ship).vx > -3) {
+/*  Function: updateVelocity.
+* -----------------------------------------------
+* Updates the direction and speed of the spaceship.
+*
+* *ship; direction of the spaceship.
+* key; The pressed char from the user. 'a', 'd', 'w'.
+* buffer; An array representing the char show on the lcd.
+* place; the area of the spaceship on the map.
+*/
+
+void updateVelocity(SpaceShip_t * ship, char key, uint8_t *buffer, int place) {
+
+    if (key == 'a' && (*ship).fuel>0 && place == 3 && ((*ship).vx > -3)){ //drives left
             (*ship).vx -= 1;
             subfuel(ship, buffer, 1);
-        }
     }
-    else if (dirct == 'd' && (*ship).fuel>0){
-        if ((*ship).vx < 3) {
+    else if (key == 'd' && (*ship).fuel>0 && place == 3 && ((*ship).vx < 3)){ //drives right
             (*ship).vx += 1;
             subfuel(ship, buffer, 1);
-        }
     }
-    else if (dirct == 'w' && (*ship).fuel>0){
-        if ((*ship).vy > -3) {
+    else if (key == 'a' && (*ship).fuel>0 && !(place == 3) && ((*ship).vx > -3)){ //glides left
+            (*ship).vx -= 1;
+    }
+    else if (key == 'd' && (*ship).fuel>0 && !(place == 3) && ((*ship).vx < 3)){ //glides right
+            (*ship).vx += 1;
+    }
+    else if (key == 'w' && (*ship).fuel>0 && ((*ship).vy > -2)){ //flies up
             (*ship).vy -= 1;
             subfuel(ship, buffer, 4);
-        }
     }
-    else if (place == 3){
+    else if (place == 3){   //stands still
         (*ship).vx = 0;
         (*ship).vy =0;
     }
-    else if (getShipFlag1() > 20) {
+    else if (getShipFlag1() > 60) { //falls down
             if ((*ship).vy < 1) {
             (*ship).vy++;
             }
             resetShipFlag1();
-
-
 
         if ((*ship).vx > 0) {
             (*ship).vx--;
@@ -118,56 +132,79 @@ void updateVelocity(SpaceShip_t * ship, char dirct, uint8_t *buffer, int place) 
 	}
 }
 
+/*  Function: inBounds.
+* -----------------------------------------------
+* Checks where the spaceship is on the map.
+*
+* *ship; The ships vertical and horizontal placement.
+* x; The vertical start position of the spaceship.
+* y; The horizontal start position of the spaceship.
+*
+* returns where the ship is:
+* 1; Too far left.
+* 2; Too far right.
+* 3; on ground height.
+* 4; Top.
+* 5; Lower left corner.
+* 6; Lower right corner.
+* 7; Upper left corner.
+* 8; Upper right corner.
+* 0; None of the above.
+*/
 
-int8_t inBounds(SpaceShip_t *p){
-//følgende er de forskellige tilfælde den kan overstige grænserne
 
-    //hver af returværdierne svarer til at frakoble en bestemt tast
-    //Spilleren er i nederste venstre hjørne
-    if ((*p).x <= 1 && (*p).y >= GROUND_HEIGHT - 2) {
-        return 5;
-    }
-    //Spilleren er i nederste højre hjørne
-    else if ((*p).x >= SCREEN_WIDTH - 1 && (*p).y >= GROUND_HEIGHT - 2) {
-        return 6;
-    }
-    //Spilleren er i øverste venstre hjørne
-    else if ((*p).x <= 1 && (*p).y <= 2) {
-        return 7;
-    }
-    //Spilleren er i øverste højre hjørne
-    else if ((*p).x >= SCREEN_WIDTH - 1 && (*p).y <= 2) {
-        return 8;
-    }
-    //skibet er for langt til venstre
-    else if ((*p).x<=1){
+int8_t inBounds(SpaceShip_t *ship){
+    if ((*ship).x<=1){
         return 1;
     }
-    //skibet er for langt til højre
-    else if ((*p).x>=SCREEN_WIDTH - 1){
+    else if ((*ship).x>=SCREEN_WIDTH - 1){
         return 2;
     }
-    //spilleren forsøger at grave sig ned i jorden
-    else if ((*p).y>=GROUND_HEIGHT - 2){
+    else if ((*ship).y>=GROUND_HEIGHT - 2){
         return 3;
     }
-    //spilleren flyver ud af banen
-    else if ((*p).y < 2){
+    else if ((*ship).y < 2){
        return 4;
+    }
+    else if ((*ship).x <= 1 && (*ship).y >= GROUND_HEIGHT - 2) {
+        return 5;
+    }
+    else if ((*ship).x >= SCREEN_WIDTH - 1 && (*ship).y >= GROUND_HEIGHT - 2) {
+        return 6;
+    }
+    else if ((*ship).x <= 1 && (*ship).y <= 2) {
+        return 7;
+    }
+    else if ((*ship).x >= SCREEN_WIDTH - 1 && (*ship).y <= 2) {
+        return 8;
     }
     return 0;
 }
 
-//Skibets drill til at få mineraler
-int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer){
+/*  Function: drill.
+* -----------------------------------------------
+* Checks if there is a mineral under the ship, drills down from the ship, either to the placement of a mineral or top screen height.
+* Updates the fuel and powerUp's of the spaceship, Prints it on the lcd.
+*
+* *ship; placement of the ship, fuel level and powerUps.
+* key; The pressed char from the user. 'e', 'E'.
+* buffer; An array representing the char show on the lcd.
+* place; the area of the spaceship on the map.
+* nuMinerals; the number on minerals on the map.
+*
+* returns:
+* 1-i; The drilled mineral.
+* 0; If no mineral is drilled.
+*/
+int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer){
 	int i;
 	int j;
 
-	if ((dirct == 'e' || dirct == 'E')  && place == 3){ //Hvis der trykkes 'e' og skibet står på jorden,
+	if ((key == 'e' || key == 'E')  && place == 3){ //user presses e and the ship is on the ground.
 
-            i = checkMinerals(ship, minerals, numMinerals); //mineralets placering
+            i = checkMinerals(ship, minerals, numMinerals);
 
-            if (i){ //Hvis skibet er over et mineral
+            if (i){ //The ship is above a mineral
 
                 (*ship).fuel += (*minerals).fuel;
                 (*ship).powerUp += (*minerals).powerUp;
@@ -181,12 +218,12 @@ int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[],
                     printf("%c",219);
                 }
 
-                addfuel(ship,buffer); //printer fuel på lcd.
+                addfuel(ship,buffer);
                 addPowerBullet((*ship).powerUp,buffer);
                 return i - 1;
 
             }
-            else { //Hvis skibet ikke er over et mineral
+            else { //The ship is not above a mineral.
 
                 for (i = 0; i <= SCREEN_HEIGHT; i++ ){
                     gotoxy((*ship).x, GROUND_HEIGHT+i);
@@ -201,37 +238,52 @@ int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[],
 	return 0;
 }
 
-//lægger fuel til fuelbaren
+/*  Function: addFuel.
+* -----------------------------------------------
+* Writes the fuel bar on the lcd.
+*
+* *ship; fuel level.
+* buffer; An array representing the char show on the lcd.
+*/
 void addfuel(SpaceShip_t * ship, uint8_t *buffer){
-    int i;
-
-        gotoxy(1,1);
+    int8_t i;
         for(i=0; i < (*ship).fuel; i++){
-
-        lcd_write_bar("E", buffer, 0,25+i);
-
-        lcd_push_buffer(buffer);
-
-       // lcd_push_buffer(buffer);
+            lcd_write_bar("E", buffer, 0,25+i);
+            lcd_push_buffer(buffer);
         }
 }
 
-//Trækker fuel fra fuelbaren
+/*  Function: subFuel.
+* -----------------------------------------------
+* deletes the fuel bar on the lcd.
+*
+* *ship; fuel level.
+* buffer; An array representing the char show on the lcd.
+* fuelsub; The amount of used fuel.
+*/
 void subfuel(SpaceShip_t * ship, uint8_t *buffer, int fuelsub){
-        int i;
-
+        int8_t i;
         for (i=0; i < fuelsub; i++){
             (*ship).fuel--;
             lcd_write_bar(" ", buffer, 0,25+(*ship).fuel);
             lcd_push_buffer(buffer);
-
-
         }
 }
 
-// Finder det mineral skibet står over
+/*  Function: checksMineral.
+* -----------------------------------------------
+* Checks if there is an mineral under the spaceship.
+*
+* *ship; ships horizontal placement.
+* minerals; minerals horizontal placement.
+* numMinerals; number of minerals.
+*
+* returns:
+* i; Which mineral the spaceship is above.
+* 0; If there is not any minerals under the spaceship.
+*/
 int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
-    int i;
+    int8_t i;
         for (i=1; i<numMinerals; i++){
 
             if ((*ship).x == (minerals[i - 1]).x){
@@ -241,6 +293,15 @@ int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
     return 0;
 }
 
+/*  Function: MineralKilled.
+* -----------------------------------------------
+* Deletes a used mineral.
+*
+* minerals[]; the array of minerals.
+* index; Which mineral is used.
+* numMinerals; number of minerals.
+*
+*/
 void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals) {
     int i;
     for (i = index; i < numMinerals - 1; i++) {
@@ -248,8 +309,14 @@ void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals) {
     }
 }
 
-
-//Lægger liv til livbaren
+/*  Function: addLives.
+* -----------------------------------------------
+* Writes a heart for every for the ships lives.
+*
+* *ship; ships lives.
+* buffer; An array representing the char show on the lcd.
+*
+*/
 void addLives(SpaceShip_t * ship, uint8_t *buffer){
     int i;
 
@@ -261,26 +328,47 @@ void addLives(SpaceShip_t * ship, uint8_t *buffer){
         }
 }
 
-//Trækker live fra livbaren
+/*  Function: subLives.
+* -----------------------------------------------
+* Subtracts a life form the spaceship and the lcd.
+*
+* *ship; ships lives.
+* buffer; An array representing the char show on the lcd.
+*
+* return; void.
+*/
 void subLives(SpaceShip_t * ship, uint8_t *buffer){
         (*ship).lives--;
-        lcd_write_string(" ", buffer, 1,30+(((*ship).lives*5)*2));
-        lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));
-
+        lcd_write_string("  ", buffer, 1,30+(((*ship).lives*5)*2));
+      //  lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));
         lcd_push_buffer(buffer);
 }
 
+/*  Function: endGameCondition.
+* -----------------------------------------------
+* Check if the game is over or won.
+*
+* *ship; a pointer to the ships fuel, lives a vertical position.
+* minerals[]; an array of the minerals.
+* score; The score.
+*
+* return:
+* 1; The ship made it out of the map.
+* 2; The fuel is 0, and there are no minerals under the ship.
+* 3; The ship has no more lives.
+* 0; none of the above.
+*/
 int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score){
-    if ((*ship).fuel <= 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)){
-            return 2;
-    }
-    else if ( (*ship).lives == 0){
-            return 3;
-    }
-    else if ( (*ship).y < 3){
+    if ((*ship).y < 3){
             return 1;
     }
-    else if ( score == 0){
+    else if ((*ship).fuel <= 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)){
+            return 2;
+    }
+    else if ((*ship).lives == 0){
+            return 3;
+    }
+    else if (score == 0){
             return 4;
     }
     return 0;

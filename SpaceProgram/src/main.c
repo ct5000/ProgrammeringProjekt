@@ -114,7 +114,7 @@ int main(void){
 
                 drawMinerals(minerals, numMinerals);
 
-                initSpaceShip(ship, 115, 54, 30);
+                initSpaceShip(ship, 115, 54, 100);
                 numAliens = 0;
 
                 addfuel(ship,buffer);
@@ -175,7 +175,7 @@ int main(void){
                     }
 
 
-                    if ( (( ((*ship).vy != 0) || ((*ship).vx != 0) ) || pos == 0) && getShipFlag3() > 4){
+                    if ( (( ((*ship).vy != 0) || ((*ship).vx != 0) ) || pos == 0) && getShipFlag3() > 3){
 
                             updateSpaceShip(ship);
                             if (collide(aliens, ship, numAliens, buffer)) {

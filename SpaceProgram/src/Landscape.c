@@ -1,7 +1,13 @@
 # include "Landscape.h"
 
 
-//dimensions of screen are 540*960
+/*  Function: drawlandscape.
+* -----------------------------------------------
+* Draws the landscape at ground height and all the way down to screen height.
+*
+* GROUND_HEIGHT; ground level.
+*
+*/
 void drawLandscape(){
     int i;
     gotoxy(0,GROUND_HEIGHT);
@@ -9,31 +15,58 @@ void drawLandscape(){
     clrscr();
     bgcolor(2+rand()%7);
     fgcolor(2+rand()%15);
-    for (i=0; i<SCREEN_WIDTH*12; i++){
+    for (i=0; i<SCREEN_WIDTH*(SCREEN_HEIGHT-GROUND_HEIGHT); i++){
         printf("%c",176);
     }
 
 }
 
 
+
+/*  Function: randomNumber.
+* -----------------------------------------------
+* Makes a random number between two numbers
+*
+* mini; minimum random number.
+* maxi; max random number.
+*
+* returns: int random number.
+*/
 int randomNumber(int32_t mini, int32_t maxi){
     return (rand()%(maxi-mini+1)+mini);
 }
 
-void initMineral(mineral_t *p){
+/*  Function: initMineral.
+* -----------------------------------------------
+* Creates minerals at random positions.
+*
+* mineral; initializes the minerals.
+*
+* returns; void.
+*/
+void initMineral(mineral_t *mineral){
     int num;
-    (*p).x=randomNumber(1, 240);
-    (*p).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-10) ;
-    (*p).fuel=randomNumber(5, 12);
+    (*mineral).x=randomNumber(1, 240);
+    (*mineral).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-10) ;
+    (*mineral).fuel=randomNumber(5, 12);
     num = rand()%2;
     if (num == 1) {
-            (*p).powerUp = 1;
+            (*mineral).powerUp = 1;
     }
     else {
-            (*p).powerUp = 0;
+            (*mineral).powerUp = 0;
     }
 }
 
+/*  Function: drawMinerals.
+* -----------------------------------------------
+* Draws the minerals at their position.
+*
+* minerals[]; arrat of the minerals positions.
+* numMinerals; the amount of minerals.
+*
+* returns; void.
+*/
 void drawMinerals(mineral_t minerals[], int numMinerals){
     int i;
 
@@ -45,6 +78,15 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
     }
 }
 
+/*  Function: initMineral.
+* -----------------------------------------------
+* Creates minerals in the array.
+*
+* minerals[]; minerals array.
+* emptyIndex;
+*
+* returns; 1.
+*/
 int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
     mineral_t mineral;
 
@@ -53,6 +95,12 @@ int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
             return 1;
 }
 
+/*  Function: groundDraw.
+* -----------------------------------------------
+* Draws random colors on the ground.
+*
+* returns; void.
+*/
 void groundDraw(){
    int i;
    int color = rand()%17;
