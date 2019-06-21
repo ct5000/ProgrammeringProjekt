@@ -1,19 +1,5 @@
 #include "mbed.h"
 
-
-/*  blue - D8 - CN5 - 1
-    green - D9 - CN5 - 2
-    red - D5 - CN9 - 6
-
-    right - A5 - CN8 - 6
-    up - A2 - CN8 - 3
-    mid - d4 - CN9 - 5
-    left - A4 - CN8 - 5
-    down - A3 - CN8 - 4
-
-    reset values page. 170.
-*/
-
     int time =0;
     int alienFlag =0;
     int bulletFlag = 0;
@@ -22,7 +8,15 @@
     int shipFlag3 = 0;
     int spawnRateFlag =0;
 
-void LED_setup(){
+/*
+ * Function: setupLED
+ * --------------------------
+ * Setup for the LED where all it's pins are set to high for no emitting light.
+ *
+ *
+ * returns: void
+ */
+void setupLED(){
 
             RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
             RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port B
@@ -163,6 +157,16 @@ void showDirection(int8_t old, int8_t next){
     }
 }
 
+/*
+ * Function: writeLED
+ * --------------------------
+ * Sets the color of the LED. 0: Off, 1: Red, 2: Green, 3: Yellow, 4: Blue
+ * 5: Purple, 6: Cyan, 7: White
+ *
+ * ledcolor: a number for the wished color
+ *
+ * returns: void
+ */
 void writeLED(int8_t ledcolor){
 
     RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
@@ -173,7 +177,7 @@ void writeLED(int8_t ledcolor){
     switch(ledcolor){
         case 0:
         // off
-            GPIOA->ODR |= (0x0001 << 9);
+            GPIOA->ODR |= (0x0001 << 9); //Set pin PA9 to high
             GPIOC->ODR |= (0x0001 << 7); //Set pin PC7 to high
             GPIOB->ODR |= (0x0001 << 4); //Set pin PB4 to high
             break;
@@ -182,46 +186,49 @@ void writeLED(int8_t ledcolor){
             //red
             GPIOA->ODR |= (0x0001 << 9); //Set pin PA9 to high
             GPIOC->ODR |= (0x0001 << 7); //Set pin PC7 to high
-            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to high
+            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to low
             break;
 
         case 2:
             //green
-            GPIOA->ODR |= (0x0001 << 9);
-            GPIOC->ODR &= ~(0x0001 << 7);
+            GPIOA->ODR |= (0x0001 << 9); //Set pin PA9 to high
+            GPIOC->ODR &= ~(0x0001 << 7); //Set pin PC7 to low
             GPIOB->ODR |= (0x0001 << 4); //Set pin PB4 to high
             break;
 
-            case 3:
+        case 3:
             //yellow
-            GPIOA->ODR |= (0x0001 << 9);
-            GPIOC->ODR &= ~(0x0001 << 7);
-            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to high
+            GPIOA->ODR |= (0x0001 << 9); //Set pin PA9 to high
+            GPIOC->ODR &= ~(0x0001 << 7); //Set pin PC7 to low
+            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to low
             break;
 
          case 4:
              //blue
-            GPIOA->ODR &= ~(0x0001 << 9);
-            GPIOC->ODR |= (0x0001 << 7);
+            GPIOA->ODR &= ~(0x0001 << 9); //Set pin PA9 to low
+            GPIOC->ODR |= (0x0001 << 7); //Set pin PC7 to high
             GPIOB->ODR |= (0x0001 << 4); //Set pin PB4 to high
             break;
 
          case 5:
              //purple
-            GPIOA->ODR &= ~(0x0001 << 9);
-            GPIOC->ODR |= (0x0001 << 7);
-            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to high
+            GPIOA->ODR &= ~(0x0001 << 9); //Set pin PA9 to low
+            GPIOC->ODR |= (0x0001 << 7); //Set pin PC7 to high
+            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to low
             break;
 
         case 6:
-            GPIOA->ODR &= ~(0x0001 << 9);
-            GPIOC->ODR &= ~(0x0001 << 7);
-            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to high
+             //cyan
+            GPIOA->ODR &= ~(0x0001 << 9); //Set pin PA9 to low
+            GPIOC->ODR &= ~(0x0001 << 7); //Set pin PC7 to low
+            GPIOB->ODR |= (0x0001 << 4); //Set pin PB4 to high
             break;
 
         case 7:
             //white
-
+            GPIOA->ODR &= ~(0x0001 << 9); //Set pin PA9 to low
+            GPIOC->ODR &= ~(0x0001 << 7); //Set pin PC7 to low
+            GPIOB->ODR &= ~(0x0001 << 4); //Set pin PB4 to low
             break;
         }
 }
@@ -253,7 +260,15 @@ void showColor(int8_t joystick){
             }
 }
 
-void set_timer(){
+/*
+ * Function: setTimer
+ * --------------------------
+ * Setup for the timer but without starting it.
+ *
+ *
+ * returns: void
+ */
+void setTimer(){
 
 
      RCC->APB1ENR |= RCC_APB1Periph_TIM2; // Enable clock line to timer 2;
@@ -270,7 +285,15 @@ void set_timer(){
 
 }
 
-void start_stop(){
+/*
+ * Function: startStop
+ * --------------------------
+ * Starts the timer.
+ *
+ *
+ * returns: void
+ */
+void startStop(){
     if (TIM2->CR1 & 0x01){
         TIM2->CR1 = 0x00; //starts timer
     }
@@ -279,9 +302,17 @@ void start_stop(){
     }
 }
 
+/*
+ * Function: resetTime
+ * --------------------------
+ * Resets the time time to zero and stops the timer
+ *
+ *
+ * returns: void
+ */
 void resetTime(){
     if (TIM2->CR1 & 0x01){
-        TIM2->CR1 = 0x00; //starts timer
+        TIM2->CR1 = 0x00; //stops timer
     }
     time = 0;
 }
@@ -290,6 +321,14 @@ int split_time1(){
     return time;
 }
 
+/*
+ * Function: TIM2_IRQHandler
+ * --------------------------
+ * Interrupt function that is called every time the timer hits a certain count. It Updates the time and the flags
+ *
+ *
+ * returns: void
+ */
 void TIM2_IRQHandler(void) {
     alienFlag++;
     bulletFlag++;
@@ -301,73 +340,207 @@ void TIM2_IRQHandler(void) {
     TIM2->SR &= ~0x0001; // Clear interrupt bit
  }
 
+/*
+ * Function: getAlienFlag
+ * --------------------------
+ * Returns the value of alienFlag
+ *
+ *
+ * returns: void
+ */
 int getAlienFlag() {
     return alienFlag;
  }
 
+/*
+ * Function: resetAlienFlag
+ * --------------------------
+ * Resets the value of alienFlag
+ *
+ *
+ * returns: void
+ */
 void resetAlienFlag() {
     alienFlag = 0;
 }
 
+/*
+ * Function: getShipFlag1
+ * --------------------------
+ * Returns the value of shipFlag1
+ *
+ *
+ * returns: void
+ */
 int getShipFlag1() {
     return shipFlag1;
  }
 
+/*
+ * Function: resetShipFlag1
+ * --------------------------
+ * Resets the value of shipFlag1
+ *
+ *
+ * returns: void
+ */
 void resetShipFlag1() {
     shipFlag1 = 0;
 }
 
+/*
+ * Function: getShipFlag2
+ * --------------------------
+ * Returns the value of shipFlag2
+ *
+ *
+ * returns: void
+ */
 int getShipFlag2() {
     return shipFlag2;
  }
 
+/*
+ * Function: resetShipFlag2
+ * --------------------------
+ * Resets the value of shipFlag2
+ *
+ *
+ * returns: void
+ */
 void resetShipFlag2() {
     shipFlag2 = 0;
 }
 
+/*
+ * Function: getShipFlag3
+ * --------------------------
+ * Returns the value of shipFlag3
+ *
+ *
+ * returns: void
+ */
 int getShipFlag3() {
     return shipFlag3;
  }
 
+/*
+ * Function: resetShipFlag3
+ * --------------------------
+ * Resets the value of shipFlag3
+ *
+ *
+ * returns: void
+ */
 void resetShipFlag3() {
     shipFlag3 = 0;
 }
 
+/*
+ * Function: getSpawnRateFlag
+ * --------------------------
+ * Returns the value of spawnRateFlag
+ *
+ *
+ * returns: void
+ */
 int getSpawnRateFlag() {
     return spawnRateFlag;
  }
 
+/*
+ * Function: resetSpawnRateFlag
+ * --------------------------
+ * Resets the value of SpawnRateFlag
+ *
+ *
+ * returns: void
+ */
 void resetSpawnRateFlag() {
     spawnRateFlag = 0;
 }
 
-
+/*
+ * Function: getBulletFlag
+ * --------------------------
+ * Returns the value of bulletFlag
+ *
+ *
+ * returns: void
+ */
 int getBulletFlag() {
     return bulletFlag;
  }
 
+/*
+ * Function: resetBulletFlag
+ * --------------------------
+ * Resets the value of BulletFlag1
+ *
+ *
+ * returns: void
+ */
 void resetBulletFlag() {
     bulletFlag = 0;
 }
 
+/*
+ * Function: getTime
+ * --------------------------
+ * Returns the value of time
+ *
+ *
+ * returns: void
+ */
 int getTime(){
     return(time%100);
 }
 
+/*
+ * Function: getSec
+ * --------------------------
+ * Returns the value of time in seconds
+ *
+ *
+ * returns: void
+ */
 int getSec(){
     return((time/100)%60);
 }
 
+/*
+ * Function: getSec
+ * --------------------------
+ * Returns the value of time in minutes
+ *
+ *
+ * returns: void
+ */
 int getMin(){
     return((time/(100*60)%60));
 }
 
+/*
+ * Function: getSec
+ * --------------------------
+ * Returns the value of time in hours
+ *
+ *
+ * returns: void
+ */
 int gethour(){
     return(time/(100*60*60));
 }
 
-
-void setup_pot(){
+/*
+ * Function: setupPot
+ * --------------------------
+ * Setups the potentiometers so it is possible to read values from them.
+ *
+ *
+ * returns: void
+ */
+void setupPot(){
     RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
     // Set pin PA4 to input
     GPIOA->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
@@ -401,6 +574,14 @@ void setup_pot(){
 
 }
 
+/*
+ * Function: readPotLeft
+ * --------------------------
+ * Returns the value of the left potentiometer
+ *
+ *
+ * returns: void
+ */
 int16_t readPotLeft(){
 
     ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
@@ -414,6 +595,14 @@ int16_t readPotLeft(){
 
 }
 
+/*
+ * Function: readPotRight
+ * --------------------------
+ * Returns the value of the Right potentiometer
+ *
+ *
+ * returns: void
+ */
 int16_t readPotRight(){
 
     ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_1Cycles5);
@@ -426,6 +615,7 @@ int16_t readPotRight(){
     return y;
 
 }
+
 
 void measPot(int32_t read, char *s){
     //char num[7];
