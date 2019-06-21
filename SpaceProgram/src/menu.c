@@ -1,8 +1,15 @@
 #include "menu.h"
 
 /*
+ * Function: bossKey
+ * --------------------------
+ * Draws the menu of the game in the middle with a little instruction for using it
+ *
+ * returns: void
+ */
+
 Draws the menu of the game in the middle. It takes no parameters and has no return value.
-*/
+
 void drawMenu() {
     clrscr();
     gotoxy(70, 3);
@@ -36,6 +43,16 @@ void drawMenu() {
 
 }
 
+/*
+ * Function: updateArrow
+ * --------------------------
+ * Updates the menu arrow according to the user in put and draws it in the right place
+ *
+ * key: the key stroke from the user
+ * menu: the current menu position
+ *
+ * returns: the number for the menu it is on
+ */
 int8_t updateArrow(char key, int8_t menu) {
     if (key == 's') {
             if (menu == 1) {
@@ -58,6 +75,13 @@ int8_t updateArrow(char key, int8_t menu) {
     return menu;
 }
 
+/*
+ * Function: drawHelp
+ * --------------------------
+ * Draws the help menu for the game
+ *
+ * returns: void
+ */
 void drawHelp() {
     clrscr();
     gotoxy(70, 15);
@@ -74,6 +98,13 @@ void drawHelp() {
     printf("Press ENTER to return to the menu");
 }
 
+/*
+ * Function: runningMenu
+ * --------------------------
+ * Runs the menu and updates the graphics according to the user inputs.
+ *
+ * returns: void
+ */
 void runningMenu() {
     int menuArrow= 1;
     int menu = 1;
@@ -81,27 +112,33 @@ void runningMenu() {
     drawMenu();
     //Keeps the player in the menu until it hits enter at START
     while(menu) {
+        //reads user input if any
         if (uart_get_count() > 0) {
                 keyStroke = uart_get_char();
                 uart_clear();
             }
+        //enters bossKey if b
         if (keyStroke == 'b') {
                 bossKey();
                 runningMenu();
                 break;
         }
+        //checks if in help menu and the user wants to return
         else if (menu == 2 && keyStroke == 0x0D) {
                 menu = 1;
                 drawMenu();
                 menuArrow = 1;
         }
+        //checks if in main menu
         else if (menu == 1) {
             menuArrow = updateArrow(keyStroke, menuArrow);
             if (keyStroke == 0x0D) {
+                //checks if enter should get in to help menu
                 if (menuArrow == 2) {
                     drawHelp();
                     menu = 2;
                 }
+                //check if help should end the menu
                 else {
                     menu = 0;
                 }
@@ -111,6 +148,17 @@ void runningMenu() {
     }
 }
 
+/*
+ * Function: gameOver
+ * --------------------------
+ * Draws the game over menu with message. It stays there until the user press enter
+ *
+ * condition: The condition which terminated the game
+ * score: the players score
+ * level: the level the player was on
+ *
+ * returns: void
+ */
 void gameOver(int8_t condition, int score, int level) {
     color(7,0);
     char user;
@@ -127,9 +175,6 @@ void gameOver(int8_t condition, int score, int level) {
     writeR(COLUMNSIZE);
     gotoxy(70, 15);
     switch (condition) {
-    case 1: //The player left the planet
-        printf("Congratulations you survived the aliens attacks and escaped the planet! YOU WON");
-        break;
     case 2: //The player ran out of fuel
         printf("You ran out of fuel and can no longer get off the planet. The aliens will be here soon... YOU LOST");
         break;
@@ -155,10 +200,12 @@ void gameOver(int8_t condition, int score, int level) {
                 user = uart_get_char();
                 uart_clear();
             }
+            //Stop the game over screen if user press enter
             if (user == 0x0D) {
                     uart_clear();
                     break;
             }
+            //Enters bossKey function if the user press b
             else if (user == 'b') {
                     bossKey();
                     gameOver(condition, score, level);
@@ -169,6 +216,16 @@ void gameOver(int8_t condition, int score, int level) {
 
 }
 
+/*
+ * Function: nextLevel
+ * --------------------------
+ * Draws the next level menu with message. It stays there until the user press enter
+ *
+ * score: the players score
+ * level: the level the player was on
+ *
+ * returns: void
+ */
 void nextLevel(int score, int level){
     color(7,0);
     char user;
@@ -200,10 +257,12 @@ void nextLevel(int score, int level){
                 user = uart_get_char();
                 uart_clear();
             }
+            //Ends the while loop if enter
             if (user == 0x0D) {
                     uart_clear();
                     break;
             }
+            //Enter bossKey function if user press b
             else if (user == 'b') {
                     bossKey();
                     nextLevel( score, level);

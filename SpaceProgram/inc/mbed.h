@@ -13,7 +13,7 @@ void showDirection(int8_t old, int8_t next);
 void writeLED(int8_t ledcolor);
 void showColor(int8_t joystick);
 
-void set_timer();
+void setTimer();
 void TIM2_IRQHandler(void);
 
 int getTime();
@@ -21,7 +21,7 @@ int getSec();
 int getMin();
 
 void resetTime();
-void start_stop();
+void startStop();
 
 int split_time1();
 
@@ -38,13 +38,13 @@ void resetShipFlag3();
 int getSpawnRateFlag();
 void resetSpawnRateFlag();
 
-void setup_pot();
+void setupPot();
 int16_t readPotLeft();
 int16_t readPotRight();
 void measPot(int32_t read, char *s);
 
 
-void LED_setup();
+void setupLED();
 void joystick_setup();
 #endif
 
