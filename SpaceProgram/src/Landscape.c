@@ -6,7 +6,6 @@ void drawLandscape(){
     int i;
     gotoxy(0,GROUND_HEIGHT);
 
-    bgcolor(6);
     clrscr();
     bgcolor(2+rand()%7);
     fgcolor(2+rand()%15);
@@ -24,10 +23,10 @@ int randomNumber(int32_t mini, int32_t maxi){
 void initMineral(mineral_t *p){
     int num;
     (*p).x=randomNumber(1, 240);
-    (*p).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-1) ;
-    (*p).fuel=randomNumber(10, 20);
-    num = randomNumber(0, 3);
-    if (num == 2) {
+    (*p).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-10) ;
+    (*p).fuel=randomNumber(5, 12);
+    num = rand()%2;
+    if (num == 1) {
             (*p).powerUp = 1;
     }
     else {
@@ -42,7 +41,7 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
         fgcolor(1);
         gotoxy((minerals[i]).x,(minerals[i]).y);
         printf("%c",219); //i+49 to show numbers
-        fgcolor(0);
+        fgcolor(7);
     }
 }
 
@@ -57,8 +56,8 @@ int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
 void groundDraw(){
    int i;
    int color = rand()%17;
-   if (color == 1 || color == 6){
-    color++;
+   if (color == 1 || color == 0){
+    color+=2;
    }
 
    fgcolor(color);
@@ -117,8 +116,8 @@ void groundDraw(){
             printf("%c",176);
         }
     }
-    bgcolor(6);
-    fgcolor(0);
+    bgcolor(0);
+    fgcolor(7);
 }
 
 

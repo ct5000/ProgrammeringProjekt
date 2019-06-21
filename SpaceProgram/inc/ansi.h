@@ -10,6 +10,7 @@
 void fgcolor(uint8_t foreground);
 void bgcolor(uint8_t background);
 void color(uint8_t foreground, uint8_t background);
+void resetbgcolor();
 
 void clrscr();
 void clreol();
@@ -29,21 +30,36 @@ void moveCursorUp(int i);
 void moveCursorDown(int i);
 
 void writeA(int8_t sizeColumn);
+
+void writeC(int8_t sizeColumn);
+
+void writeE(int8_t sizeColumn);
+
+void writeG(int8_t sizeColumn);
+void writeH(int8_t sizeColumn);
+
+
+
 void writeP(int8_t sizeColumn);
 void writeS(int8_t sizeColumn);
-void writeC(int8_t sizeColumn);
-void writeE(int8_t sizeColumn);
-void writeR(int8_t sizeColumn);
-void writeQ(int8_t sizeColumn);
-void writeBlank(int8_t sizeColumn);
-void writeU(int8_t sizeColumn);
-void writeT(int8_t sizeColumn);
-void writeH(int8_t sizeColumn);
+
 void writeL(int8_t sizeColumn);
-void writeO(int8_t sizeColumn);
-void writeG(int8_t sizeColumn);
+
 void writeM(int8_t sizeColumn);
+void writeN(int8_t sizeColumn);
+void writeO(int8_t sizeColumn);
+
+void writeQ(int8_t sizeColumn);
+void writeR(int8_t sizeColumn);
+
+void writeT(int8_t sizeColumn);
+void writeU(int8_t sizeColumn);
 void writeV(int8_t sizeColumn);
+
+void writeX(int8_t sizeColumn);
+
+void writeBlank(int8_t sizeColumn);
+
 void deleteLetter(int8_t sizeColumn);
 
 void drawAlien(int x, int y);

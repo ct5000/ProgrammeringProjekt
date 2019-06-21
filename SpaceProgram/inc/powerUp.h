@@ -32,6 +32,10 @@ void createPowerBullet(powerBullet_t powerBullets[], int8_t emptyIndex, SpaceShi
 
 void gravitatePowerBullet(powerBullet_t *p);
 
+void addPowerBullet(int numPowerBullets, uint8_t *buffer);
+
+void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer);
+
 
 #endif
 

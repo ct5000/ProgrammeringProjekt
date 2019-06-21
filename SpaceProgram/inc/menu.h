@@ -6,12 +6,14 @@
 //#include "stm32f30x_rcc.h"
 #include "ansi.h"
 #include "30010_io.h"
+#include "bossKey.h"
 
 void drawMenu();
 void drawHelp();
 int8_t updateArrow(char key, int8_t menu);
 void runningMenu();
-void gameOver(int8_t condition, int score);
+void gameOver(int8_t condition, int score, int level);
+void nextLevel( int score, int level);
 
 
 #endif

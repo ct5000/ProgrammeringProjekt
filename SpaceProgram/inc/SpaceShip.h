@@ -21,7 +21,7 @@ typedef struct {
     int32_t x, y;
     int8_t vx, vy;
     int8_t lives;
-    uint8_t fuel;
+    int16_t fuel;
     int8_t powerUp;
 } SpaceShip_t;
 
@@ -35,12 +35,12 @@ int8_t inBounds(SpaceShip_t *p);
 int checkMinerals( SpaceShip_t *p, mineral_t minerals[],int numMinerals);
 
 void addfuel(SpaceShip_t * ship, uint8_t *buffer);
-void subfuel(SpaceShip_t * ship, uint8_t *buffer);
+void subfuel(SpaceShip_t * ship, uint8_t *buffer, int fuelSub);
 
 void addLives(SpaceShip_t * ship, uint8_t *buffer);
 void subLives(SpaceShip_t * ship, uint8_t *buffer);
 
-int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals);
+int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score);
 
 
 #endif

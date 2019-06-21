@@ -14,8 +14,17 @@ void initCannon(cannonBall_t *bullet, SpaceShip_t *ship){
     (*bullet).x=(*ship).x <<14;
     (*bullet).y=((*ship).y-1) <<14;
 
+<<<<<<< HEAD
     (*bullet).vx =  (-2 * Cos(readDegree()));
     (*bullet).vy = (-2 * Sin(readDegree()));
+=======
+void initCannon(cannonBall_t *p, SpaceShip_t *r){
+    (*p).x=(*r).x <<14;
+    (*p).y=((*r).y-2) <<14;
+
+    (*p).vx =  (-2 * Cos(readDegree()));
+    (*p).vy = (-2 * Sin(readDegree()));
+>>>>>>> 430e8c32032c5551dd0c290ae6b3aa2edba7acf9
 }
 /*
 Function: updateBulletPosition
