@@ -47,6 +47,12 @@ int main(void){
     mineral_t minerals[50];
     int8_t numMinerals = 0;
     int8_t mineralIndex;
+
+    boxes_t boxes[10];
+    int8_t numBoxes = 0;
+    //int8_t boxIndex;
+
+
     int8_t level=1;
 
     cannonBall_t cannonBalls[50];
@@ -59,7 +65,6 @@ int main(void){
     int on = 0;
     int endgame = 0;
     int where = 1;
-    int oldWhere = 1;
     char dirct;
 
     int spawnRate;
@@ -79,17 +84,17 @@ int main(void){
 
     uart_init(960000);
 
-    set_timer();
-    start_stop();
+    setTimer();
+    startStop();
     lcd_init();
     memset(buffer, 0x00, 512);
     lcd_push_buffer(buffer);
-    lcd_write_string("FUEL:",buffer,0,0);
-    lcd_write_string("LIVES:",buffer,1,0);
-    lcd_write_string("POW B:",buffer,2,0);
+    lcdWriteString("FUEL:",buffer,0,0);
+    lcdWriteString("LIVES:",buffer,1,0);
+    lcdWriteString("POW B:",buffer,2,0);
     lcd_push_buffer(buffer);
-    LED_setup();
-    setup_pot();
+    setupLED();
+    setupPot();
 
     color(7,0);
 
@@ -100,7 +105,7 @@ int main(void){
                 runningMenu();
                 srand(getTime());
                 resetTime();
-                start_stop();
+                startStop();
 
                 clrscr();
 
@@ -114,7 +119,13 @@ int main(void){
 
                 drawMinerals(minerals, numMinerals);
 
-                initSpaceShip(ship, 115, 54, 100);
+                for (numBoxes = 0; numBoxes < 10; numBoxes++) {
+                        createBoxes(boxes, numBoxes);
+                }
+
+                drawBoxes(boxes, numBoxes);
+
+                initSpaceShip(ship, 115, 40, 40);
                 numAliens = 0;
 
                 addfuel(ship,buffer);
@@ -140,7 +151,7 @@ int main(void){
                             }
                         }
                         updateAliens(aliens,ship ,numAliens, buffer);
-                        if ((*ship).fuel >= 40){
+                        if ((*ship).fuel >= 50){
                             if (on) {
                                     writeLED(0);
                                     on = 0;
@@ -164,9 +175,8 @@ int main(void){
                     }
                     if (dirct == 'b') {
                             where = 4;
-                            //oldWhere = 2;
                     }
-                    pos = inBounds(ship);
+                    pos = inBounds(ship, boxes);
                     updateVelocity(ship, dirct, buffer, pos );
                     mineralIndex = drill(ship, dirct,pos, minerals, numMinerals, buffer);
                     if (mineralIndex) {
@@ -177,7 +187,7 @@ int main(void){
 
                     if ( (( ((*ship).vy != 0) || ((*ship).vx != 0) ) || pos == 0) && getShipFlag3() > 3){
 
-                            updateSpaceShip(ship);
+                            updateSpaceShip(ship, boxes);
                             if (collide(aliens, ship, numAliens, buffer)) {
                                     numAliens--;
                             }
@@ -192,7 +202,7 @@ int main(void){
                     else if (dirct == 'g' && (*ship).powerUp > 0 && numPowerBullets < 2) {
                             createPowerBullet(powerBullets, numPowerBullets, ship);
                             numPowerBullets++;
-                            subPowerBullet(ship,buffer);
+                            subPowerBullet(ship, buffer, 1);
                     }
                     if (getBulletFlag() >= 8) {
                             score--;
@@ -232,11 +242,6 @@ int main(void){
                                 if((!inPowerBulletBounds(&(powerBullets[i])))) {
                                        powerBulletKilled(powerBullets, i, numPowerBullets);
                                        numPowerBullets--;
-
-
-                                gotoxy(1,1);
-                                printf("%3d", numPowerBullets);
-
                                 }
                         }
 
@@ -264,10 +269,10 @@ int main(void){
                     where = 1;
                     score = 1000;
                     subfuel(ship, buffer,(*ship).fuel);
-                    subPowerBullet(ship,buffer);
+                    subPowerBullet(ship,buffer, (*ship).powerUp);
                     break;
             case 4:
-                    start_stop();
+                    startStop();
                     bossKey();
 
                     //where = oldWhere;
@@ -279,7 +284,7 @@ int main(void){
                         drawShip((*ship).x, (*ship).y);
                         where = 2;
                         fgcolor(7);
-                        start_stop();
+                        startStop();
                     //}
                     break;
             case 5:
@@ -296,14 +301,14 @@ int main(void){
                     drawLandscape();
                     groundDraw();
                     resetTime();
-                    start_stop();
+                    startStop();
 
                     subfuel(ship, buffer, (*ship).fuel);
                     (*ship).x=randomNumber(60, 180);
-                    (*ship).y=54;
+                    (*ship).y=40;
                     (*ship).vx=0;
                     (*ship).vy=0;
-                    (*ship).fuel = 30;
+                    (*ship).fuel = 40;
 
                     drawShip((*ship).x,(*ship).y);
 

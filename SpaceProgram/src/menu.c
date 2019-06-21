@@ -7,9 +7,6 @@
  *
  * returns: void
  */
-
-Draws the menu of the game in the middle. It takes no parameters and has no return value.
-
 void drawMenu() {
     clrscr();
     gotoxy(70, 3);

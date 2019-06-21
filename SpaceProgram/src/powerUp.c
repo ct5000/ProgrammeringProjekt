@@ -149,7 +149,7 @@ return: void.
 
 
 
-void gravitatePowerBullet(powerBullet_t *p) {
+void gravitatePowerBullet(powerBullet_t *pBullet) {
     int32_t tempx = (*pBullet).vx;
     int grader = 2;
 
@@ -182,7 +182,7 @@ void addPowerBullet(int numPowerBullets, uint8_t *buffer){
 
         for(i=0; i < numPowerBullets; i++){
 
-        lcd_write_string("O", buffer, 2,30+i*5);
+        lcdWriteString("O", buffer, 2,30+i*5);
 
         lcd_push_buffer(buffer);
         }
@@ -197,14 +197,13 @@ buffer: an 512 long array where every element represents a character on LCD disp
 
 return:void
 */
-void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer){
+void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer, int8_t usedPowerUp){
         int8_t i;
         //the number of powerups is copied as not to update the stopcondition while the
         //loop is running
-        int copyPowerUp = (*ship).powerUp;
-        for (i=0; i<copyPowerUp; i++){
+        for (i=0; i<usedPowerUp; i++){
             (*ship).powerUp--;
-            lcd_write_string(" ", buffer, 2,30+(*ship).powerUp*5);
+            lcdWriteString(" ", buffer, 2,30+(*ship).powerUp*5);
             lcd_push_buffer(buffer);
         }
 

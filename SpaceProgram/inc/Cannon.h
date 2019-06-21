@@ -34,7 +34,7 @@ void updateBallPosition(cannonBall_t *bullet);
 int8_t inBallBounds(cannonBall_t *bullet);
 
 
-int8_t readDegree();
+int16_t readDegree();
 
 int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int8_t numBalls);
 

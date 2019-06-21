@@ -42,11 +42,11 @@ void powerBulletKilled(powerBullet_t powerBullets[], int8_t index, int8_t numPow
 
 void createPowerBullet(powerBullet_t powerBullets[], int8_t emptyIndex, SpaceShip_t *ship);
 
-void gravitatePowerBullet(powerBullet_t *p);
+void gravitatePowerBullet(powerBullet_t *pBullet);
 
 void addPowerBullet(int numPowerBullets, uint8_t *buffer);
 
-void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer);
+void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer, int8_t usedPowerUp);
 
 
 #endif

@@ -35,12 +35,11 @@ typedef struct {
 } SpaceShip_t;
 
 void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y, int16_t fuel);
-void updateSpaceShip(SpaceShip_t * ship);
+void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]);
 void updateVelocity(SpaceShip_t * ship, char key,  uint8_t *buffer, int place);
 int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer);
-void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals);
 
-int8_t inBounds(SpaceShip_t *ship);
+int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]);
 int checkMinerals( SpaceShip_t *p, mineral_t minerals[],int numMinerals);
 
 void addfuel(SpaceShip_t * ship, uint8_t *buffer);
@@ -50,6 +49,7 @@ void addLives(SpaceShip_t * ship, uint8_t *buffer);
 void subLives(SpaceShip_t * ship, uint8_t *buffer);
 
 int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score);
+int checkBoxes(SpaceShip_t *ship, boxes_t boxes[], int numBoxes);
 
 
 #endif

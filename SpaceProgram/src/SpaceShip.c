@@ -29,12 +29,12 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
 *
 */
 
-void updateSpaceShip(SpaceShip_t * ship){
+void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]){
     int8_t bounds;
     deleteAlien((*ship).x,(*ship).y);
     (*ship).x += (*ship).vx;
     (*ship).y += (*ship).vy;
-    bounds = inBounds(ship);
+    bounds = inBounds(ship, boxes);
     switch (bounds) {
         case 1: //far left
             (*ship).x = 2;
@@ -111,7 +111,7 @@ void updateVelocity(SpaceShip_t * ship, char key, uint8_t *buffer, int place) {
     }
     else if (key == 'w' && (*ship).fuel>0 && ((*ship).vy > -2)){ //flies up
             (*ship).vy -= 1;
-            subfuel(ship, buffer, 4);
+            subfuel(ship, buffer, 1);
     }
     else if (place == 3){   //stands still
         (*ship).vx = 0;
@@ -153,12 +153,19 @@ void updateVelocity(SpaceShip_t * ship, char key, uint8_t *buffer, int place) {
 */
 
 
-int8_t inBounds(SpaceShip_t *ship){
+int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]){
+    int boxIndex = checkBoxes(ship, boxes, 10);
+
     if ((*ship).x<=1){
         return 1;
     }
     else if ((*ship).x>=SCREEN_WIDTH - 1){
         return 2;
+    }
+    else if (boxIndex){
+            if ((*ship).y >= boxes[boxIndex-1].y1-4){
+            return 3;
+            }
     }
     else if ((*ship).y>=GROUND_HEIGHT - 2){
         return 3;
@@ -178,6 +185,8 @@ int8_t inBounds(SpaceShip_t *ship){
     else if ((*ship).x >= SCREEN_WIDTH - 1 && (*ship).y <= 2) {
         return 8;
     }
+
+
     return 0;
 }
 
@@ -206,8 +215,8 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
 
             if (i){ //The ship is above a mineral
 
-                (*ship).fuel += (*minerals).fuel;
-                (*ship).powerUp += (*minerals).powerUp;
+                (*ship).fuel += (minerals[i-1]).fuel;
+                (*ship).powerUp += (minerals[i-1]).powerUp;
 
                 for (j = GROUND_HEIGHT; j <= (minerals[i - 1]).y; j++ ){
                     gotoxy((*ship).x, j);
@@ -248,7 +257,7 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
 void addfuel(SpaceShip_t * ship, uint8_t *buffer){
     int8_t i;
         for(i=0; i < (*ship).fuel; i++){
-            lcd_write_bar("E", buffer, 0,25+i);
+            lcdWriteBar("E", buffer, 0,25+i);
             lcd_push_buffer(buffer);
         }
 }
@@ -265,7 +274,7 @@ void subfuel(SpaceShip_t * ship, uint8_t *buffer, int fuelsub){
         int8_t i;
         for (i=0; i < fuelsub; i++){
             (*ship).fuel--;
-            lcd_write_bar(" ", buffer, 0,25+(*ship).fuel);
+            lcdWriteBar(" ", buffer, 0,25+(*ship).fuel);
             lcd_push_buffer(buffer);
         }
 }
@@ -293,21 +302,7 @@ int checkMinerals(SpaceShip_t *ship, mineral_t minerals[], int numMinerals){
     return 0;
 }
 
-/*  Function: MineralKilled.
-* -----------------------------------------------
-* Deletes a used mineral.
-*
-* minerals[]; the array of minerals.
-* index; Which mineral is used.
-* numMinerals; number of minerals.
-*
-*/
-void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals) {
-    int i;
-    for (i = index; i < numMinerals - 1; i++) {
-        minerals[i] = minerals[i + 1];
-    }
-}
+
 
 /*  Function: addLives.
 * -----------------------------------------------
@@ -322,7 +317,7 @@ void addLives(SpaceShip_t * ship, uint8_t *buffer){
 
         for(i=0; i < (*ship).lives; i++){
 
-        lcd_write_string("<3", buffer, 1,30+((i*5)*2));
+        lcdWriteString("<3", buffer, 1,30+((i*5)*2));
 
         lcd_push_buffer(buffer);
         }
@@ -339,7 +334,7 @@ void addLives(SpaceShip_t * ship, uint8_t *buffer){
 */
 void subLives(SpaceShip_t * ship, uint8_t *buffer){
         (*ship).lives--;
-        lcd_write_string("  ", buffer, 1,30+(((*ship).lives*5)*2));
+        lcdWriteString("  ", buffer, 1,30+(((*ship).lives*5)*2));
       //  lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));
         lcd_push_buffer(buffer);
 }
@@ -359,7 +354,7 @@ void subLives(SpaceShip_t * ship, uint8_t *buffer){
 * 0; none of the above.
 */
 int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score){
-    if ((*ship).y < 3){
+    if ((*ship).y < 3 && (*ship).fuel > 50){
             return 1;
     }
     else if ((*ship).fuel <= 0 &&  (checkMinerals(ship, minerals, numMinerals) == 0)){
@@ -371,6 +366,17 @@ int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals
     else if (score == 0){
             return 4;
     }
+    return 0;
+}
+
+int checkBoxes(SpaceShip_t *ship, boxes_t boxes[], int numBoxes){
+    int8_t i;
+        for (i=1; i<numBoxes; i++){
+
+            if ((*ship).x >= (boxes[i]).x1 && (*ship).x <= (boxes[i]).x2){
+            return i+1;
+            }
+        }
     return 0;
 }
 

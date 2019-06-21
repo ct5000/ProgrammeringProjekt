@@ -1,14 +1,16 @@
 #include "Cannon.h"
 
-/*
-Function: initBullet
-This function initializes the the position of a bullet to the spaceships position.
-The velocity is set according to the potentiometer.
-bullet: A pointer to the bullet to be initialized
-ship: A pointer to the spaceship that is flying around, thats position
-will be used
 
-return: void
+/* Function: initBullet
+* ---------------------------------
+* This function initializes the the position of a bullet to the spaceships position.
+* The velocity is set according to the potentiometer.
+*
+* bullet: A pointer to the bullet to be initialized
+* ship: A pointer to the spaceship that is flying around, thats position
+* will be used
+*
+* return: void
 */
 void initCannon(cannonBall_t *bullet, SpaceShip_t *ship){
     (*bullet).x=(*ship).x <<14;
@@ -62,21 +64,23 @@ Return: returns an integer between 0 and 180.
 */
 
 
-int8_t readDegree(){
+int16_t readDegree(){
     return  (readPotRight()*100)/(2266);
+
 }
 
-/*Function: hitAliens
-This function determines if any of the flying bullets have hit an alien, by having the
-same position. A 2*2 box around the center of the alien is checked.
-
-aliens: An array of all the aliens.
-bullet: An array of all the bullets.
-numAliens: the number of flying aliens in the map.
-numBullets: the number of flying bullets in the map
-
-return: An integer representing the number of aliens hit.
-
+/* Function: hitAliens
+* -----------------------------------
+* This function determines if any of the flying bullets have hit an alien, by having the
+* same position. A 2*2 box around the center of the alien is checked.
+*
+* aliens: An array of all the aliens.
+* bullet: An array of all the bullets.
+* numAliens: the number of flying aliens in the map.
+* numBullets: the number of flying bullets in the map
+*
+* return: An integer representing the number of aliens hit.
+*
 */
 int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int8_t numBullets){
     int i,j;

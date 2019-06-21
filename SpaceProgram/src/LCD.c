@@ -33,7 +33,7 @@ void lcdUpdate(rollingtext_t *p,uint8_t * buffer){
     if (getAlienFlag() == 4){
         memset(buffer, 0x00, 512);
         (*p).slice--;
-        lcd_write_string((*p).t, buffer, (*p).line, (*p).slice);
+        lcdWriteString((*p).t, buffer, (*p).line, (*p).slice);
         resetAlienFlag();
     }
 }
@@ -56,7 +56,9 @@ void initRolling(rollingtext_t *p, int8_t line, char * text){
 * returns; void.
 */
 void lcdWriteBar(char t[], uint8_t *buffer, int8_t line, int8_t slice){
-    int i,j, c;
+    int i=0;
+    int j=0;
+    int c;
     int as;
 
 

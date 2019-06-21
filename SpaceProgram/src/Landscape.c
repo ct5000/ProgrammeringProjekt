@@ -15,7 +15,7 @@ void drawLandscape(){
     clrscr();
     bgcolor(2+rand()%7);
     fgcolor(2+rand()%15);
-    for (i=0; i<SCREEN_WIDTH*(SCREEN_HEIGHT-GROUND_HEIGHT); i++){
+    for (i=0; i<SCREEN_WIDTH*(SCREEN_HEIGHT-GROUND_HEIGHT+2); i++){
         printf("%c",176);
     }
 
@@ -45,11 +45,12 @@ int randomNumber(int32_t mini, int32_t maxi){
 * returns; void.
 */
 void initMineral(mineral_t *mineral){
-    int num;
+    int num = rand()%3;
     (*mineral).x=randomNumber(1, 240);
-    (*mineral).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT-10) ;
+    (*mineral).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT) ;
     (*mineral).fuel=randomNumber(5, 12);
-    num = rand()%2;
+
+
     if (num == 1) {
             (*mineral).powerUp = 1;
     }
@@ -85,15 +86,15 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
 * minerals[]; minerals array.
 * emptyIndex;
 *
-* returns; 1.
+* returns; void.
 */
-int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
+void createMineral(mineral_t minerals[], int8_t emptyIndex) {
     mineral_t mineral;
 
             initMineral(&mineral);
             minerals[emptyIndex] = mineral;
-            return 1;
 }
+
 
 /*  Function: groundDraw.
 * -----------------------------------------------
@@ -101,7 +102,7 @@ int8_t createMineral(mineral_t minerals[], int8_t emptyIndex) {
 *
 * returns; void.
 */
-void groundDraw(){
+int8_t groundDraw(){
    int i;
    int color = rand()%17;
    if (color == 1 || color == 0){
@@ -109,7 +110,7 @@ void groundDraw(){
    }
 
    fgcolor(color);
-    for(i=1; i <=240; i++){
+    for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
         gotoxy(i,56);
         if (r < 18){
@@ -120,7 +121,7 @@ void groundDraw(){
         }
     }
 
-    for(i=1; i <=240; i++){
+    for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
         gotoxy(i,57);
         if (r < 12){
@@ -130,7 +131,7 @@ void groundDraw(){
             printf("%c",177);
         }
     }
-    for(i=1; i <=240; i++){
+    for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
         gotoxy(i,58);
         if (r < 6){
@@ -140,7 +141,7 @@ void groundDraw(){
             printf("%c",177);
         }
     }
-    for(i=1; i <=240; i++){
+    for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
         gotoxy(i,59);
         if (r < 2){
@@ -150,14 +151,14 @@ void groundDraw(){
             printf("%c", 177);
         }
     }
-    for(i=1; i <=240; i++){
+    for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
         gotoxy(i,60);
         if (r > 4){
             printf("%c",176);
         }
     }
-    for(i=1; i <=240; i++){
+    for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
         gotoxy(i,61);
         if (r < 4){
@@ -166,7 +167,52 @@ void groundDraw(){
     }
     bgcolor(0);
     fgcolor(7);
+    return color;
+}
+
+void initBoxes(boxes_t *box){
+    (*box).x1=randomNumber(1, SCREEN_WIDTH);
+    (*box).y1 = GROUND_HEIGHT-1;
+
+
+    (*box).x2= (*box).x1+rand()%3+15;
+    (*box).y2 = (*box).y1-rand()%3;
+}
+
+void createBoxes(boxes_t boxes[], int8_t emptyIndex) {
+    boxes_t box;
+    initBoxes(&box);
+    boxes[emptyIndex] = box;
+}
+
+void drawBoxes(boxes_t boxes[], int numBoxes){
+    int i, j, k;
+    fgcolor(groundDraw());
+    for (i=0; i < numBoxes;i++){
+        for(j=boxes[i].x1; j <= boxes[i].x2; j++){
+             for(k=boxes[i].y2; k <= boxes[i].y1; k++){
+                drawSymbol(j , k, 219);
+            }
+        }
+
+    }
+    fgcolor(0);
 }
 
 
+/*  Function: MineralKilled.
+* -----------------------------------------------
+* Deletes a used mineral.
+*
+* minerals[]; the array of minerals.
+* index; Which mineral is used.
+* numMinerals; number of minerals.
+*
+*/
+void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals) {
+    int i;
+    for (i = index; i < numMinerals - 1; i++) {
+        minerals[i] = minerals[i + 1];
+    }
+}
 
