@@ -10,6 +10,7 @@
 void fgcolor(uint8_t foreground);
 void bgcolor(uint8_t background);
 void color(uint8_t foreground, uint8_t background);
+void resetbgcolor();
 
 void clrscr();
 void clreol();
@@ -54,17 +55,10 @@ void writeR(int8_t sizeColumn);
 void writeT(int8_t sizeColumn);
 void writeU(int8_t sizeColumn);
 void writeV(int8_t sizeColumn);
-//void writeN(int8_t sizeColumn);
+
 void writeX(int8_t sizeColumn);
 
 void writeBlank(int8_t sizeColumn);
-
-
-
-
-
-
-
 
 void deleteLetter(int8_t sizeColumn);
 
