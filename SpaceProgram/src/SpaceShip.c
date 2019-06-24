@@ -30,12 +30,21 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
 */
 
 void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]){
-    int8_t bounds;
+    int8_t boundsAfter, boundsBefore;
+    int boxIndex;
     deleteAlien((*ship).x,(*ship).y);
+    boundsBefore = inBounds(ship, boxes);
     (*ship).x += (*ship).vx;
     (*ship).y += (*ship).vy;
-    bounds = inBounds(ship, boxes);
-    switch (bounds) {
+    boundsAfter = inBounds(ship, boxes);
+    if (boundsBefore == 3 && boundsAfter == 9) {
+            (*ship).x -= (*ship).vx;
+            boundsAfter = boundsBefore;
+    }
+
+
+
+    switch (boundsAfter) {
         case 1: //far left
             (*ship).x = 2;
             (*ship).vx = 0;
@@ -76,6 +85,11 @@ void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]){
             (*ship).x = SCREEN_WIDTH - 1;
             (*ship).vx = 0;
             break;
+        case 9:
+            boxIndex = checkBoxes(ship, boxes, 10);
+            (*ship).y = boxes[boxIndex-1].y2 - 2;
+           // (*ship).y = boxes[boxIndex-1].y2;
+            (*ship).vy = 0;
         default:
             break;
     }
@@ -103,17 +117,17 @@ void updateVelocity(SpaceShip_t * ship, char key, uint8_t *buffer, int place) {
             (*ship).vx += 1;
             subfuel(ship, buffer, 1);
     }
-    else if (key == 'a' && (*ship).fuel>0 && !(place == 3) && ((*ship).vx > -3)){ //glides left
+    else if (key == 'a' && (*ship).fuel>0 && (!(place == 3) || !(place == 9)) && ((*ship).vx > -3)){ //glides left
             (*ship).vx -= 1;
     }
-    else if (key == 'd' && (*ship).fuel>0 && !(place == 3) && ((*ship).vx < 3)){ //glides right
+    else if (key == 'd' && (*ship).fuel>0 && (!(place == 3) || !(place == 9)) && ((*ship).vx < 3)){ //glides right
             (*ship).vx += 1;
     }
     else if (key == 'w' && (*ship).fuel>0 && ((*ship).vy > -2)){ //flies up
             (*ship).vy -= 1;
             subfuel(ship, buffer, 1);
     }
-    else if (place == 3){   //stands still
+    else if (place == 3 || place == 9){   //stands still
         (*ship).vx = 0;
         (*ship).vy =0;
     }
@@ -149,7 +163,7 @@ void updateVelocity(SpaceShip_t * ship, char key, uint8_t *buffer, int place) {
 * 6; Lower right corner.
 * 7; Upper left corner.
 * 8; Upper right corner.
-* 0; None of the above.
+* 0; None of the above.ww
 */
 
 
@@ -161,14 +175,6 @@ int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]){
     }
     else if ((*ship).x>=SCREEN_WIDTH - 1){
         return 2;
-    }
-    else if (boxIndex){
-            if ((*ship).y >= boxes[boxIndex-1].y1-4){
-            return 3;
-            }
-    }
-    else if ((*ship).y>=GROUND_HEIGHT - 2){
-        return 3;
     }
     else if ((*ship).y < 2){
        return 4;
@@ -184,6 +190,14 @@ int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]){
     }
     else if ((*ship).x >= SCREEN_WIDTH - 1 && (*ship).y <= 2) {
         return 8;
+    }
+    else if (boxIndex){
+            if ((*ship).y >= boxes[boxIndex-1].y2-2){
+            return 9;
+            }
+    }
+    else if ((*ship).y>=GROUND_HEIGHT - 2){
+        return 3;
     }
 
 
@@ -209,7 +223,7 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
 	int i;
 	int j;
 
-	if ((key == 'e' || key == 'E')  && place == 3){ //user presses e and the ship is on the ground.
+	if ((key == 'e' || key == 'E')  && (place == 3 || place == 9)){ //user presses e and the ship is on the ground.
 
             i = checkMinerals(ship, minerals, numMinerals);
 
@@ -371,9 +385,9 @@ int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals
 
 int checkBoxes(SpaceShip_t *ship, boxes_t boxes[], int numBoxes){
     int8_t i;
-        for (i=1; i<numBoxes; i++){
+        for (i=0; i<numBoxes; i++){
 
-            if ((*ship).x >= (boxes[i]).x1 && (*ship).x <= (boxes[i]).x2){
+            if ((*ship).x + 1 >= (boxes[i]).x1 && (*ship).x - 1 <= (boxes[i]).x2){
             return i+1;
             }
         }

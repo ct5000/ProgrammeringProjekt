@@ -10,7 +10,7 @@
 */
 void drawLandscape(){
     int i;
-    gotoxy(0,GROUND_HEIGHT);
+    gotoxy(1,GROUND_HEIGHT);
 
     clrscr();
     bgcolor(2+rand()%7);
@@ -194,7 +194,6 @@ void drawBoxes(boxes_t boxes[], int numBoxes){
                 drawSymbol(j , k, 219);
             }
         }
-
     }
     fgcolor(0);
 }

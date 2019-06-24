@@ -211,7 +211,7 @@
 	<stdint.h>
 	<string.h>
 
-1561130120 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
+1561373813 c:\users\viktor laptop\desktop\gitpro\spaceprogram\inc\landscape.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -296,7 +296,7 @@
 1560431104 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\charset.c
 	"charset.h"
 
-1561130218 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
+1561373588 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\landscape.c
 	"Landscape.h"
 
 1561122297 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\lcd.c
@@ -305,7 +305,7 @@
 1560431300 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\lutsin.c
 	"LUTsin.h"
 
-1561130853 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
+1561373720 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\main.c
 	"stm32f30x_conf.h"
 	"30010_io.h"
 	"ansi.h"
@@ -343,7 +343,7 @@
 	"serialRead.h"
 	<string.h>
 
-1561127089 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
+1561373429 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\spaceship.c
 	"SpaceShip.h"
 
 1561041488 source:c:\users\viktor laptop\desktop\gitpro\spaceprogram\src\startup_stm32f30x.s

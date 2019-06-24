@@ -109,8 +109,8 @@ int main(void){
 
                 clrscr();
 
-                drawLandscape();
-                groundDraw();
+               drawLandscape();
+               groundDraw();
                 fgcolor(7);
 
                 for (numMinerals = 0; numMinerals < 50; numMinerals++) {
@@ -123,7 +123,7 @@ int main(void){
                         createBoxes(boxes, numBoxes);
                 }
 
-                drawBoxes(boxes, numBoxes);
+               drawBoxes(boxes, numBoxes);
 
                 initSpaceShip(ship, 115, 40, 40);
                 numAliens = 0;
