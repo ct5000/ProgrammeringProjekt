@@ -7,6 +7,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#define PRESCALER_VALUE 9
+
 
 int8_t readJoystick();
 void showDirection(int8_t old, int8_t next);
@@ -14,7 +16,10 @@ void writeLED(int8_t ledcolor);
 void showColor(int8_t joystick);
 
 void setTimer();
-void TIM2_IRQHandler(void);
+void TIM1_BRK_TIM15_IRQHandler(void);
+
+void setTimer2 ();
+void setFreq(uint16_t freq);
 
 int getTime();
 int getSec();
