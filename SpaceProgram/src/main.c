@@ -27,7 +27,7 @@
 #include "menu.h"
 #include "aliens.h"
 #include "Cannon.h"
-#include "powerUp.h"
+//#include "powerUp.h"
 #include "bossKey.h"
 
 #include <stdlib.h>

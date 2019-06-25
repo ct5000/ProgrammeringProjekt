@@ -6653,7 +6653,7 @@ OUTPUT(bin\Debug\SpaceProgram.elf elf32-littlearm)
  .debug_ranges  0x00000b28       0x20 obj\debug\src\system_stm32f30x.o
  .debug_ranges  0x00000b48       0x28 obj\debug\src\trigonometric.o
 
-.debug_macro    0x00000000    0x11593
+.debug_macro    0x00000000    0x1157d
  .debug_macro   0x00000000      0x1b3 obj\debug\spl\src\stm32f30x_adc.o
  .debug_macro   0x000001b3      0x892 obj\debug\spl\src\stm32f30x_adc.o
  .debug_macro   0x00000a45       0x74 obj\debug\spl\src\stm32f30x_adc.o
@@ -6745,15 +6745,15 @@ OUTPUT(bin\Debug\SpaceProgram.elf elf32-littlearm)
  .debug_macro   0x0000fcba      0x34c obj\debug\src\landscape.o
  .debug_macro   0x00010006      0x357 obj\debug\src\lcd.o
  .debug_macro   0x0001035d       0x1a obj\debug\src\lutsin.o
- .debug_macro   0x00010377      0x461 obj\debug\src\main.o
- .debug_macro   0x000107d8       0x10 obj\debug\src\main.o
- .debug_macro   0x000107e8      0x34d obj\debug\src\mbed.o
- .debug_macro   0x00010b35      0x35d obj\debug\src\menu.o
- .debug_macro   0x00010e92      0x3bd obj\debug\src\spaceship.o
- .debug_macro   0x0001124f      0x197 obj\debug\src\system_stm32f30x.o
- .debug_macro   0x000113e6      0x1ad obj\debug\src\trigonometric.o
+ .debug_macro   0x00010377      0x44b obj\debug\src\main.o
+ .debug_macro   0x000107c2       0x10 obj\debug\src\main.o
+ .debug_macro   0x000107d2      0x34d obj\debug\src\mbed.o
+ .debug_macro   0x00010b1f      0x35d obj\debug\src\menu.o
+ .debug_macro   0x00010e7c      0x3bd obj\debug\src\spaceship.o
+ .debug_macro   0x00011239      0x197 obj\debug\src\system_stm32f30x.o
+ .debug_macro   0x000113d0      0x1ad obj\debug\src\trigonometric.o
 
-.debug_line     0x00000000     0x8bdc
+.debug_line     0x00000000     0x8bcf
  .debug_line    0x00000000      0xa20 obj\debug\spl\src\stm32f30x_adc.o
  .debug_line    0x00000a20      0x57f obj\debug\spl\src\stm32f30x_gpio.o
  .debug_line    0x00000f9f      0x7e5 obj\debug\spl\src\stm32f30x_rcc.o
@@ -6768,15 +6768,15 @@ OUTPUT(bin\Debug\SpaceProgram.elf elf32-littlearm)
  .debug_line    0x000054a7      0x75e obj\debug\src\landscape.o
  .debug_line    0x00005c05      0x618 obj\debug\src\lcd.o
  .debug_line    0x0000621d       0x3f obj\debug\src\lutsin.o
- .debug_line    0x0000625c      0x7b1 obj\debug\src\main.o
- .debug_line    0x00006a0d      0x962 obj\debug\src\mbed.o
- .debug_line    0x0000736f      0x6af obj\debug\src\menu.o
- .debug_line    0x00007a1e      0x920 obj\debug\src\spaceship.o
- .debug_line    0x0000833e       0xbb obj\debug\src\startup_stm32f30x.o
- .debug_line    0x000083f9      0x493 obj\debug\src\system_stm32f30x.o
- .debug_line    0x0000888c      0x350 obj\debug\src\trigonometric.o
+ .debug_line    0x0000625c      0x7a4 obj\debug\src\main.o
+ .debug_line    0x00006a00      0x962 obj\debug\src\mbed.o
+ .debug_line    0x00007362      0x6af obj\debug\src\menu.o
+ .debug_line    0x00007a11      0x920 obj\debug\src\spaceship.o
+ .debug_line    0x00008331       0xbb obj\debug\src\startup_stm32f30x.o
+ .debug_line    0x000083ec      0x493 obj\debug\src\system_stm32f30x.o
+ .debug_line    0x0000887f      0x350 obj\debug\src\trigonometric.o
 
-.debug_str      0x00000000    0x597fd
+.debug_str      0x00000000    0x597f2
  .debug_str     0x00000000    0x52be3 obj\debug\spl\src\stm32f30x_adc.o
                               0x52d94 (size before relaxing)
  .debug_str     0x00052be3      0x29c obj\debug\spl\src\stm32f30x_gpio.o
@@ -6805,17 +6805,17 @@ OUTPUT(bin\Debug\SpaceProgram.elf elf32-littlearm)
                               0x55fdc (size before relaxing)
  .debug_str     0x000591a0        0xd obj\debug\src\lutsin.o
                                0x2526 (size before relaxing)
- .debug_str     0x000591ad       0xc3 obj\debug\src\main.o
-                              0x56337 (size before relaxing)
- .debug_str     0x00059270      0x337 obj\debug\src\mbed.o
+ .debug_str     0x000591ad       0xb8 obj\debug\src\main.o
+                              0x5632c (size before relaxing)
+ .debug_str     0x00059265      0x337 obj\debug\src\mbed.o
                               0x568af (size before relaxing)
- .debug_str     0x000595a7       0x70 obj\debug\src\menu.o
+ .debug_str     0x0005959c       0x70 obj\debug\src\menu.o
                               0x56029 (size before relaxing)
- .debug_str     0x00059617      0x137 obj\debug\src\spaceship.o
+ .debug_str     0x0005960c      0x137 obj\debug\src\spaceship.o
                               0x5634b (size before relaxing)
- .debug_str     0x0005974e       0x83 obj\debug\src\system_stm32f30x.o
+ .debug_str     0x00059743       0x83 obj\debug\src\system_stm32f30x.o
                               0x5245a (size before relaxing)
- .debug_str     0x000597d1       0x2c obj\debug\src\trigonometric.o
+ .debug_str     0x000597c6       0x2c obj\debug\src\trigonometric.o
                                0x6f73 (size before relaxing)
 
 .debug_frame    0x00000000     0x3df4

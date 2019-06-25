@@ -27,6 +27,7 @@ int8_t drawLandscape(int change, int colorBG, int colorFG);
 
 
 int randomNumber(int32_t mini, int32_t maxi);
+
 void initMineral(mineral_t *p);
 void drawMinerals(mineral_t minerals[], int numMinerals);
 void createMineral(mineral_t minerals[], int8_t emptyIndex);

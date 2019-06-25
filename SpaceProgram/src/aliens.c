@@ -129,7 +129,6 @@ int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex, int spawnRate) {
     alien_t alien;
     int num = randomNumber(0, spawnRate);
     if (num == 0) {
-            //aliens = realloc(aliens, (emptyIndex + 1) * sizeof(alien_t));
             initAlien(&alien);
             aliens[emptyIndex] = alien;
             return 1;
@@ -149,7 +148,6 @@ int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex, int spawnRate) {
  */
 void makeAlien(alien_t aliens[], int8_t emptyIndex) {
     alien_t alien;
-    //aliens = realloc(aliens, (emptyIndex + 1) * sizeof(alien_t));
     initAlien(&alien);
     aliens[emptyIndex] = alien;
 }

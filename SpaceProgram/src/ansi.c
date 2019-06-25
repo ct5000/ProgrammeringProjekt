@@ -21,7 +21,7 @@ void clrscr(){ // clears the terminal
  *
  * returns: void
  */
-void clreol(){  // clears the rest of a line
+void clreol(){  // clears the rest of a line // bruges ikke
     printf("%c[0K",ESC);
 }
 
@@ -906,7 +906,7 @@ void writeN(int8_t sizeColumn) {
  *
  * returns: void
  */
-void deleteLetter(int8_t sizeColumn) {
+void deleteLetter(int8_t sizeColumn) { // bruges ikke
     int i, j;
     saveCursor();
     for(i = 0; i< sizeColumn + 1; i++) {

@@ -32,9 +32,9 @@ typedef struct {
 
 void initPowerBullet(powerBullet_t *p, SpaceShip_t *r);
 
-void updatePowerBulletPosition(powerBullet_t *p);
+void updatePowerBulletPosition(powerBullet_t *p); //bruges ikke
 
-int powerHitAliens(alien_t aliens[], powerBullet_t powerBullets[], int numAliens, int numPowerBullets);
+int powerHitAliens(alien_t aliens[], powerBullet_t powerBullets[], int numAliens, int numPowerBullets); //bruges ikke
 
 int8_t inPowerBulletBounds(powerBullet_t *p);
 

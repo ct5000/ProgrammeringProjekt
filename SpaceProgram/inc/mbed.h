@@ -10,10 +10,10 @@
 #define PRESCALER_VALUE 9
 
 
-int8_t readJoystick();
-void showDirection(int8_t old, int8_t next);
+int8_t readJoystick();  //bruges ikke
+void showDirection(int8_t old, int8_t next); //bruges ikke
 void writeLED(int8_t ledcolor);
-void showColor(int8_t joystick);
+void showColor(int8_t joystick); //bruges ikke
 
 void setTimer();
 void TIM1_BRK_TIM15_IRQHandler(void);
@@ -22,13 +22,13 @@ void setTimer2 ();
 void setFreq(uint16_t freq);
 
 int getTime();
-int getSec();
-int getMin();
+int getSec(); //bruges ikke
+int getMin(); //bruges Ikke
 
 void resetTime();
 void startStop();
 
-int split_time1();
+int split_time1(); //bruges ikke
 
 int getAlienFlag();
 void resetAlienFlag();
@@ -46,12 +46,12 @@ int getSoundFlag();
 void resetSoundFlag();
 
 void setupPot();
-int16_t readPotLeft();
+int16_t readPotLeft(); //bruges ikke
 int16_t readPotRight();
-void measPot(int32_t read, char *s);
+void measPot(int32_t read, char *s); //bruges ikke
 
 
 void setupLED();
-void joystick_setup();
+void joystick_setup(); //bruges ikke
 #endif
 

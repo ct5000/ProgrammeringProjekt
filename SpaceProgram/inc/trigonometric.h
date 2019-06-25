@@ -7,8 +7,8 @@
 
 
 int32_t Sin(int grader);
-void printFix(int32_t i);
-int32_t expand(int32_t i);
+void printFix(int32_t i); // bruges ikke
+int32_t expand(int32_t i); // bruges ikke
 int32_t Cos(int grader);
 
 #endif

@@ -75,14 +75,13 @@ int8_t inBallBounds(cannonBall_t *bullet, boxes_t boxes[]){
 }
 
 /*Function: readDegree
-This function interprets the input from the potentiometer as a degree between 0 and 180.
-Return: returns an integer between 0 and 180.
+* --------------------------
+* This function interprets the input from the potentiometer as a degree between 0 and 180.
+*
+*Return: returns an integer between 0 and 180.
 */
-
-
 int16_t readDegree(){
     return  (readPotRight()*100)/(2266);
-
 }
 
 /* Function: hitAliens
@@ -184,7 +183,6 @@ void gravitate(cannonBall_t *bullet){
     int8_t degree = 2;
 
     if ((*bullet).vx > 0){
-        //FIX14_MULT is used to multiply numbers that are shifted 14
         (*bullet).vx = FIX14_MULT((*bullet).vx,Cos(degree)) - FIX14_MULT((*bullet).vy,Sin(degree));
         (*bullet).vy = FIX14_MULT(tempx,Sin(degree)) + FIX14_MULT((*bullet).vy,Cos(degree));
     }
