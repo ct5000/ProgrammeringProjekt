@@ -9,8 +9,9 @@
 
 
 void bossKey() {
-    int8_t i, num;
+    int8_t num;
     char key;
+    gotoxy(1,1);
     color(15, 0);
     clrscr();
     while (key != 'b' && key != 'B') {
@@ -18,9 +19,11 @@ void bossKey() {
                 key = uart_get_char();
                 uart_clear();
             }
-            for (i = 0; i < 8; i++) {
+
+            if (getBulletFlag() > 1) {
                     num = rand() % 2;
                     printf("%d", num);
+                    resetBulletFlag();
             }
     }
 }

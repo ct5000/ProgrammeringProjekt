@@ -42,6 +42,8 @@ int getShipFlag3();
 void resetShipFlag3();
 int getSpawnRateFlag();
 void resetSpawnRateFlag();
+int getSoundFlag();
+void resetSoundFlag();
 
 void setupPot();
 int16_t readPotLeft();

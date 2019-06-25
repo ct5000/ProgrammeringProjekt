@@ -43,6 +43,7 @@ int main(void){
     alien_t aliens[25];
     int8_t numAliens = 0;
     int8_t killedAliens;
+    int8_t killedAliensP;
 
     mineral_t minerals[50];
     int8_t numMinerals = 0;
@@ -59,7 +60,7 @@ int main(void){
     int8_t numBalls = 0;
     int8_t aliveBall;
 
-    powerBullet_t powerBullets[5];
+    cannonBall_t powerBullets[5];
     int8_t numPowerBullets = 0;
 
     int i;
@@ -74,8 +75,8 @@ int main(void){
     int score = 1000;
 
     int pos;
-    //int readyDirct = 1;
-
+    int colorFG;
+    int colorBG;
 
     SpaceShip_t skib;
     SpaceShip_t *ship = &skib;
@@ -87,6 +88,8 @@ int main(void){
 
     setTimer();
     startStop();
+    setTimer2();
+    setFreq(0);
     lcd_init();
     memset(buffer, 0x00, 512);
     lcd_push_buffer(buffer);
@@ -110,21 +113,18 @@ int main(void){
 
                 clrscr();
 
-               drawLandscape();
-               groundDraw();
-                fgcolor(7);
+                colorBG = drawLandscape(1, colorBG, colorFG);
+
+                colorFG = groundDraw(1, colorFG);
+                for (numBoxes = 0; numBoxes < 10; numBoxes++) {
+                        createBoxes(boxes, numBoxes);
+                }
+                drawBoxes(boxes, numBoxes, colorFG);
 
                 for (numMinerals = 0; numMinerals < 50; numMinerals++) {
                         createMineral(minerals, numMinerals);
                 }
-
                 drawMinerals(minerals, numMinerals);
-
-                for (numBoxes = 0; numBoxes < 10; numBoxes++) {
-                        createBoxes(boxes, numBoxes);
-                }
-
-               drawBoxes(boxes, numBoxes);
 
                 initSpaceShip(ship, 115, 40, 40);
                 numAliens = 0;
@@ -201,8 +201,8 @@ int main(void){
                             createBall(cannonBalls, numBalls, ship);
                             numBalls++;
                     }
-                    else if (dirct == 'g' && (*ship).powerUp > 0 && numPowerBullets < 2) {
-                            createPowerBullet(powerBullets, numPowerBullets, ship);
+                    else if (dirct == 'g' && (*ship).powerUp > 0 && numPowerBullets < 3) {
+                            createPowerBall(powerBullets, numPowerBullets, ship);
                             numPowerBullets++;
                             subPowerBullet(ship, buffer, 1);
                     }
@@ -232,17 +232,17 @@ int main(void){
                         }
 
                         for (i=0; i< numPowerBullets; i++){
-                                updatePowerBulletPosition(&(powerBullets[i]));
+                                aliveBall = updateBallPosition(&(powerBullets[i]), boxes);
 
-                                killedAliens = powerHitAliens(aliens, powerBullets, numAliens, numPowerBullets);
-                                numAliens -= killedAliens;
+                                killedAliensP = hitAliens(aliens, powerBullets, numAliens, numPowerBullets);
+                                numAliens -= killedAliensP;
                                 if (killedAliens) {
                                         score += 50;
                                 }
 
 
-                                if((!inPowerBulletBounds(&(powerBullets[i])))) {
-                                       powerBulletKilled(powerBullets, i, numPowerBullets);
+                                if(!aliveBall) {
+                                       ballKilled(powerBullets, i, numPowerBullets);
                                        numPowerBullets--;
                                 }
                         }
@@ -270,23 +270,28 @@ int main(void){
                     gameOver(endgame, score, level);
                     where = 1;
                     score = 1000;
+                    numBalls=0;
+                    numPowerBullets=0;
                     subfuel(ship, buffer,(*ship).fuel);
                     subPowerBullet(ship,buffer, (*ship).powerUp);
                     break;
             case 4:
-                    startStop();
+                    //startStop();
                     bossKey();
 
                     //where = oldWhere;
                    // if (where == 2) {
                         clrscr();
-                        drawLandscape();
-                        groundDraw();
+                        drawLandscape(0, colorBG, colorFG);
+                        groundDraw(0, colorFG);
                         drawMinerals(minerals, numMinerals);
+
+                        drawBoxes(boxes, numBoxes, colorFG);
+
                         drawShip((*ship).x, (*ship).y, 0);
                         where = 2;
                         fgcolor(7);
-                        startStop();
+                        //startStop();
                     //}
                     break;
             case 5:
@@ -300,8 +305,12 @@ int main(void){
                     spawnRate = startSpawnRate;
 
                     where = 2;
-                    drawLandscape();
-                    groundDraw();
+                    colorBG = drawLandscape(1, colorBG, colorFG);
+                    colorFG = groundDraw(1, colorFG);
+                    for (numBoxes = 0; numBoxes < 10; numBoxes++) {
+                            createBoxes(boxes, numBoxes);
+                    }
+                    drawBoxes(boxes, numBoxes, colorFG);
                     resetTime();
                     startStop();
 
@@ -325,6 +334,7 @@ int main(void){
                     for (numMinerals = 0; numMinerals < 50-level*3; numMinerals++) {
                         createMineral(minerals, numMinerals);
                     }
+
 
                     drawMinerals(minerals, numMinerals);
                     level++;

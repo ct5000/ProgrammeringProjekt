@@ -166,47 +166,6 @@ void gravitatePowerBullet(powerBullet_t *pBullet) {
     }
 }
 
-/*Function: addPowerBullet
-This function is used update the LCD display when a new power bullet is found.
-An 'O' is added for every powerBullet on line 3.
 
-numPowerBullets: the total number of power bullets
-buffer: an 512 long array where every element represents a character on LCD display
-
-return void
-
-*/
-
-void addPowerBullet(int numPowerBullets, uint8_t *buffer){
-    int i;
-
-        for(i=0; i < numPowerBullets; i++){
-
-        lcdWriteString("O", buffer, 2,30+i*5);
-
-        lcd_push_buffer(buffer);
-        }
-}
-
-/*Function: subPowerBullet
-Keeps the amount of power bullets updated when one is used.
-The LCD display is updated to show the correct number of power bullets.
-
-ship: a pointer to the active spaceship. It is used to get the number of power ups.
-buffer: an 512 long array where every element represents a character on LCD display
-
-return:void
-*/
-void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer, int8_t usedPowerUp){
-        int8_t i;
-        //the number of powerups is copied as not to update the stopcondition while the
-        //loop is running
-        for (i=0; i<usedPowerUp; i++){
-            (*ship).powerUp--;
-            lcdWriteString(" ", buffer, 2,30+(*ship).powerUp*5);
-            lcd_push_buffer(buffer);
-        }
-
-}
 
 

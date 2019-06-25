@@ -14,9 +14,9 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     (*ship).y=y;
     (*ship).vx = 0;
     (*ship).vy = 0;
-    (*ship).lives = 5;
+    (*ship).lives = 50;
     (*ship).fuel=fuel;
-    (*ship).powerUp = 0;
+    (*ship).powerUp = 10;
     (*ship).shield = 0;
     drawShip(x,y,0);
 }
@@ -232,14 +232,15 @@ int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]){
 int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer){
 	int i;
 	int j;
-
+	int newFuel;
 	if ((key == 'e' || key == 'E')  && (place == 3 || place == 9)){ //user presses e and the ship is on the ground.
 
             i = checkMinerals(ship, minerals, numMinerals);
 
             if (i){ //The ship is above a mineral
+                newFuel=(*ship).fuel + (minerals[i-1]).fuel;
+                (*ship).fuel = (newFuel <103) ? newFuel : 103;
 
-                (*ship).fuel += (minerals[i-1]).fuel;
                 (*ship).powerUp += (minerals[i-1]).powerUp;
 
                 if((minerals[i-1]).shield){
@@ -250,10 +251,7 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
                     gotoxy((*ship).x, j);
                     printf("%c",186);
                 }
-                for (j = (minerals[i - 1]).y; j >= (*ship).y+2; j-- ){
-                    gotoxy((*ship).x, j);
-                    printf("%c",219);
-                }
+
 
                 addfuel(ship,buffer);
                 addPowerBullet((*ship).powerUp,buffer);
@@ -266,10 +264,7 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
                     gotoxy((*ship).x, (*ship).y+2+j);
                     printf("%c",186);
                 }
-                for (j = SCREEN_HEIGHT; j >= 0; j-- ){
-                    gotoxy((*ship).x, (*ship).y+2+j);
-                    printf("%c",219);
-                }
+
             }
 	}
 	return 0;
@@ -300,11 +295,13 @@ void addfuel(SpaceShip_t * ship, uint8_t *buffer){
 */
 void subfuel(SpaceShip_t * ship, uint8_t *buffer, int fuelsub){
         int8_t i;
+
         for (i=0; i < fuelsub; i++){
             (*ship).fuel--;
             lcdWriteBar(" ", buffer, 0,25+(*ship).fuel);
             lcd_push_buffer(buffer);
         }
+
 }
 
 /*  Function: checksMineral.
@@ -361,10 +358,14 @@ void addLives(SpaceShip_t * ship, uint8_t *buffer){
 * return; void.
 */
 void subLives(SpaceShip_t * ship, uint8_t *buffer){
+        resetSoundFlag();
+        setFreq(500);
         (*ship).lives--;
         lcdWriteString("  ", buffer, 1,30+(((*ship).lives*5)*2));
-      //  lcd_write_string(" ", buffer, 1,35+(((*ship).lives*5)*2));
         lcd_push_buffer(buffer);
+        while(getSoundFlag() < 40){}
+        setFreq(0);
+
 }
 
 /*  Function: endGameCondition.
@@ -424,5 +425,36 @@ int checkBoxes(int x, boxes_t boxes[], int numBoxes){
     }
 }
 
+void addPowerBullet(int numPowerBullets, uint8_t *buffer){
+    int i;
+
+        for(i=0; i < numPowerBullets; i++){
+
+        lcdWriteString("O", buffer, 2,30+i*5);
+
+        lcd_push_buffer(buffer);
+        }
+}
+
+/*Function: subPowerBullet
+Keeps the amount of power bullets updated when one is used.
+The LCD display is updated to show the correct number of power bullets.
+
+ship: a pointer to the active spaceship. It is used to get the number of power ups.
+buffer: an 512 long array where every element represents a character on LCD display
+
+return:void
+*/
+void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer, int8_t usedPowerUp){
+        int8_t i;
+        //the number of powerups is copied as not to update the stopcondition while the
+        //loop is running
+        for (i=0; i<usedPowerUp; i++){
+            (*ship).powerUp--;
+            lcdWriteString(" ", buffer, 2,30+(*ship).powerUp*5);
+            lcd_push_buffer(buffer);
+        }
+
+}
 
 

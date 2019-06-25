@@ -7,17 +7,23 @@
 * GROUND_HEIGHT; ground level.
 *
 */
-void drawLandscape(){
+int8_t drawLandscape(int change, int colorBG, int colorFG){
     int i;
     gotoxy(1,GROUND_HEIGHT);
 
     clrscr();
-    bgcolor(2+rand()%7);
-    fgcolor(2+rand()%15);
+    if (change){
+        colorBG = 2+rand()%7;
+
+    }
+    bgcolor(colorBG);
+    fgcolor(colorFG);
+
     for (i=0; i<SCREEN_WIDTH*(SCREEN_HEIGHT-GROUND_HEIGHT+2); i++){
         printf("%c",176);
     }
-
+    bgcolor(0);
+    return colorBG;
 }
 
 /*  Function: randomNumber.
@@ -101,17 +107,23 @@ void createMineral(mineral_t minerals[], int8_t emptyIndex) {
 *
 * returns; void.
 */
-int8_t groundDraw(){
+int8_t groundDraw(int change, int colorFG){
    int i;
-   int color = rand()%17;
-   if (color == 1 || color == 0){
-    color+=2;
-   }
+   int color;
 
+   if (change){
+        color = rand()%17;
+        if (color == 1 || color == 0){
+            color+=2;
+       }
+   }
+   else{
+    color = colorFG;
+   }
    fgcolor(color);
     for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
-        gotoxy(i,56);
+        gotoxy(i,GROUND_HEIGHT);
         if (r < 18){
             printf("%c",219);
         }
@@ -122,7 +134,7 @@ int8_t groundDraw(){
 
     for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
-        gotoxy(i,57);
+        gotoxy(i,GROUND_HEIGHT+1);
         if (r < 12){
             printf("%c",219);
         }
@@ -132,7 +144,7 @@ int8_t groundDraw(){
     }
     for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
-        gotoxy(i,58);
+        gotoxy(i,GROUND_HEIGHT+2);
         if (r < 6){
             printf("%c",219);
         }
@@ -142,7 +154,7 @@ int8_t groundDraw(){
     }
     for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
-        gotoxy(i,59);
+        gotoxy(i,GROUND_HEIGHT+3);
         if (r < 2){
             printf("%c",219);
         }
@@ -152,14 +164,14 @@ int8_t groundDraw(){
     }
     for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
-        gotoxy(i,60);
+        gotoxy(i,GROUND_HEIGHT+4);
         if (r > 4){
             printf("%c",176);
         }
     }
     for(i=1; i <=SCREEN_WIDTH; i++){
         int r = rand()%20;
-        gotoxy(i,61);
+        gotoxy(i,GROUND_HEIGHT+5);
         if (r < 4){
             printf("%c",176);
         }
@@ -180,7 +192,7 @@ int8_t groundDraw(){
 void initBoxes(boxes_t *box){
     (*box).x1=randomNumber(1, SCREEN_WIDTH);
     (*box).y1 = GROUND_HEIGHT-1;
-    (*box).x2= (*box).x1+rand()%3+30;
+    (*box).x2= (*box).x1+rand()%30;
     (*box).y2 = (*box).y1-rand()%3;
 }
 
@@ -209,9 +221,9 @@ void createBoxes(boxes_t boxes[], int8_t emptyIndex) {
 *
 * return; void.
 */
-void drawBoxes(boxes_t boxes[], int numBoxes){
+void drawBoxes(boxes_t boxes[], int numBoxes, int colorFG){
     int i, j, k;
-    fgcolor(groundDraw());
+    fgcolor(colorFG);
     for (i=0; i < numBoxes;i++){
         for(j=boxes[i].x1; j <= boxes[i].x2; j++){
              for(k=boxes[i].y2; k <= boxes[i].y1; k++){

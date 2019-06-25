@@ -52,6 +52,8 @@ void subLives(SpaceShip_t * ship, uint8_t *buffer);
 int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score);
 int checkBoxes(int x, boxes_t boxes[], int numBoxes);
 
+void addPowerBullet(int numPowerBullets, uint8_t *buffer);
+void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer, int8_t usedPowerUp);
 
 #endif
 

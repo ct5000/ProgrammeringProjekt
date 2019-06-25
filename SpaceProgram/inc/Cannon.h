@@ -24,11 +24,12 @@
 
 typedef struct {
     int32_t x, y, vx, vy;
+    int8_t powerUp;
 } cannonBall_t;
 
 
 
-void initCannon(cannonBall_t *bullet, SpaceShip_t *ship);
+void initCannon(cannonBall_t *bullet, SpaceShip_t *ship, int8_t isPower);
 
 int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]);
 
@@ -43,7 +44,11 @@ void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls);
 
 void createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship);
 
+void createPowerBall(cannonBall_t powerBullets[], int8_t emptyIndex, SpaceShip_t *ship);
+
 void gravitate(cannonBall_t *p);
+
+
 
 
 #endif

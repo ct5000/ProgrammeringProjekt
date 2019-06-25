@@ -7,6 +7,7 @@
     int shipFlag2 = 0;
     int shipFlag3 = 0;
     int spawnRateFlag =0;
+    int soundFlag =0;
 
 /*
  * Function: setupLED
@@ -329,6 +330,7 @@ void TIM1_BRK_TIM15_IRQHandler(void) {
     shipFlag3++;
     spawnRateFlag++;
     time++;
+    soundFlag++;
     TIM15->SR &= ~0x0001; // Clear interrupt bit
  }
 
@@ -477,6 +479,30 @@ void resetBulletFlag() {
 }
 
 /*
+ * Function: getSoundFlag
+ * --------------------------
+ * Returns the value of soundFlag
+ *
+ *
+ * returns: void
+ */
+int getSoundFlag() {
+    return soundFlag;
+ }
+
+/*
+ * Function: resetSoundFlag
+ * --------------------------
+ * Resets the value of soundFlag
+ *
+ *
+ * returns: void
+ */
+void resetSoundFlag() {
+    soundFlag = 0;
+}
+
+/*
  * Function: getTime
  * --------------------------
  * Returns the value of time
@@ -484,6 +510,7 @@ void resetBulletFlag() {
  *
  * returns: void
  */
+
 int getTime(){
     return(time%100);
 }

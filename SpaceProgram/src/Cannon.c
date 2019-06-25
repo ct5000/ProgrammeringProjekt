@@ -12,11 +12,12 @@
 *
 * return: void
 */
-void initCannon(cannonBall_t *bullet, SpaceShip_t *ship){
+void initCannon(cannonBall_t *bullet, SpaceShip_t *ship,int8_t isPower){
     (*bullet).x=(*ship).x <<14;
     (*bullet).y=((*ship).y-2) <<14;
     (*bullet).vx =  (-2 * Cos(readDegree()));
     (*bullet).vy = (-2 * Sin(readDegree()));
+    (*bullet).powerUp= isPower;
 }
 /*
 Function: updateBulletPosition
@@ -30,6 +31,7 @@ return: void.
 */
 int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]){
     int8_t bounds;
+    char symbol = ((*bullet).powerUp) ? 120 : 169;
     deleteSymbol((*bullet).x>>14, (*bullet).y>>14);
 
     (*bullet).x+=(*bullet).vx;
@@ -38,7 +40,7 @@ int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]){
     gravitate(bullet);
 
     if (bounds){
-        drawSymbol((*bullet).x>>14,(*bullet).y >>14, 169);
+        drawSymbol((*bullet).x>>14,(*bullet).y >>14, symbol);
     }
     else {
         (*bullet).x-=(*bullet).vx;
@@ -135,8 +137,15 @@ return: void
 void createBall(cannonBall_t bullets[], int8_t emptyIndex, SpaceShip_t *ship) {
     cannonBall_t bullet;
 
-    initCannon(&bullet, ship);
+    initCannon(&bullet, ship,0);
     bullets[emptyIndex] = bullet;
+}
+
+void createPowerBall(cannonBall_t powerBullets[], int8_t emptyIndex, SpaceShip_t *ship) {
+    cannonBall_t bullet;
+
+    initCannon(&bullet, ship,1);
+    powerBullets[emptyIndex] = bullet;
 }
 
 /*Function: bulletKilled
@@ -189,3 +198,17 @@ void gravitate(cannonBall_t *bullet){
 
 
 }
+
+/*Function: addPowerBullet
+This function is used update the LCD display when a new power bullet is found.
+An 'O' is added for every powerBullet on line 3.
+
+numPowerBullets: the total number of power bullets
+buffer: an 512 long array where every element represents a character on LCD display
+
+return void
+
+*/
+
+
+

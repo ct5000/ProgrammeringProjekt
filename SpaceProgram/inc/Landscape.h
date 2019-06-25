@@ -23,18 +23,18 @@ typedef struct{
     int32_t x1,y1,x2, y2;
 } boxes_t;
 
-void drawLandscape();
+int8_t drawLandscape(int change, int colorBG, int colorFG);
 
 
 int randomNumber(int32_t mini, int32_t maxi);
 void initMineral(mineral_t *p);
 void drawMinerals(mineral_t minerals[], int numMinerals);
 void createMineral(mineral_t minerals[], int8_t emptyIndex);
-int8_t groundDraw();
+int8_t groundDraw(int change, int colorFG);
 
 void initBoxes(boxes_t *box);
 void createBoxes(boxes_t boxes[], int8_t emptyIndex);
-void drawBoxes(boxes_t boxes[], int numBoxes);
+void drawBoxes(boxes_t boxes[], int numBoxes, int colorFG);
 
 void mineralKilled(mineral_t minerals[], int8_t index, int8_t numMinerals);
 
