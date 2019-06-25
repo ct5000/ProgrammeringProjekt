@@ -169,11 +169,6 @@ void showDirection(int8_t old, int8_t next){
  */
 void writeLED(int8_t ledcolor){
 
-    RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
-    RCC->AHBENR |= RCC_AHBPeriph_GPIOB; // Enable clock for GPIO Port B
-    RCC->AHBENR |= RCC_AHBPeriph_GPIOC; // Enable clock for GPIO Port C
-
-
     switch(ledcolor){
         case 0:
         // off
@@ -271,16 +266,15 @@ void showColor(int8_t joystick){
 void setTimer(){
 
 
-     RCC->APB1ENR |= RCC_APB1Periph_TIM2; // Enable clock line to timer 2;
+     RCC->APB2ENR |= RCC_APB2Periph_TIM15; // Enable clock line to timer 2;
 
-     TIM2->CR1 = 0x00000000; // Configure timer 2
-     TIM2->ARR = 0x3CF9; // Set reload value = 15609
-     TIM2->PSC = 0x028; // Set prescale value = 40
+     TIM15->CR1 = 0x0000; // Configure timer 15
+     TIM15->ARR = 63999; // Set reload value
+     TIM15->PSC = 9; // Set prescale value
+     TIM15->DIER |= 0x0001; // Enable timer 15 interrupts
 
-     TIM2->DIER |= 0x0001; // Enable timer 2 interrupts
-
-     NVIC_SetPriority(TIM2_IRQn, 0); // Set interrupt priority
-     NVIC_EnableIRQ(TIM2_IRQn); // Enable interrupt
+     NVIC_SetPriority(TIM1_BRK_TIM15_IRQn, 0); // Set interrupt priority
+     NVIC_EnableIRQ(TIM1_BRK_TIM15_IRQn); // Enable interrupt
 
 
 }
@@ -294,11 +288,11 @@ void setTimer(){
  * returns: void
  */
 void startStop(){
-    if (TIM2->CR1 & 0x01){
-        TIM2->CR1 = 0x00; //starts timer
+    if (TIM15->CR1 & 0x01){
+        TIM15->CR1 = 0x00; //stops timer
     }
     else {
-        TIM2->CR1 = 0x01;
+        TIM15->CR1 = 0x01; //starts timer
     }
 }
 
@@ -311,9 +305,7 @@ void startStop(){
  * returns: void
  */
 void resetTime(){
-    if (TIM2->CR1 & 0x01){
-        TIM2->CR1 = 0x00; //stops timer
-    }
+    TIM15->CR1 = 0x00; //stops timer
     time = 0;
 }
 
@@ -329,7 +321,7 @@ int split_time1(){
  *
  * returns: void
  */
-void TIM2_IRQHandler(void) {
+void TIM1_BRK_TIM15_IRQHandler(void) {
     alienFlag++;
     bulletFlag++;
     shipFlag1++;
@@ -337,7 +329,7 @@ void TIM2_IRQHandler(void) {
     shipFlag3++;
     spawnRateFlag++;
     time++;
-    TIM2->SR &= ~0x0001; // Clear interrupt bit
+    TIM15->SR &= ~0x0001; // Clear interrupt bit
  }
 
 /*
@@ -532,6 +524,38 @@ int gethour(){
     return(time/(100*60*60));
 }
 
+void setTimer2 () {
+    RCC->APB1ENR |= 0x00000001; // Enable clock line to timer 2;
+    TIM2->CR1 = 0x0000; // Disable timer
+    TIM2->ARR = 1000; // Set auto reload value
+    TIM2->PSC = PRESCALER_VALUE; // Set pre-scaler value
+    TIM2->CR1 |= 0x0001; // Enable timer
+
+    TIM2->CCER &= ~TIM_CCER_CC3P; // Clear CCER register
+    TIM2->CCER |= 0x00000001 << 8; // Enable OC3 output
+    TIM2->CCMR2 &= ~TIM_CCMR2_OC3M; // Clear CCMR2 register
+    TIM2->CCMR2 &= ~TIM_CCMR2_CC3S;
+    TIM2->CCMR2 |= TIM_OCMode_PWM1; // Set output mode to PWM1
+    TIM2->CCMR2 &= ~TIM_CCMR2_OC3PE;
+    TIM2->CCMR2 |= TIM_OCPreload_Enable;
+    TIM2->CCR3 = 500; // Set duty cycle to 50 %
+
+    RCC->AHBENR |= RCC_AHBENR_GPIOBEN; // Enable clock line for GPIO bank B
+    GPIOB->MODER &= ~(0x00000003 << (10 * 2)); // Clear mode register
+    GPIOB->MODER |= (0x00000002 << (10 * 2)); // Set mode register
+    GPIO_PinAFConfig(GPIOB, GPIO_PinSource10, GPIO_AF_1);
+}
+
+
+void setFreq(uint16_t freq) {
+     uint32_t reload = 64e6 / freq / (PRESCALER_VALUE + 1) - 1;
+     TIM2->ARR = reload; // Set auto reload value
+     TIM2->CCR3 = reload/2; // Set compare register
+     TIM2->EGR |= 0x01;
+ }
+
+
+
 /*
  * Function: setupPot
  * --------------------------
@@ -542,17 +566,13 @@ int gethour(){
  */
 void setupPot(){
     RCC->AHBENR |= RCC_AHBPeriph_GPIOA; // Enable clock for GPIO Port A
-    // Set pin PA4 to input
+    // Set pin PA0 to input
     GPIOA->MODER &= ~(0x00000003 << (0 * 2)); // Clear mode register
     GPIOA->MODER |= (0x00000000 << (0 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
 
-    // Set pin PA4 to input
+    // Set pin PA1 to input
     GPIOA->MODER &= ~(0x00000003 << (1 * 2)); // Clear mode register
     GPIOA->MODER |= (0x00000000 << (1 * 2)); // Set mode register (0x00 – Input, 0x01 - Output, 0x02 - Alternate Function, 0x03 - Analog in/out)
-   // GPIOA->PUPDR &= ~(0x00000003 << (1 * 2)); // Clear push/pull register
-    //GPIOA->PUPDR |= (0x00000001 << (1 * 2)); // Set push/pull register (0x00 -No pull, 0x01 - Pull-up, 0x02 - Pull-down)
-
-
 
     RCC->CFGR2 &= ~RCC_CFGR2_ADCPRE12; // Clear ADC12 prescaler bits
     RCC->CFGR2 |= RCC_CFGR2_ADCPRE12_DIV6; // Set ADC12 prescaler to 6
@@ -580,16 +600,16 @@ void setupPot(){
  * Returns the value of the left potentiometer
  *
  *
- * returns: void
+ * returns: A value between 0 and 4095 for the voltages of the potentiometer
  */
 int16_t readPotLeft(){
-
+    uint16_t x;
     ADC_RegularChannelConfig(ADC1, ADC_Channel_1, 1, ADC_SampleTime_1Cycles5);
 
     ADC_StartConversion(ADC1); // Start ADC read
     while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
 
-    uint16_t x = ADC_GetConversionValue(ADC1); // Read the ADC value
+    x = ADC_GetConversionValue(ADC1); // Read the ADC value
 
     return x;
 
@@ -601,18 +621,18 @@ int16_t readPotLeft(){
  * Returns the value of the Right potentiometer
  *
  *
- * returns: void
+ * returns: A value between 0 and 4095 for the voltages of the potentiometer
  */
 int16_t readPotRight(){
-
+    uint16_t x;
     ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_1Cycles5);
 
     ADC_StartConversion(ADC1); // Start ADC read
     while (ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == 0); // Wait for ADC read
 
-    uint16_t y = ADC_GetConversionValue(ADC1); // Read the ADC value
+    x = ADC_GetConversionValue(ADC1); // Read the ADC value
 
-    return y;
+    return x;
 
 }
 
