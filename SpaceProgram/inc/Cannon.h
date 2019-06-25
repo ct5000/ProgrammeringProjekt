@@ -9,6 +9,7 @@
 #include "SpaceShip.h"
 #include "vectors.h"
 #include "aliens.h"
+#include "landscape.h"
 /*struct: bullet
 
     x and y represent the position of the bullet
@@ -29,9 +30,9 @@ typedef struct {
 
 void initCannon(cannonBall_t *bullet, SpaceShip_t *ship);
 
-void updateBallPosition(cannonBall_t *bullet);
+int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]);
 
-int8_t inBallBounds(cannonBall_t *bullet);
+int8_t inBallBounds(cannonBall_t *bullet, boxes_t boxes[]);
 
 
 int16_t readDegree();

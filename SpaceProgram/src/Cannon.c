@@ -28,17 +28,23 @@ bullet: A pointer to the bullet thats position is to be updated.
 return: void.
 
 */
-void updateBallPosition(cannonBall_t *bullet){
+int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]){
+    int8_t bounds;
     deleteSymbol((*bullet).x>>14, (*bullet).y>>14);
 
     (*bullet).x+=(*bullet).vx;
     (*bullet).y+=(*bullet).vy;
-
+    bounds = inBallBounds(bullet, boxes);
     gravitate(bullet);
 
-    if (inBallBounds(bullet)){
+    if (bounds){
         drawSymbol((*bullet).x>>14,(*bullet).y >>14, 169);
     }
+    else {
+        (*bullet).x-=(*bullet).vx;
+    }
+    return bounds;
+
 }
 /* Function: inBulletBounds
 This function determines determines if the bullet is above the ground but still
@@ -48,11 +54,19 @@ bullet: A pointer to the bullet that must be determined if is in the legal area.
 return: returns 1 if the bullet is in the legal area, otherwise 0.
 */
 
-int8_t inBallBounds(cannonBall_t *bullet){
+int8_t inBallBounds(cannonBall_t *bullet, boxes_t boxes[]){
     int x = (*bullet).x >>14;
     int y = (*bullet).y >>14;
+    int k = 0;
 
-    if (x>=1 && x <=(SCREEN_WIDTH-2) && y >= 2 && y < GROUND_HEIGHT-1){
+    int boxIndex = checkBoxes(x, boxes, 10);
+    if (boxIndex > 0){
+           k= y< boxes[boxIndex-1].y2-1;
+    }
+    else {
+           k= y < GROUND_HEIGHT-1;
+    }
+    if ( x>=1 && x <=(SCREEN_WIDTH-2) && y >= 2 && k ){
         return 1;
     }
     return 0;

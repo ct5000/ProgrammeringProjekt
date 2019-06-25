@@ -16,6 +16,7 @@ typedef struct{
     int32_t x,y;
     int8_t fuel;
     int8_t powerUp;
+    int8_t shield;
 } mineral_t;
 
 typedef struct{

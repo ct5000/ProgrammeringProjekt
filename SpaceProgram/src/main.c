@@ -57,6 +57,7 @@ int main(void){
 
     cannonBall_t cannonBalls[50];
     int8_t numBalls = 0;
+    int8_t aliveBall;
 
     powerBullet_t powerBullets[5];
     int8_t numPowerBullets = 0;
@@ -150,7 +151,8 @@ int main(void){
 
                             }
                         }
-                        updateAliens(aliens,ship ,numAliens, buffer);
+                        updateAliens(aliens,ship ,numAliens, buffer, boxes);
+
                         if ((*ship).fuel >= 50){
                             if (on) {
                                     writeLED(0);
@@ -212,7 +214,7 @@ int main(void){
 
 
                         for (i=0; i<numBalls; i++){
-                                updateBallPosition(&(cannonBalls[i]));
+                                aliveBall = updateBallPosition(&(cannonBalls[i]), boxes);
 
                                 killedAliens = hitAliens(aliens, cannonBalls, numAliens, numBalls);
                                 numAliens -= killedAliens;
@@ -221,7 +223,7 @@ int main(void){
                                 }
 
 
-                                if((!inBallBounds(&(cannonBalls[i]))) || killedAliens) {
+                                if((!aliveBall) || killedAliens) {
                                        ballKilled(cannonBalls, i, numBalls);
                                        numBalls--;
 
@@ -281,7 +283,7 @@ int main(void){
                         drawLandscape();
                         groundDraw();
                         drawMinerals(minerals, numMinerals);
-                        drawShip((*ship).x, (*ship).y);
+                        drawShip((*ship).x, (*ship).y, 0);
                         where = 2;
                         fgcolor(7);
                         startStop();
@@ -310,7 +312,7 @@ int main(void){
                     (*ship).vy=0;
                     (*ship).fuel = 40;
 
-                    drawShip((*ship).x,(*ship).y);
+                    drawShip((*ship).x,(*ship).y,0);
 
 
                     addfuel(ship,buffer);

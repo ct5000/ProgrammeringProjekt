@@ -1,6 +1,5 @@
 # include "Landscape.h"
 
-
 /*  Function: drawlandscape.
 * -----------------------------------------------
 * Draws the landscape at ground height and all the way down to screen height.
@@ -20,8 +19,6 @@ void drawLandscape(){
     }
 
 }
-
-
 
 /*  Function: randomNumber.
 * -----------------------------------------------
@@ -45,17 +42,20 @@ int randomNumber(int32_t mini, int32_t maxi){
 * returns; void.
 */
 void initMineral(mineral_t *mineral){
-    int num = rand()%3;
+    int num = rand()%10;
     (*mineral).x=randomNumber(1, 240);
     (*mineral).y=randomNumber(GROUND_HEIGHT+1, SCREEN_HEIGHT) ;
     (*mineral).fuel=randomNumber(5, 12);
 
-
-    if (num == 1) {
+    if (num < 4) {
             (*mineral).powerUp = 1;
+    }
+    else if (num == 5){
+            (*mineral).shield = 1;
     }
     else {
             (*mineral).powerUp = 0;
+            (*mineral).shield =0;
     }
 }
 
@@ -74,7 +74,7 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
     for (i=0; i < numMinerals;i++){
         fgcolor(1);
         gotoxy((minerals[i]).x,(minerals[i]).y);
-        printf("%c",219); //i+49 to show numbers
+        printf("%c",219);
         fgcolor(7);
     }
 }
@@ -90,9 +90,8 @@ void drawMinerals(mineral_t minerals[], int numMinerals){
 */
 void createMineral(mineral_t minerals[], int8_t emptyIndex) {
     mineral_t mineral;
-
-            initMineral(&mineral);
-            minerals[emptyIndex] = mineral;
+    initMineral(&mineral);
+    minerals[emptyIndex] = mineral;
 }
 
 
@@ -170,21 +169,46 @@ int8_t groundDraw(){
     return color;
 }
 
+/*  Function: initBoxes.
+* -----------------------------------------------
+* Creates boxes at random positions.
+*
+* box; initializes the box.
+*
+* returns; void.
+*/
 void initBoxes(boxes_t *box){
     (*box).x1=randomNumber(1, SCREEN_WIDTH);
     (*box).y1 = GROUND_HEIGHT-1;
-
-
-    (*box).x2= (*box).x1+rand()%3+15;
+    (*box).x2= (*box).x1+rand()%3+30;
     (*box).y2 = (*box).y1-rand()%3;
 }
 
+
+/*  Function: createBoxes.
+* -----------------------------------------------
+* Create minerals in the array.
+*
+* boxes[]; the array of boxes.
+* emptyIndex;
+*
+* return; void.
+*/
 void createBoxes(boxes_t boxes[], int8_t emptyIndex) {
     boxes_t box;
     initBoxes(&box);
     boxes[emptyIndex] = box;
 }
 
+/*  Function: drawBoxes.
+* -----------------------------------------------
+* draws boxes on the surface.
+*
+* boxes[]; the array of boxes.
+* numBoxes; number of boxes.
+*
+* return; void.
+*/
 void drawBoxes(boxes_t boxes[], int numBoxes){
     int i, j, k;
     fgcolor(groundDraw());
@@ -192,6 +216,7 @@ void drawBoxes(boxes_t boxes[], int numBoxes){
         for(j=boxes[i].x1; j <= boxes[i].x2; j++){
              for(k=boxes[i].y2; k <= boxes[i].y1; k++){
                 drawSymbol(j , k, 219);
+
             }
         }
     }

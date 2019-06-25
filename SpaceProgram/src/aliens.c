@@ -30,6 +30,7 @@ void initAlien(alien_t *alien) {
 void updateAlien(alien_t *alien) {
     int num = randomNumber(0, 15);
     deleteAlien((*alien).posX, (*alien).posY);
+
     if ((*alien).dir == 1) {
             if ((*alien).posX + 2 >= SCREEN_WIDTH) {
                     (*alien).dir = 2;
@@ -49,6 +50,7 @@ void updateAlien(alien_t *alien) {
     if (num == 0) {
             (*alien).posY += 3;
     }
+
     drawAlien((*alien).posX, (*alien).posY);
 }
 
@@ -64,13 +66,29 @@ void updateAlien(alien_t *alien) {
  *
  * returns: void
  */
-void updateAliens(alien_t aliens[],SpaceShip_t * ship , int8_t numAliens, uint8_t *buffer) {
+void updateAliens(alien_t aliens[],SpaceShip_t * ship , int8_t numAliens, uint8_t *buffer, boxes_t boxes[]) {
     int i;
+    int boxIndex;
+    int k;
+
     for (i = 0; i < numAliens; i++) {
             updateAlien(&aliens[i]);
-            if (aliens[i].posY >= GROUND_HEIGHT - 3) {
+            boxIndex = checkBoxes(aliens[i].posX, boxes, 10);
+            if (boxIndex > 0){
+                k = aliens[i].posY >= boxes[boxIndex-1].y2-3;
+            }
+            else{
+                k = aliens[i].posY >= GROUND_HEIGHT - 3;
+            }
+            if (k) {
                 alienKilled(aliens, i, numAliens);
-                subLives(ship,buffer);
+
+                if ((*ship).shield == 1){
+                    (*ship).shield = 0;
+                }
+                else{
+                    subLives(ship,buffer);
+                }
             }
     }
 }
@@ -161,7 +179,12 @@ int8_t collide(alien_t aliens[], SpaceShip_t *ship, int8_t numAliens, uint8_t *b
             inX= (shipX >= aliX - 2 && shipX <= aliX + 2);
             inY= (shipY >= aliY - 2 && shipY <= aliY + 2);
             if (inX && inY){
+                    if( (*ship).shield == 1){
+                        (*ship).shield = 0;
+                    }
+                    else{
                     subLives(ship, buffer);
+                    }
                     alienKilled(aliens,j,numAliens);
                     aliensHit++;
             }

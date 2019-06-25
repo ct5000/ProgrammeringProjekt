@@ -24,7 +24,7 @@ typedef struct {
 
 void init_alien(alien_t *alien);
 void updateAlien(alien_t *alien);
-void updateAliens(alien_t aliens[], SpaceShip_t * ship, int8_t numAliens, uint8_t *buffer);
+void updateAliens(alien_t aliens[], SpaceShip_t * ship, int8_t numAliens, uint8_t *buffer, boxes_t boxes[]);
 void alienKilled(alien_t aliens[], int8_t index, int8_t numAliens);
 int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex, int spawnRate);
 void makeAlien(alien_t aliens[], int8_t emptyIndex);

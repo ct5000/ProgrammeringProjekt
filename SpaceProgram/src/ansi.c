@@ -1030,14 +1030,26 @@ void drawAlien(int x, int y) {
  *
  * returns: void
  */
-void drawShip(int x, int y) {
-    fgcolor(1);
-    gotoxy(x - 1,y - 1);
-    printf("%c%c%c", 217, 65, 192);
-    gotoxy(x - 1, y);
-    printf("%c%c%c", 219, 206, 219);
-    gotoxy(x - 1, y + 1);
-    printf("%c%c%c", 201, 190, 187);
+void drawShip(int x, int y, int shield) {
+    if (shield){
+        fgcolor(4);
+        gotoxy(x - 1,y - 1);
+        printf("%c%c%c", 217, 65, 192);
+        gotoxy(x - 1, y);
+        printf("%c%c%c", 219, 206, 219);
+        fgcolor(1);
+        gotoxy(x - 1, y + 1);
+        printf("%c%c%c", 201, 190, 187);
+    }
+    else{
+        fgcolor(1);
+        gotoxy(x - 1,y - 1);
+        printf("%c%c%c", 217, 65, 192);
+        gotoxy(x - 1, y);
+        printf("%c%c%c", 219, 206, 219);
+        gotoxy(x - 1, y + 1);
+        printf("%c%c%c", 201, 190, 187);
+    }
     fgcolor(7);
 }
 

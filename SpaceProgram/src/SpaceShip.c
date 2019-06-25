@@ -17,7 +17,8 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
     (*ship).lives = 5;
     (*ship).fuel=fuel;
     (*ship).powerUp = 0;
-    drawShip(x,y);
+    (*ship).shield = 0;
+    drawShip(x,y,0);
 }
 
 /*  Function: updateSpaceShip.
@@ -31,27 +32,35 @@ void initSpaceShip(SpaceShip_t *ship, int32_t x, int32_t y, int16_t fuel) {
 
 void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]){
     int8_t boundsAfter, boundsBefore;
+    int8_t boxIndexBefore, boxIndexAfter;
     int boxIndex;
     deleteAlien((*ship).x,(*ship).y);
     boundsBefore = inBounds(ship, boxes);
+    boxIndexBefore = checkBoxes((*ship).x, boxes, 10);
     (*ship).x += (*ship).vx;
     (*ship).y += (*ship).vy;
     boundsAfter = inBounds(ship, boxes);
-    if (boundsBefore == 3 && boundsAfter == 9) {
+    boxIndexAfter = checkBoxes((*ship).x, boxes, 10);
+    if ((boundsBefore == 3 || boundsBefore == 0)  && boundsAfter == 9) {
             (*ship).x -= (*ship).vx;
             boundsAfter = boundsBefore;
     }
-
-
+    else if(boundsAfter == 9 && boxIndexBefore != boxIndexAfter) {
+            if (boxes[boxIndexAfter-1].y2 < boxes[boxIndexBefore-1].y2) {
+                    (*ship).x -= (*ship).vx;
+            }
+    }
 
     switch (boundsAfter) {
         case 1: //far left
             (*ship).x = 2;
             (*ship).vx = 0;
+
             break;
         case 2:
             (*ship).x = SCREEN_WIDTH - 1;
             (*ship).vx = 0;
+
             break;
         case 3:
             (*ship).y = GROUND_HEIGHT - 2;
@@ -86,14 +95,14 @@ void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]){
             (*ship).vx = 0;
             break;
         case 9:
-            boxIndex = checkBoxes(ship, boxes, 10);
+            boxIndex = checkBoxes((*ship).x, boxes, 10);
             (*ship).y = boxes[boxIndex-1].y2 - 2;
-           // (*ship).y = boxes[boxIndex-1].y2;
             (*ship).vy = 0;
+            break;
         default:
             break;
     }
-	drawShip((*ship).x, (*ship).y);
+	drawShip((*ship).x, (*ship).y, (*ship).shield);
 }
 
 
@@ -163,23 +172,15 @@ void updateVelocity(SpaceShip_t * ship, char key, uint8_t *buffer, int place) {
 * 6; Lower right corner.
 * 7; Upper left corner.
 * 8; Upper right corner.
-* 0; None of the above.ww
+* 0; None of the above.
 */
 
 
 int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]){
-    int boxIndex = checkBoxes(ship, boxes, 10);
+    int boxIndex = checkBoxes((*ship).x, boxes, 10);
 
-    if ((*ship).x<=1){
-        return 1;
-    }
-    else if ((*ship).x>=SCREEN_WIDTH - 1){
-        return 2;
-    }
-    else if ((*ship).y < 2){
-       return 4;
-    }
-    else if ((*ship).x <= 1 && (*ship).y >= GROUND_HEIGHT - 2) {
+
+    if ((*ship).x <= 1 && (*ship).y >= GROUND_HEIGHT - 2) {
         return 5;
     }
     else if ((*ship).x >= SCREEN_WIDTH - 1 && (*ship).y >= GROUND_HEIGHT - 2) {
@@ -190,6 +191,15 @@ int8_t inBounds(SpaceShip_t *ship, boxes_t boxes[]){
     }
     else if ((*ship).x >= SCREEN_WIDTH - 1 && (*ship).y <= 2) {
         return 8;
+    }
+    else if ((*ship).x<=1){
+        return 1;
+    }
+    else if ((*ship).x>=SCREEN_WIDTH - 1){
+        return 2;
+    }
+    else if ((*ship).y < 2){
+       return 4;
     }
     else if (boxIndex){
             if ((*ship).y >= boxes[boxIndex-1].y2-2){
@@ -232,11 +242,15 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
                 (*ship).fuel += (minerals[i-1]).fuel;
                 (*ship).powerUp += (minerals[i-1]).powerUp;
 
-                for (j = GROUND_HEIGHT; j <= (minerals[i - 1]).y; j++ ){
+                if((minerals[i-1]).shield){
+                        (*ship).shield = 1;
+                }
+
+                for (j = (*ship).y+2; j <= (minerals[i - 1]).y; j++ ){
                     gotoxy((*ship).x, j);
                     printf("%c",186);
                 }
-                for (j = (minerals[i - 1]).y; j >= GROUND_HEIGHT; j-- ){
+                for (j = (minerals[i - 1]).y; j >= (*ship).y+2; j-- ){
                     gotoxy((*ship).x, j);
                     printf("%c",219);
                 }
@@ -248,12 +262,12 @@ int8_t drill(SpaceShip_t * ship, char key, int8_t place, mineral_t minerals[], i
             }
             else { //The ship is not above a mineral.
 
-                for (i = 0; i <= SCREEN_HEIGHT; i++ ){
-                    gotoxy((*ship).x, GROUND_HEIGHT+i);
+                for (j = 0; j <= SCREEN_HEIGHT; j++ ){
+                    gotoxy((*ship).x, (*ship).y+2+j);
                     printf("%c",186);
                 }
-                for (i = SCREEN_HEIGHT; i >= 0; i-- ){
-                    gotoxy((*ship).x, GROUND_HEIGHT+i);
+                for (j = SCREEN_HEIGHT; j >= 0; j-- ){
+                    gotoxy((*ship).x, (*ship).y+2+j);
                     printf("%c",219);
                 }
             }
@@ -383,15 +397,31 @@ int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals
     return 0;
 }
 
-int checkBoxes(SpaceShip_t *ship, boxes_t boxes[], int numBoxes){
+int checkBoxes(int x, boxes_t boxes[], int numBoxes){
     int8_t i;
-        for (i=0; i<numBoxes; i++){
+    int8_t foundBoxes[numBoxes];
+    int8_t foundBoxesTotal = 0;
+    int8_t largestYIndex;
 
-            if ((*ship).x + 1 >= (boxes[i]).x1 && (*ship).x - 1 <= (boxes[i]).x2){
-            return i+1;
-            }
+
+    for (i=0; i<numBoxes; i++){
+        if (x + 1 >= (boxes[i]).x1 && x - 1 <= (boxes[i]).x2){
+            foundBoxes[foundBoxesTotal] = i;
+            foundBoxesTotal++;
         }
-    return 0;
+    }
+    if (foundBoxesTotal > 0) {
+        largestYIndex = foundBoxes[0];
+        for (i = 1; i < foundBoxesTotal; i++) {
+                if (boxes[foundBoxes[i]].y2 < boxes[largestYIndex].y2) {
+                        largestYIndex = foundBoxes[i];
+                }
+        }
+        return largestYIndex + 1;
+    }
+    else {
+        return 0;
+    }
 }
 
 
