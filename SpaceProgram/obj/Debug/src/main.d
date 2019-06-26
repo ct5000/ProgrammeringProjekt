@@ -11,9 +11,8 @@ obj\debug\src\main.o: src\main.c inc/stm32f30x_conf.h \
  SPL\inc/stm32f30x_rcc.h SPL\inc/stm32f30x_rtc.h SPL\inc/stm32f30x_spi.h \
  SPL\inc/stm32f30x_tim.h SPL\inc/stm32f30x_usart.h \
  SPL\inc/stm32f30x_wwdg.h SPL\inc/stm32f30x_misc.h inc/30010_io.h \
- inc/ansi.h inc/LUTsin.h inc/trigonometric.h inc/LUTsin.h inc/vectors.h \
- inc/trigonometric.h inc/ball.h inc/mbed.h inc/serialRead.h \
- inc/30010_io.h inc/serialRead.h inc/LCD.h inc/charset.h inc/mbed.h \
- inc/charset.h inc/SpaceShip.h inc/vectors.h inc/ansi.h inc/Landscape.h \
- inc/LCD.h inc/Landscape.h inc/menu.h inc/bossKey.h inc/aliens.h \
- inc/SpaceShip.h inc/Cannon.h inc/aliens.h inc/landscape.h inc/bossKey.h
+ inc/ansi.h inc/mbed.h inc/LCD.h inc/30010_io.h inc/charset.h inc/mbed.h \
+ inc/SpaceShip.h inc/ansi.h inc/Landscape.h inc/LCD.h inc/Landscape.h \
+ inc/menu.h inc/bossKey.h inc/aliens.h inc/SpaceShip.h inc/Cannon.h \
+ inc/trigonometric.h inc/LUTsin.h inc/aliens.h inc/landscape.h \
+ inc/bossKey.h

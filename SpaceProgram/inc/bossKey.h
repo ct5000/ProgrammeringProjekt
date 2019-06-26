@@ -1,7 +1,6 @@
 #ifndef BOSSKEY_H
 #define BOSSKEY_H
 
-
 #include "30010_io.h"
 #include "ansi.h"
 #include "mbed.h"
@@ -12,6 +11,5 @@
 #include <stdlib.h>
 
 void bossKey();
-
 
 #endif

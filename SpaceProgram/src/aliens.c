@@ -12,8 +12,8 @@
  */
 void initAlien(alien_t *alien) {
     (*alien).dir = randomNumber(1, 2); //1 means alien going right, 2 means alien going left
-    (*alien).posX = randomNumber(3,SCREEN_WIDTH-3);
-    (*alien).posY = 3;
+    (*alien).posX = randomNumber(ALIEN_BORDER,SCREEN_WIDTH-ALIEN_BORDER);
+    (*alien).posY = ALIEN_Y;
     drawAlien((*alien).posX, (*alien).posY);
 }
 
@@ -28,29 +28,28 @@ void initAlien(alien_t *alien) {
  * returns: void
  */
 void updateAlien(alien_t *alien) {
-    int num = randomNumber(0, 15);
+    int num = randomNumber(0, DESCEND_CHANCE);
     deleteAlien((*alien).posX, (*alien).posY);
 
-    if ((*alien).dir == 1) {
-            if ((*alien).posX + 2 >= SCREEN_WIDTH) {
+    if ((*alien).dir == 1) { //checks if the alien goes to the right
+            if ((*alien).posX + ALIEN_BORDER >= SCREEN_WIDTH) { //checks if it hits the edge
                     (*alien).dir = 2;
             }
             else {
                     (*alien).posX++;
             }
     }
-    else {
-            if ((*alien).posX - 2 <= 0) {
+    else { //else alien is going left
+            if ((*alien).posX - ALIEN_BORDER <= 0) { //checks if it hits the edge
                     (*alien).dir = 1;
             }
             else {
                     (*alien).posX--;
             }
     }
-    if (num == 0) {
+    if (num == 0) { //Check if alien goes down
             (*alien).posY += 3;
     }
-
     drawAlien((*alien).posX, (*alien).posY);
 }
 
@@ -70,26 +69,24 @@ void updateAliens(alien_t aliens[],SpaceShip_t * ship , int8_t numAliens, uint8_
     int i;
     int boxIndex;
     int k;
-
     for (i = 0; i < numAliens; i++) {
-            updateAlien(&aliens[i]);
-            boxIndex = checkBoxes(aliens[i].posX, boxes, 10);
-            if (boxIndex > 0){
-                k = aliens[i].posY >= boxes[boxIndex-1].y2-3;
+        updateAlien(&aliens[i]);
+        boxIndex = checkBoxes(aliens[i].posX, boxes, NUMBER_BOXES);
+        if (boxIndex > 0){ //if the alien is above a box it is the box height to consider
+            k = aliens[i].posY >= boxes[boxIndex-1].y2-ALIEN_BORDER;
+        }
+        else{
+            k = aliens[i].posY >= GROUND_HEIGHT - ALIEN_BORDER;
+        }
+        if (k) { //checks if the alien is too low
+            alienKilled(aliens, i, numAliens);
+            if ((*ship).shield == 1){
+                (*ship).shield = 0;
             }
             else{
-                k = aliens[i].posY >= GROUND_HEIGHT - 3;
+                subLives(ship,buffer);
             }
-            if (k) {
-                alienKilled(aliens, i, numAliens);
-
-                if ((*ship).shield == 1){
-                    (*ship).shield = 0;
-                }
-                else{
-                    subLives(ship,buffer);
-                }
-            }
+        }
     }
 }
 
@@ -106,9 +103,8 @@ void updateAliens(alien_t aliens[],SpaceShip_t * ship , int8_t numAliens, uint8_
  */
 void alienKilled(alien_t aliens[], int8_t index, int8_t numAliens) {
     int i;
-    //(*alien).alive = 0;
     deleteAlien((aliens[index]).posX, (aliens[index]).posY);
-    for (i = index; i < numAliens - 1; i ++) {
+    for (i = index; i < numAliens - 1; i ++) { //shifts aliens after the killed alien one to the left in the array
         aliens[i] = aliens[i + 1];
     }
 
@@ -125,31 +121,15 @@ void alienKilled(alien_t aliens[], int8_t index, int8_t numAliens) {
  *
  * returns: An 1 if there has been spawned an alien or else an 0.
  */
-int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex, int spawnRate) {
+int8_t spawnAlien(alien_t aliens[], int8_t emptyIndex, int8_t spawnRate) {
     alien_t alien;
     int num = randomNumber(0, spawnRate);
-    if (num == 0) {
+    if (num == 0) { //creates alien if the random number is 0
             initAlien(&alien);
             aliens[emptyIndex] = alien;
             return 1;
     }
     return 0;
-}
-
-/*
- * Function: makeAlien
- * --------------------------
- * Makes an alien in an array
- *
- * aliens: the array of aliens where an alien should be made.
- * emptyIndex: the index where an alien can be spawned
- *
- * returns: void
- */
-void makeAlien(alien_t aliens[], int8_t emptyIndex) {
-    alien_t alien;
-    initAlien(&alien);
-    aliens[emptyIndex] = alien;
 }
 
 /*
@@ -169,19 +149,21 @@ int8_t collide(alien_t aliens[], SpaceShip_t *ship, int8_t numAliens, uint8_t *b
     int inX,inY;
     int shipX, aliX, shipY, aliY;
     int aliensHit = 0;
-        for (j=0; j< numAliens; j++){
+        for (j=0; j< numAliens; j++){ //runs through the aliens
+            //get the data from alien and spaceship
             shipX = (*ship).x;
             aliX = aliens[j].posX;
             shipY = (*ship).y;
             aliY = aliens[j].posY;
-            inX= (shipX >= aliX - 2 && shipX <= aliX + 2);
-            inY= (shipY >= aliY - 2 && shipY <= aliY + 2);
-            if (inX && inY){
+            //checks for x and y direction
+            inX= (shipX >= aliX - COLLISION_ZONE && shipX <= aliX + COLLISION_ZONE);
+            inY= (shipY >= aliY - COLLISION_ZONE && shipY <= aliY + COLLISION_ZONE);
+            if (inX && inY){ //checks if inside the box and damage the if it is
                     if( (*ship).shield == 1){
                         (*ship).shield = 0;
                     }
                     else{
-                    subLives(ship, buffer);
+                        subLives(ship, buffer);
                     }
                     alienKilled(aliens,j,numAliens);
                     aliensHit++;

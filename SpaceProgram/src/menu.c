@@ -9,7 +9,7 @@
  */
 void drawMenu() {
     clrscr();
-    gotoxy(70, 3);
+    gotoxy(TITLE_STARTX, TITLE_Y);
     writeS(COLUMNSIZE);
     writeP(COLUMNSIZE);
     writeA(COLUMNSIZE);
@@ -19,23 +19,23 @@ void drawMenu() {
     writeR(COLUMNSIZE);
     writeE(COLUMNSIZE);
     writeS(COLUMNSIZE);
-    writeQ(COLUMNSIZE);
+    writeC(COLUMNSIZE);
     writeU(COLUMNSIZE);
     writeE(COLUMNSIZE);
-    gotoxy(88, 15);
+    gotoxy(MENU_X, 15);
     writeS(COLUMNSIZE);
     writeT(COLUMNSIZE);
     writeA(COLUMNSIZE);
     writeR(COLUMNSIZE);
     writeT(COLUMNSIZE);
-    gotoxy(88, 27);
+    gotoxy(MENU_X, 27);
     writeH(COLUMNSIZE);
     writeE(COLUMNSIZE);
     writeL(COLUMNSIZE);
     writeP(COLUMNSIZE);
-    gotoxy(83, 19);
+    gotoxy(ARROW_X, ARROW_Y1);
     drawArrow();
-    gotoxy(53, 40);
+    gotoxy(INSTRUCTION_X, INSTRUCTION_Y);
     printf("Use w up and s to choose menu point and hit enter to continue");
 
 }
@@ -53,18 +53,18 @@ void drawMenu() {
 int8_t updateArrow(char key, int8_t menu) {
     if (key == 's') {
             if (menu == 1) {
-                    gotoxy(83, 19);
+                    gotoxy(ARROW_X, ARROW_Y1);
                     printf("    ");
-                    gotoxy(83, 31);
+                    gotoxy(ARROW_X, ARROW_Y2);
                     drawArrow();
             }
             return 2;
     }
     else if (key == 'w') {
             if (menu == 2) {
-                   gotoxy(83, 31);
+                    gotoxy(ARROW_X, ARROW_Y2);
                     printf("    ");
-                    gotoxy(83, 19);
+                    gotoxy(ARROW_X, ARROW_Y1);
                     drawArrow();
             }
             return 1;
@@ -81,17 +81,19 @@ int8_t updateArrow(char key, int8_t menu) {
  */
 void drawHelp() {
     clrscr();
-    gotoxy(70, 15);
+    gotoxy(TITLE_STARTX, 15);
     printf("The purpose of SPACE RESQUE is to escape the planet. At the same time aliens are attacking you to hinder your escape.");
-    gotoxy(70, 16);
-    printf("Your space ship does now have the necessary fuel to leave the gravity field of the planet. Luckily the planet's underground");
-    gotoxy(70, 17);
+    gotoxy(TITLE_STARTX, 16);
+    printf("Your space ship does not have the necessary fuel to leave the gravity field of the planet. Luckily the planet's underground");
+    gotoxy(TITLE_STARTX, 17);
     printf("is full of it, you just have to drill it up using your drill. To maneuver your ship use W, A and D. Be aware of the gravity");
-    gotoxy(70, 18);
-    printf("pulling you down. To drill for fuel press E. To aim your ships canon use the potentiometer on the micro controller. To fire");
-    gotoxy(70, 19);
-    printf("press SPACE. Good luck");
-    gotoxy(83, 50);
+    gotoxy(TITLE_STARTX, 18);
+    printf("pulling you down. To drill for fuel press E. Besides fuel you can get a shield or some POWER BULLETS. To aim your ships");
+    gotoxy(TITLE_STARTX, 19);
+    printf("canon use the potentiometer on the micro controller. To fire press SPACE. Have been so lucky to get some POWER BULLETS use them on G.");
+    gotoxy(TITLE_STARTX, 20);
+    printf("These bullets can go through multiple enemies. Good luck");
+    gotoxy(INSTRUCTION_X, INSTRUCTION_Y);
     printf("Press ENTER to return to the menu");
 }
 
@@ -110,7 +112,7 @@ void runningMenu() {
     //Keeps the player in the menu until it hits enter at START
     while(menu) {
         //reads user input if any
-        if (uart_get_count() > 0) {
+        if (uart_get_count() > 0) { //reads user input if any
                 keyStroke = uart_get_char();
                 uart_clear();
             }
@@ -156,11 +158,11 @@ void runningMenu() {
  *
  * returns: void
  */
-void gameOver(int8_t condition, int score, int level) {
-    color(7,0);
+void gameOver(int8_t condition, uint16_t score, uint8_t level) {
     char user;
+    color(7,0);
     clrscr();
-    gotoxy(70,3);
+    gotoxy(TITLE_STARTX,TITLE_Y);
     writeG(COLUMNSIZE);
     writeA(COLUMNSIZE);
     writeM(COLUMNSIZE);
@@ -185,15 +187,14 @@ void gameOver(int8_t condition, int score, int level) {
     default:
         printf("ERROR");
     }
-    gotoxy(70, 30);
+    gotoxy(INSTRUCTION_X, INSTRUCTION_Y);
     printf("Press enter to return to the menu");
-    gotoxy(110, 25);
+    gotoxy(LEVEL_SCORE, 25);
     printf("Score: %06d", score);
-    gotoxy(110, 26);
+    gotoxy(LEVEL_SCORE, 26);
     printf("Level: %06d", level);
-
     while(1) {
-            if (uart_get_count() > 0) {
+            if (uart_get_count() > 0) { //reads user input if any
                 user = uart_get_char();
                 uart_clear();
             }
@@ -223,11 +224,11 @@ void gameOver(int8_t condition, int score, int level) {
  *
  * returns: void
  */
-void nextLevel(int score, int level){
+void nextLevel(uint16_t score, uint8_t level){
     color(7,0);
     char user;
     clrscr();
-    gotoxy(88, 15);
+    gotoxy(TITLE_STARTX, TITLE_Y);
     writeN(COLUMNSIZE);
     writeE(COLUMNSIZE);
     writeX(COLUMNSIZE);
@@ -242,15 +243,15 @@ void nextLevel(int score, int level){
     writeE(COLUMNSIZE);
     writeL(COLUMNSIZE);
 
-    gotoxy(70, 30);
+    gotoxy(INSTRUCTION_X, INSTRUCTION_Y);
     printf("Press enter to start");
-    gotoxy(110, 25);
+    gotoxy(LEVEL_SCORE, 25);
     printf("Score: %06d", score);
-    gotoxy(110, 26);
+    gotoxy(LEVEL_SCORE, 26);
     printf("Level: %06d", level);
 
     while(1) {
-            if (uart_get_count() > 0) {
+            if (uart_get_count() > 0) { //reads user input if any
                 user = uart_get_char();
                 uart_clear();
             }

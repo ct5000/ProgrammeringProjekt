@@ -2,102 +2,103 @@
 
 
 /* Function: initBullet
-* ---------------------------------
-* This function initializes the the position of a bullet to the spaceships position.
-* The velocity is set according to the potentiometer.
-*
-* bullet: A pointer to the bullet to be initialized
-* ship: A pointer to the spaceship that is flying around, thats position
-* will be used
-*
-* return: void
-*/
-void initCannon(cannonBall_t *bullet, SpaceShip_t *ship,int8_t isPower){
-    (*bullet).x=(*ship).x <<14;
-    (*bullet).y=((*ship).y-2) <<14;
-    (*bullet).vx =  (-2 * Cos(readDegree()));
-    (*bullet).vy = (-2 * Sin(readDegree()));
+ * ---------------------------------
+ * This function initializes the the position of a bullet to the spaceships position.
+ * The velocity is set according to the potentiometer.
+ *
+ * bullet: A pointer to the bullet to be initialized
+ * ship: A pointer to the spaceship that is flying around, thats position
+ * will be used
+ *
+ * return: void
+ */
+void initBullet(bullet_t *bullet, SpaceShip_t *ship,int8_t isPower){
+    (*bullet).x=(*ship).x <<FIX14_SHIFT;
+    (*bullet).y=((*ship).y-2) <<FIX14_SHIFT;
+    (*bullet).vx =  (-BULLET_SPEED * Cos(readDegree()));
+    (*bullet).vy = (-BULLET_SPEED * Sin(readDegree()));
     (*bullet).powerUp= isPower;
 }
 /*
-Function: updateBulletPosition
-This function deletes the old symbol for the bullet. Determines the new position by adding the
-velocity. If the bullet is in the legal area it is drawn. The velocity is also affected by gravity.
-
-bullet: A pointer to the bullet thats position is to be updated.
-
-return: void.
-
+ * Function: updateBulletPosition
+ * -----------------------------------
+ * This function deletes the old symbol for the bullet. Determines the new position by adding the
+ * velocity. If the bullet is in the legal area it is drawn. The velocity is also affected by gravity.
+ *
+ * bullet: A pointer to the bullet thats position is to be updated.
+ *
+ * return: void.
 */
-int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]){
+int8_t updateBulletPosition(bullet_t *bullet, boxes_t boxes[]){
     int8_t bounds;
-    char symbol = ((*bullet).powerUp) ? 120 : 169;
-    deleteSymbol((*bullet).x>>14, (*bullet).y>>14);
-
+    char symbol = ((*bullet).powerUp) ? CHAR_POWERBULLET : CHAR_BULLET;
+    deleteSymbol((*bullet).x>>FIX14_SHIFT, (*bullet).y>>FIX14_SHIFT);
+    //update x- and y-coordinate for bullet
     (*bullet).x+=(*bullet).vx;
     (*bullet).y+=(*bullet).vy;
-    bounds = inBallBounds(bullet, boxes);
+    bounds = inBulletBounds(bullet, boxes);
     gravitate(bullet);
-
-    if (bounds){
+    if (bounds){ //draw bullet if in bounds
         drawSymbol((*bullet).x>>14,(*bullet).y >>14, symbol);
     }
-    else {
+    else { //don't draw bullet but put x-coordinate back
         (*bullet).x-=(*bullet).vx;
     }
     return bounds;
 
 }
+
 /* Function: inBulletBounds
-This function determines determines if the bullet is above the ground but still
-within the screen.
-bullet: A pointer to the bullet that must be determined if is in the legal area.
+ * -------------------------------
+ * This function determines determines if the bullet is above the ground but still
+ * within the screen.
+ * bullet: A pointer to the bullet that must be determined if is in the legal area.
+ *
+ * return: returns 1 if the bullet is in the legal area, otherwise 0.
+ */
 
-return: returns 1 if the bullet is in the legal area, otherwise 0.
-*/
-
-int8_t inBallBounds(cannonBall_t *bullet, boxes_t boxes[]){
-    int x = (*bullet).x >>14;
-    int y = (*bullet).y >>14;
+int8_t inBulletBounds(bullet_t *bullet, boxes_t boxes[]){
+    int x = (*bullet).x >>FIX14_SHIFT;
+    int y = (*bullet).y >>FIX14_SHIFT;
     int k = 0;
 
-    int boxIndex = checkBoxes(x, boxes, 10);
-    if (boxIndex > 0){
-           k= y< boxes[boxIndex-1].y2-1;
+    int boxIndex = checkBoxes(x, boxes, NUMBER_BOXES);
+    if (boxIndex > 0){ //checks if bullet is at box
+           k = y < boxes[boxIndex-1].y2-BULLET_BORDER; //logic if the bullet is over box
     }
     else {
-           k= y < GROUND_HEIGHT-1;
+           k = y < GROUND_HEIGHT-BULLET_BORDER; //logic if the bullet is not over box
     }
-    if ( x>=1 && x <=(SCREEN_WIDTH-2) && y >= 2 && k ){
+    if ( x>=1 && x <=(SCREEN_WIDTH-BULLET_BORDER) && y >= BULLET_BORDER && k ){ //checks if the ball is in bounds
         return 1;
     }
     return 0;
 }
 
 /*Function: readDegree
-* --------------------------
-* This function interprets the input from the potentiometer as a degree between 0 and 180.
-*
-*Return: returns an integer between 0 and 180.
-*/
+ * --------------------------
+ * This function interprets the input from the potentiometer as a degree between 0 and 180.
+ *
+ * Return: returns an integer between 0 and 180.
+ */
 int16_t readDegree(){
     return  (readPotRight()*100)/(2266);
 }
 
 /* Function: hitAliens
-* -----------------------------------
-* This function determines if any of the flying bullets have hit an alien, by having the
-* same position. A 2*2 box around the center of the alien is checked.
-*
-* aliens: An array of all the aliens.
-* bullet: An array of all the bullets.
-* numAliens: the number of flying aliens in the map.
-* numBullets: the number of flying bullets in the map
-*
-* return: An integer representing the number of aliens hit.
-*
-*/
-int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int8_t numBullets){
+ * -----------------------------------
+ * This function determines if any of the flying bullets have hit an alien, by having the
+ * same position. A 2*2 box around the center of the alien is checked.
+ *
+ * aliens: An array of all the aliens.
+ * bullet: An array of all the bullets.
+ * numAliens: the number of flying aliens in the map.
+ * numBullets: the number of flying bullets in the map
+ *
+ * return: An integer representing the number of aliens hit.
+ *
+ */
+int8_t hitAliens(alien_t aliens[], bullet_t bullets[], int8_t numAliens, int8_t numBullets){
     int i,j;
     int inX,inY;
     int aliensHit = 0;
@@ -106,17 +107,17 @@ int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int
     int cannY;
     int aliY;
 
-    for (i=0; i<numBullets; i++){
-        for (j=0; j< numAliens; j++){
-            cannX = (bullets[i].x) >> 14;
+    for (i=0; i<numBullets; i++){ //runs through the bullets
+        for (j=0; j< numAliens; j++){ //runs through the aliens
+            //get the data from alien and bullet
+            cannX = (bullets[i].x) >> FIX14_SHIFT;
             aliX = aliens[j].posX;
-            cannY = (bullets[i].y) >> 14;
+            cannY = (bullets[i].y) >> FIX14_SHIFT;
             aliY = aliens[j].posY;
-
-            inX= (cannX >= aliX - 2 && cannX <= aliX + 2);
-            inY= (cannY >= aliY - 2 && cannY <= aliY + 2);
-
-                if (inX && inY){
+            //checks for x and y direction
+            inX= (cannX >= aliX - COLLISION_ZONE && cannX <= aliX + COLLISION_ZONE);
+            inY= (cannY >= aliY - COLLISION_ZONE && cannY <= aliY + COLLISION_ZONE);
+                if (inX && inY){ //checks if inside the box and kills the alien
                         alienKilled(aliens,j,numAliens);
                         aliensHit++;
                 }
@@ -124,89 +125,70 @@ int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int
     }
     return aliensHit;
 }
-/*Function: createBullet
-This function adds intializes a new bullet to the list of active bullets.
-
-bullets: an array of all the bullets
-emptyIndex: the index where the new bullet is to be placed
-ship: a pointer to the active spaceship, which is used for the intialization
-
-return: void
-*/
-void createBall(cannonBall_t bullets[], int8_t emptyIndex, SpaceShip_t *ship) {
-    cannonBall_t bullet;
-
-    initCannon(&bullet, ship,0);
+/* Function: createBullet
+ * ------------------------
+ * This function adds initializes a new bullet to the list of active bullets.
+ *
+ * bullets: an array of all the bullets
+ * emptyIndex: the index where the new bullet is to be placed
+ * ship: a pointer to the active spaceship, which is used for the intialization
+ *
+ * return: void
+ */
+void createBullet(bullet_t bullets[], int8_t emptyIndex, SpaceShip_t *ship, int8_t type) {
+    bullet_t bullet;
+    initBullet(&bullet, ship,type);
     bullets[emptyIndex] = bullet;
 }
 
-void createPowerBall(cannonBall_t powerBullets[], int8_t emptyIndex, SpaceShip_t *ship) {
-    cannonBall_t bullet;
 
-    initCannon(&bullet, ship,1);
-    powerBullets[emptyIndex] = bullet;
-}
-
-/*Function: bulletKilled
-This function updates the array of active bullets so the deceased bullet is not included.
-This is either because it hit an alien or flew out of the map.
-
-bullets: An array of all the bullets
-index: where in the array the newly deceased bullet is
-numBullets: the number of active bullets in the map
-
-return: void
-
-*/
-void ballKilled(cannonBall_t bullets[], int8_t index, int8_t numBullets) {
+/* Function: bulletKilled
+ * -------------------------
+ * This function updates the array of active bullets so the deceased bullet is not included.
+ * This is either because it hit an alien or flew out of the map.
+ *
+ * bullets: An array of all the bullets
+ * index: where in the array the newly deceased bullet is
+ * numBullets: the number of active bullets in the map
+ *
+ * return: void
+ *
+ */
+void bulletKilled(bullet_t bullets[], int8_t index, int8_t numBullets) {
     int8_t i;
-    deleteSymbol( (((bullets[index]).x) >> 14) , (((bullets[index]).y) >> 14) );
+    deleteSymbol( (((bullets[index]).x) >> FIX14_SHIFT) , (((bullets[index]).y) >> FIX14_SHIFT) );
 
     for (i = index; i < numBullets - 1; i++) {
         bullets[i] = bullets[i + 1];
     }
 }
-/*Function: gravitate
-This function updates the velocity of the bullet as if it was affected by gravity,
-depending on if it was fired straight up, to the left, or to the right of the spaceship.
-This is determined using vx.
-
-bullet: A pointer to the bullets thats velocity must be updated.
-
-return: void.
-
-*/
 
 
-void gravitate(cannonBall_t *bullet){
+/* Function: gravitate
+ * ------------------------
+ * This function updates the velocity of the bullet as if it was affected by gravity,
+ * depending on if it was fired straight up, to the left, or to the right of the spaceship.
+ * This is determined using vx.
+ *
+ * bullet: A pointer to the bullets thats velocity must be updated.
+ *
+ * return: void.
+ *
+ */
+void gravitate(bullet_t *bullet){
     int32_t tempx = (*bullet).vx;
     int8_t degree = 2;
-
-    if ((*bullet).vx > 0){
+    if ((*bullet).vx > 0){ //checks if bullet velocity is to the right
+        //rotate the bullet with the clock
         (*bullet).vx = FIX14_MULT((*bullet).vx,Cos(degree)) - FIX14_MULT((*bullet).vy,Sin(degree));
         (*bullet).vy = FIX14_MULT(tempx,Sin(degree)) + FIX14_MULT((*bullet).vy,Cos(degree));
     }
-    else if((*bullet).vx < 0){
+    else if((*bullet).vx < 0){ //checks if bullet velocity is to the left
+        //rotate the bullet against the clock
         degree *= -1;
         (*bullet).vx = FIX14_MULT((*bullet).vx,Cos(degree)) - FIX14_MULT((*bullet).vy,Sin(degree));
         (*bullet).vy = FIX14_MULT(tempx,Sin(degree)) + FIX14_MULT((*bullet).vy,Cos(degree));
-    } else {
+    } else { //bullet velocity is straight up
         (*bullet).vy += degree <<6;
     }
-
-
 }
-
-/*Function: addPowerBullet
-This function is used update the LCD display when a new power bullet is found.
-An 'O' is added for every powerBullet on line 3.
-
-numPowerBullets: the total number of power bullets
-buffer: an 512 long array where every element represents a character on LCD display
-
-return void
-
-*/
-
-
-

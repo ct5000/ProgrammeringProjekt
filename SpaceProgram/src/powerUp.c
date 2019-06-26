@@ -100,22 +100,7 @@ int powerHitAliens(alien_t aliens[], powerBullet_t powerBullets[], int numAliens
     return aliensHit;
 }
 
-/*Function: createBullet
-This function adds intializes a new power bullet to the list of active power bullets.
 
-bullets: an array of all the bullets
-emptyIndex: the index where the new bullet is to be placed
-ship: a pointer to the active spaceship, which is used for the intialization
-
-return: void
-*/
-
-void createPowerBullet(powerBullet_t powerBullets[], int8_t emptyIndex, SpaceShip_t *ship) {
-    powerBullet_t powerBullet;
-
-    initPowerBullet(&powerBullet, ship);
-    powerBullets[emptyIndex] = powerBullet;
-}
 
 /*Function: bulletKilled
 This function updates the array of active bullets so the deceased bullet is not included.

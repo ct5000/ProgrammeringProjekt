@@ -1,4 +1,3 @@
-/* Includes ------------------------------------------------------------------*/
 #include "stm32f30x_conf.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -6,6 +5,9 @@
 
 #ifndef _ANSI_H_
 #define _ANSI_H_
+
+#define ESC 0x1B
+#define LETTER_BLOCK 219
 
 void fgcolor(uint8_t foreground);
 void bgcolor(uint8_t background);
@@ -15,10 +17,6 @@ void resetbgcolor();
 void clrscr();
 void clreol();
 void gotoxy(int x, int y);
-void underline(uint8_t on);
-void blink(uint8_t on);
-void inverse(uint8_t on);
-void box(int x1, int y1, int x2, int y2, int design, char windowName[]);
 void deleteSymbol(int x, int y);
 void drawSymbol(int x, int y, char sym);
 
@@ -28,6 +26,8 @@ void moveCursorRight(int i);
 void moveCursorLeft(int i);
 void moveCursorUp(int i);
 void moveCursorDown(int i);
+
+void drawVerticalRight(int8_t spaces);
 
 void writeA(int8_t sizeColumn);
 void writeC(int8_t sizeColumn);
@@ -54,10 +54,6 @@ void deleteLetter(int8_t sizeColumn);
 void drawAlien(int x, int y);
 void drawShip(int x, int y, int shield);
 void deleteAlien(int x, int y);
-void drawPowerBullet(int x, int y); ///////skal slettes
-void deletePowerBullet(int x, int y); ///// skal slettes
-
-
 void drawArrow();
 
 #endif

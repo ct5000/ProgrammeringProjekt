@@ -1,20 +1,23 @@
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
-#include "vectors.h"
-#include "serialRead.h"
-#include "mbed.h"
-#include "vectors.h"
-#include "ansi.h"
-#include "LUTsin.h"
-#include "trigonometric.h"
-#include "Landscape.h"
-#include "LCD.h"
-
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+
+#include "mbed.h"
+#include "ansi.h"
+#include "Landscape.h"
+#include "LCD.h"
+
+#define START_LIVES 5
+#define START_FUEL 20
+#define START_Y 40
+#define SPACESHIP_BORDER 2
+#define MAX_FUEL 103
+#define DRILL_CHAR 186
+#define LCD_START_WRITE 30
 
 
 /*  Struct: SpaceShip_t.
@@ -35,7 +38,8 @@ typedef struct {
     int8_t shield;
 } SpaceShip_t;
 
-void initSpaceShip(SpaceShip_t *ball, int32_t x, int32_t y, int16_t fuel);
+void initSpaceShip(SpaceShip_t *ball);
+void shipNextLevel(SpaceShip_t *ship, uint8_t *buffer);
 void updateSpaceShip(SpaceShip_t * ship, boxes_t boxes[]);
 void updateVelocity(SpaceShip_t * ship, char key,  uint8_t *buffer, int place);
 int8_t drill(SpaceShip_t * ship, char dirct, int8_t place, mineral_t minerals[], int numMinerals, uint8_t *buffer);
@@ -52,7 +56,7 @@ void subLives(SpaceShip_t * ship, uint8_t *buffer);
 int8_t endGameCondition(SpaceShip_t *ship, mineral_t minerals[], int numMinerals, int score);
 int checkBoxes(int x, boxes_t boxes[], int numBoxes);
 
-void addPowerBullet(int numPowerBullets, uint8_t *buffer);
+void addPowerBullet(SpaceShip_t * ship, uint8_t *buffer);
 void subPowerBullet(SpaceShip_t * ship, uint8_t *buffer, int8_t usedPowerUp);
 
 #endif

@@ -6,21 +6,18 @@
  *
  * returns: void
  */
-
-
 void bossKey() {
     int8_t num;
     char key;
-    gotoxy(1,1);
     color(15, 0);
     clrscr();
-    while (key != 'b' && key != 'B') {
-            if (uart_get_count() > 0) {
+    gotoxy(1,1);
+    while (key != 'b' && key != 'B') { //waits for the player to press b or B
+            if (uart_get_count() > 0) { //gets user input if any
                 key = uart_get_char();
                 uart_clear();
             }
-
-            if (getBulletFlag() > 1) {
+            if (getBulletFlag() > 1) { //slows the writing of 0s and 1s
                     num = rand() % 2;
                     printf("%d", num);
                     resetBulletFlag();

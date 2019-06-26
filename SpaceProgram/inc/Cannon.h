@@ -1,15 +1,22 @@
 #ifndef CANNON_H
 #define CANNON_H
 
-#include "mbed.h"
-#include "trigonometric.h"
 #include <stdio.h>
 #include <stdint.h>
+
+#include "mbed.h"
+#include "trigonometric.h"
 #include "ansi.h"
 #include "SpaceShip.h"
-#include "vectors.h"
 #include "aliens.h"
 #include "landscape.h"
+
+#define CHAR_POWERBULLET 120
+#define CHAR_BULLET 169
+#define BULLET_SPEED 2
+#define BULLET_BORDER 2
+
+
 /*struct: bullet
 
     x and y represent the position of the bullet
@@ -21,37 +28,18 @@
     vy: an integer that represents the velocity across the y-axis.
 
 */
-
 typedef struct {
     int32_t x, y, vx, vy;
     int8_t powerUp;
-} cannonBall_t;
+} bullet_t;
 
-
-
-void initCannon(cannonBall_t *bullet, SpaceShip_t *ship, int8_t isPower);
-
-int8_t updateBallPosition(cannonBall_t *bullet, boxes_t boxes[]);
-
-int8_t inBallBounds(cannonBall_t *bullet, boxes_t boxes[]);
-
-
+void initCannon(bullet_t *bullet, SpaceShip_t *ship, int8_t isPower);
+int8_t updateBulletPosition(bullet_t *bullet, boxes_t boxes[]);
+int8_t inBulletBounds(bullet_t *bullet, boxes_t boxes[]);
 int16_t readDegree();
-
-int8_t hitAliens(alien_t aliens[], cannonBall_t bullets[], int8_t numAliens, int8_t numBalls);
-
-void ballKilled(cannonBall_t cannonBalls[], int8_t index, int8_t numBalls);
-
-void createBall(cannonBall_t cannonBalls[], int8_t emptyIndex, SpaceShip_t *ship);
-
-void createPowerBall(cannonBall_t powerBullets[], int8_t emptyIndex, SpaceShip_t *ship);
-
-void gravitate(cannonBall_t *p);
-
-
-
+int8_t hitAliens(alien_t aliens[], bullet_t bullets[], int8_t numAliens, int8_t numBullets);
+void bulletKilled(bullet_t bullets[], int8_t index, int8_t numBullets);
+void createBullet(bullet_t bullets[], int8_t emptyIndex, SpaceShip_t *ship, int8_t type);
+void gravitate(bullet_t *p);
 
 #endif
-
-
-

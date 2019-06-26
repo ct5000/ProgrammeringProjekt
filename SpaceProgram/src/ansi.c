@@ -1,4 +1,4 @@
-#define ESC 0x1B
+
 #include "ansi.h"
 /*
  * Function: clrscr
@@ -37,131 +37,6 @@ void clreol(){  // clears the rest of a line // bruges ikke
  */
 void gotoxy(int x, int y){ // moves to cursor to a x, y position
     printf("%c[%d;%dH",ESC,y,x);
-}
-
-/*
- * Function: underline
- * --------------------------
- * Turns on and of the underline of the text
- *
- * on: The value should be 0 if the underline should be turned of and non 0 to turn it on
- *
- *
- *
- * returns: void
- */
-void underline(uint8_t on){ // makes a underline
-    int u;
-    u = on ? 4 : 24;
-    printf("%c[%dm",ESC,u);
-}
-
-/*
- * Function: blink
- * --------------------------
- * Turns on and of the blinking of the text
- *
- * on: The value should be 0 if the blink should be turned of and non 0 to turn it on
- *
- *
- *
- * returns: void
- */
-void blink(uint8_t on){
-    int bli;
-    bli = on ? 5 : 25;
-    printf("%c[%dm",ESC,bli);
-}
-
-/*
- * Function: inverse
- * --------------------------
- * Turns on and of the inverting of the text
- *
- * on: The value should be 0 if the invert should be turned of and non 0 to turn it on
- *
- *
- *
- * returns: void
- */
-void inverse(uint8_t on){
-    int inv;
-    inv = on ? 7 : 27;
-    printf("%c[%dm",ESC,inv);
-}
-
-/*
- * Function: box
- * --------------------------
- * Draws a box with one of two designs where a text can be written to
- *
- * x1: x-coordinate for upper left corner
- * y1: y-coordinate for upper left corner
- * x2: x-coordinate for lower right corner
- * y2: y-coordinate for lower right corner
- * design: choice for which of the design
- * name: a text to be written with the box
- *
- * returns: void
- */
-void box(int x1, int y1, int x2, int y2, int design, char name[]){
-    int l = x2-x1;
-    int b = y2-y1;
-    int i, j;
-    int x= x1;
-    int y= y1;
-    int lodret, vandret;
-    int x1y1, x1y2, x2y1, x2y2;
-
-    //saves the maximum length of the string
-    char windowName[l-1];
-    for ( i=0; i<l-2; i++){
-          windowName[i]= name[i];
-          windowName[i] = i<strlen(name) ? name[i] : ' ';
-          }
-    windowName[i-2] = '\0';
-    gotoxy(x1+3,y1);
-
-    color(7,0);
-    printf("%s", windowName);
-    color(0,7);
-
-    //draws the vertical lines
-    gotoxy(x1,y1);
-    lodret = design == 1 ? 179 : 186;
-    for (i=0; i<2; i++){
-        for (j=0; j<=b; j++){
-            printf("%c",lodret);
-            gotoxy(x,++y);
-        }
-        gotoxy(x2,y1);
-        y=y1;
-        x = x2;
-}
-
-    //draws the bottom horizontal line
-    gotoxy(x1,y2);
-    vandret = design == 1 ? 196 : 205;
-    for (i=0; i<l;i++){
-        printf("%c", vandret );
-    }
-
-    //draws the corner of the box
-    x1y1 = design == 1 ? 218 : 201;
-    gotoxy(x1,y1);
-    printf("%c",x1y1);
-    x2y2 = design == 1 ? 217 : 188;
-    gotoxy(x2,y2);
-    printf("%c",x2y2);
-    x1y2 = design == 1 ? 192 : 200;
-    gotoxy(x1,y2);
-    printf("%c",x1y2);
-    x2y1 = design == 1 ? 191 : 187;
-    gotoxy(x2,y1);
-    printf("%c",x2y1);
-
-    printf("%c[H",ESC);
-
 }
 
 /*
@@ -209,33 +84,33 @@ void drawSymbol(int x, int y, char sym){
 void writeS(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(2);
     for (i = 0; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
     returnCursor();
@@ -254,41 +129,48 @@ void writeS(int8_t sizeColumn) {
 void writeP(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i= 0; i< sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(2);
     for (i = 0; i < sizeColumn - 3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
     returnCursor();
     moveCursorRight(sizeColumn);
+}
+
+void drawVerticalRight(int8_t spaces) {
+    int i;
+    for (i = 0; i < spaces; i++) {
+            printf("%c", LETTER_BLOCK);
+    }
 }
 
 /*
@@ -303,44 +185,44 @@ void writeP(int8_t sizeColumn) {
 void writeA(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
-    for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
+    for (i = 0; i < sizeColumn - 3; i++) {
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i= 0; i< sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i= 0; i< sizeColumn/3 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
     moveCursorUp(sizeColumn/3 + 2);
     moveCursorLeft(1);
     for (i = 0; i < sizeColumn - 3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
@@ -360,20 +242,20 @@ void writeA(int8_t sizeColumn) {
 void writeC(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < (sizeColumn/3) * 2 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorRight(sizeColumn);
@@ -391,31 +273,31 @@ void writeC(int8_t sizeColumn) {
 void writeE(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     moveCursorLeft(sizeColumn - 1);
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorRight(sizeColumn);
@@ -433,41 +315,41 @@ void writeE(int8_t sizeColumn) {
 void writeR(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i= 0; i< sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(2);
     for (i = 0; i < sizeColumn - 3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorRight(sizeColumn/2 - 2);
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
     moveCursorDown(1);
     for (i = 0; i < sizeColumn/3 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
@@ -487,32 +369,32 @@ void writeR(int8_t sizeColumn) {
 void writeQ(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i= 0; i< sizeColumn-2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorDown(1);
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorUp(1);
     moveCursorLeft(3);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     returnCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
@@ -546,19 +428,19 @@ void writeU(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i = 0; i < sizeColumn-1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorUp(1);
     for (i = 0; i < sizeColumn-1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorUp(1);
     }
@@ -580,16 +462,16 @@ void writeT(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 0; i < sizeColumn/3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     moveCursorLeft(sizeColumn/3 + 1);
     moveCursorDown(1);
     for (i = 0; i < sizeColumn-1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorDown(1);
     }
@@ -610,34 +492,34 @@ void writeH(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i = 0; i < sizeColumn / 2; i ++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorDown(1);
     moveCursorLeft(1);
     for (i = 0; i < sizeColumn / 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
     moveCursorUp(sizeColumn / 2 + 1);
     moveCursorRight(1);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorUp(1);
     moveCursorLeft(1);
     for (int i = 0; i < sizeColumn / 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorUp(1);
     }
     moveCursorDown(sizeColumn / 2 + 5);
     for (int i = 0; i < sizeColumn / 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorUp(1);
     }
@@ -658,13 +540,13 @@ void writeL(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i = 0; i < sizeColumn-1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorRight(sizeColumn);
@@ -682,29 +564,29 @@ void writeL(int8_t sizeColumn) {
 void writeO(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorDown(1);
     for (i= 0; i< sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(2);
     for (i = 0; i < sizeColumn - 3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorUp(1);
     for (i = 0; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorUp(1);
     }
@@ -724,33 +606,33 @@ void writeO(int8_t sizeColumn) {
 void writeG(int8_t sizeColumn) {
     int i;
     saveCursor();
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorDown(1);
     for (i = 1; i < sizeColumn - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     for (i = 1; i < sizeColumn - 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(1);
     moveCursorUp(1);
     for (i = 0; i < sizeColumn / 3; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorUp(1);
             moveCursorLeft(1);
     }
-    printf("%c", 219);
+    printf("%c", LETTER_BLOCK);
     moveCursorLeft(2);
     for (i = 0; i < 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(2);
     }
     returnCursor();
@@ -771,26 +653,26 @@ void writeM(int8_t sizeColumn) {
     saveCursor();
     moveCursorDown(1);
     for (i = 0; i < sizeColumn - 1; i++) {
-        printf("%c", 219);
+        printf("%c", LETTER_BLOCK);
         moveCursorLeft(1);
         moveCursorDown(1);
     }
     returnCursor();
     for (i = 0; i < sizeColumn / 3 + 1; i++) {
-        printf("%c", 219);
+        printf("%c", LETTER_BLOCK);
         moveCursorDown(1);
 
     }
     moveCursorUp(1);
     for (i = 0; i < sizeColumn / 3 + 1; i++) {
-        printf("%c", 219);
+        printf("%c", LETTER_BLOCK);
         moveCursorUp(1);
     }
     moveCursorDown(1);
     for (i = 0; i < sizeColumn - 1; i++) {
         moveCursorDown(1);
         moveCursorLeft(1);
-        printf("%c", 219);
+        printf("%c", LETTER_BLOCK);
     }
     returnCursor();
     moveCursorRight(sizeColumn);
@@ -810,21 +692,21 @@ void writeV(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i = 0; i < sizeColumn / 2 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorDown(1);
     }
     for (i = 0; i < sizeColumn / 2 - 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorDown(1);
     }
     for (i = 0; i < sizeColumn / 2; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorUp(1);
     }
     moveCursorLeft(1);
     for (i = 0; i < sizeColumn / 2 + 1; i++) {
-            printf("%c", 219);
+            printf("%c", LETTER_BLOCK);
             moveCursorLeft(1);
             moveCursorUp(1);
     }
@@ -845,7 +727,7 @@ void writeX(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i=0; i<sizeColumn; i++){
-        printf("%c",219);
+        printf("%c",LETTER_BLOCK);
         moveCursorDown(1);
     }
 
@@ -853,7 +735,7 @@ void writeX(int8_t sizeColumn) {
     returnCursor();
     moveCursorRight(sizeColumn - 1);
     for (i=0; i<sizeColumn; i++){
-        printf("%c",219);
+        printf("%c",LETTER_BLOCK);
         moveCursorDown(1);
         moveCursorLeft(2);
     }
@@ -876,19 +758,19 @@ void writeN(int8_t sizeColumn) {
     int i;
     saveCursor();
     for (i=0; i<sizeColumn;i++){
-        printf("%c",219);
+        printf("%c",LETTER_BLOCK);
         moveCursorDown(1);
         moveCursorLeft(1);
     }
     returnCursor();
     for (i=0; i<sizeColumn-2; i++){
-        printf("%c",219);
+        printf("%c",LETTER_BLOCK);
         moveCursorDown(1);
     }
     returnCursor();
     moveCursorRight(sizeColumn-2);
     for (i=0; i<sizeColumn;i++){
-        printf("%c",219);
+        printf("%c",LETTER_BLOCK);
         moveCursorDown(1);
         moveCursorLeft(1);
 }
@@ -1067,43 +949,6 @@ void deleteAlien(int x, int y) {
     int i, j;
     for (i = x - 1; i <= x + 1; i++) {
             for (j = y - 1; j <= y + 1; j++) {
-                    deleteSymbol(i, j);
-            }
-    }
-}
-
-/*
- * Function: drawPowerBullet
- * --------------------------
- * Draws a power bullet to the terminal
- *
- * x: x-coordinate for the power bullet's top left corner
- * y: y-coordinate for the power bullet's top left corner
- *
- * returns: void
- */
-void drawPowerBullet(int x, int y) {
-    gotoxy(x, y);
-    printf("%c%c", 218, 191);
-    moveCursorDown(1);
-    moveCursorLeft(2);
-    printf("%c%c", 192, 217);
-}
-
-/*
- * Function: deletePowerBullet
- * --------------------------
- * Deletes a power bullet from the terminal
- *
- * x: x-coordinate for the power bullet's top left corner
- * y: y-coordinate for the power bullet's top left corner
- *
- * returns: void
- */
-void deletePowerBullet(int x, int y) {
-    int i, j;
-    for (i = x; i <= x + 1; i++) {
-            for(j = y; j <= y + 1; j++) {
                     deleteSymbol(i, j);
             }
     }
